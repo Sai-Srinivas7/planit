@@ -27,28 +27,28 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | INV-07 | unit | `INV-07: …` (`commands.test.ts`) |  | `CAPS.members` check in `joinOuting` |  |  |
 | OPT-01 | unit | `OPT-01: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-02 | unit | `OPT-02: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
-| OPT-03 | smoke |  |  |  |  |  |
-| OPT-04 | collab |  |  |  |  |  |
+| OPT-03 | smoke | `OPT-03: …` (`tests/smoke.spec.ts`) |  | `OptionCard.tsx` facts list (Address/Price/Hours default "Unconfirmed"; links only from `link`/`sourceUrl`) |  |  |
+| OPT-04 | collab | `OPT-04, VOTE-06, FIN-08: …` (`tests/collab.spec.ts`) |  | Realtime `useQuery` → `OutingPage` / `OptionCard` / `ConfirmedPlan` |  |  |
 | OPT-05 | unit | `OPT-05: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-06 | unit | `OPT-06: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) | Matrix fault-injected 2026-10-05: host lock bypass removed → `§6 deleteOption (own, locked): host (open)` red; restored | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-07 | unit | `OPT-07: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-08 | unit | `OPT-08: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
-| OPT-09 | smoke |  |  |  |  |  |
+| OPT-09 | smoke | `OPT-09: …` (`tests/smoke.spec.ts`) |  | `OptionCard.tsx` `canEdit`/`canDelete` from domain `isLocked` |  |  |
 | VOTE-01 | unit | `VOTE-01: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
 | VOTE-02 | api | `VOTE-02: …` (`tests/api.spec.ts`; forged `input.userId` and `X-User-Id`) |  | zod strips `userId`; route forwards only the JWT user |  |  |
 | VOTE-03 | unit | `VOTE-03: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
 | VOTE-04 | unit | `VOTE-04: …` (`responses.test.ts`) |  | `src/domain/tally.ts` |  |  |
-| VOTE-05 | smoke |  |  |  |  |  |
-| VOTE-06 | collab |  |  |  |  |  |
-| VOTE-07 | unit | `VOTE-07: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
+| VOTE-05 | smoke | `VOTE-05: …` (`tests/smoke.spec.ts`) |  | `OptionCard.tsx` counts, directory names, `aria-pressed`, destructive Can’t do styling |  |  |
+| VOTE-06 | collab | `OPT-04, VOTE-06, FIN-08: …` (`tests/collab.spec.ts`) |  | Realtime `useQuery` → `OutingPage` / `OptionCard` / `ConfirmedPlan` |  |  |
+| VOTE-07 | unit | `VOTE-07: …` unit (`responses.test.ts`) + smoke (`tests/smoke.spec.ts`, request body `[maybe, null]`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
 | FIN-01 | unit | `FIN-01: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-02 | unit | `FIN-02: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-03 | unit | `FIN-03: …` (`responses.test.ts`) + §6 matrix; requestSuggestions half added in Block 4 |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-04 | api | `FIN-04: …` (`tests/api.spec.ts`; 20 runs, both orderings observed: 8 stored-before / 12 refused) | Fault-injected 2026-10-05: `blockConcurrencyWhile` removed → run 2 finalize overwritten (`state` back to `open`). Restored, green. | Serialized room + `setResponse` state check |  |  |
-| FIN-05 | smoke |  |  |  |  |  |
+| FIN-05 | smoke | `FIN-05: …` (`tests/smoke.spec.ts`) |  | `src/features/outing/ConfirmedPlan.tsx` |  |  |
 | FIN-06 | unit | `FIN-06: …` (`responses.test.ts`) |  | `planText` in `src/domain/summary.ts` |  |  |
-| FIN-07 | unit | `FIN-07: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
-| FIN-08 | collab |  |  |  |  |  |
+| FIN-07 | unit | `FIN-07: …` unit (`responses.test.ts`) + smoke "previous pick" (`tests/smoke.spec.ts`) |  | `finalize` / `reopen` in `commands.ts` |  |  |
+| FIN-08 | collab | `OPT-04, VOTE-06, FIN-08: …` (`tests/collab.spec.ts`) |  | Realtime `useQuery` → `OutingPage` / `OptionCard` / `ConfirmedPlan` |  |  |
 | PREF-01 | unit |  |  |  |  |  |
 | PREF-02 | api |  |  |  |  |  |
 | PREF-03 | unit |  |  |  |  |  |
@@ -75,7 +75,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | SUG-14 | smoke |  |  |  |  |  |
 | SUG-15 | unit |  |  |  |  |  |
 | SUG-16 | manual |  |  |  |  |  |
-| UX-01 | smoke | `UX-01: …` (`tests/smoke.spec.ts`) — create + join; later blocks add their commands |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
+| UX-01 | smoke | `UX-01: …` create/join + `UX-01: option commands …` refused edit (`tests/smoke.spec.ts`) |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
 | UX-02 | smoke |  |  |  |  |  |
 | UX-03 | smoke |  |  |  |  |  |
 | UX-04 | manual |  |  |  |  |  |

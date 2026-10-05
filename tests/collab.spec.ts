@@ -16,7 +16,7 @@
  * cleanup. No need to manage browser contexts manually.
  */
 import { test, expect, loadAllTestAccounts } from 'deepspace/testing'
-import { command, deleteOuting, readOutings, testTitle } from './helpers/outing'
+import { command, deleteOuting, outingWithMember, readOutings, testTitle } from './helpers/outing'
 
 // A machine that has never created test accounts is the normal state of a
 // fresh checkout, and there `users()` throws — turning "you have no pool yet"
@@ -105,4 +105,34 @@ test('BASE-03: the outsider receives no outing records, including after new writ
   expect(outsiderView.filter((r) => ids.includes(r.recordId))).toEqual([])
   expect(outsiderView).toEqual([])
   for (const id of ids) await deleteOuting(host.page, id)
+})
+
+test('OPT-04, VOTE-06, FIN-08: member adds and responds, host sees it live; host finalizes, member sees the confirmed view live', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'block2 live')
+  try {
+    await Promise.all([host.page.goto(`/home?outing=${id}`), member.page.goto(`/home?outing=${id}`)])
+    await expect(host.page.getByTestId('option-count')).toHaveText('0', { timeout: 15_000 })
+    await expect(member.page.getByTestId('option-count')).toHaveText('0', { timeout: 15_000 })
+    const hostCard = host.page.getByTestId('option-card').filter({ hasText: 'Live place' })
+
+    // OPT-04: member adds through the UI; host sees it without a reload.
+    await member.page.getByRole('button', { name: 'Add place' }).click()
+    await member.page.getByTestId('option-form').getByLabel('Place name').fill('Live place')
+    await member.page.getByTestId('option-form').getByRole('button', { name: 'Add place' }).click()
+    await expect(hostCard).toBeVisible({ timeout: 15_000 })
+    await expect(host.page.getByTestId('option-count')).toHaveText('1')
+
+    // VOTE-06: member responds; host's counts update live.
+    await member.page.getByTestId('option-card').filter({ hasText: 'Live place' }).getByTestId('respond-yes').click()
+    await expect(hostCard.getByTestId('count-yes')).toHaveText('1', { timeout: 15_000 })
+    await expect(hostCard.getByTestId('voters-yes')).toHaveText('Member')
+
+    // FIN-08: host confirms; member sees the confirmed view live.
+    await hostCard.getByRole('button', { name: 'Confirm this plan' }).click()
+    await expect(member.page.getByTestId('confirmed-plan')).toBeVisible({ timeout: 15_000 })
+    await expect(member.page.getByTestId('confirmed-place')).toHaveText('Live place')
+  } finally {
+    await deleteOuting(host.page, id)
+  }
 })

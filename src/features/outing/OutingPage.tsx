@@ -6,16 +6,24 @@
 
 import { useState } from 'react'
 import { useAuth } from 'deepspace'
-import { ArrowLeft, CalendarDays, Link2, MapPin, Trash2 } from 'lucide-react'
+import { ArrowLeft, CalendarDays, Link2, MapPin, Plus, Trash2 } from 'lucide-react'
 import { Badge, Button, ConfirmModal, Input, Modal } from '@/components/ui'
+import { tally } from '../../domain/tally'
 import { formatInZone } from '../../domain/time'
+import type { Option } from '../../domain/types'
 import { useCommand } from '../../lib/outing-api'
+import { ConfirmedPlan } from './ConfirmedPlan'
+import { useNames } from './names'
+import { OptionCard } from './OptionCard'
+import { OptionDialog } from './OptionDialog'
 import { useOuting } from './useOuting'
 
 export function OutingPage({ id, onBack }: { id: string; onBack: () => void }) {
   const { userId } = useAuth()
   const { entry, status } = useOuting(id)
   const del = useCommand()
+  const nameOf = useNames()
+  const [editing, setEditing] = useState<Option | 'new' | null>(null)
   const [inviteOpen, setInviteOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -69,6 +77,44 @@ export function OutingPage({ id, onBack }: { id: string; onBack: () => void }) {
         {del.error && <p role="alert" className="text-sm text-destructive">{del.error}</p>}
       </header>
 
+      {outing.state === 'finalized' && <ConfirmedPlan outingId={id} outing={outing} isHost={isHost} />}
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <section className="grid content-start gap-4" aria-labelledby="shortlist-heading">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 id="shortlist-heading" className="text-xl font-semibold">
+                Shortlist <span className="text-muted-foreground" data-testid="option-count">{outing.options.length}</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                {outing.state === 'open' ? 'Respond Yes, Maybe, or Can’t do. Click your answer again to clear it.' : 'Responses are closed while the plan is confirmed.'}
+              </p>
+            </div>
+            {outing.state === 'open' && (
+              <Button variant="outline" onClick={() => setEditing('new')}><Plus size={16} aria-hidden /> Add place</Button>
+            )}
+          </div>
+          {outing.options.length === 0 && (
+            <p className="rounded-lg border border-dashed p-6 text-center text-muted-foreground">
+              No places yet. Add a favorite spot{isHost ? ' or ask for suggestions' : ''}.
+            </p>
+          )}
+          {tally(outing).map((entry) => (
+            <OptionCard
+              key={entry.option.id}
+              outingId={id}
+              outing={outing}
+              entry={entry}
+              me={userId ?? ''}
+              nameOf={nameOf}
+              onEdit={() => setEditing(entry.option)}
+            />
+          ))}
+        </section>
+        <aside className="grid content-start gap-4" data-testid="outing-sidebar" />
+      </div>
+
+      {editing && <OptionDialog outingId={id} option={editing === 'new' ? null : editing} onClose={() => setEditing(null)} />}
       <InviteDialog open={inviteOpen} onClose={() => setInviteOpen(false)} link={inviteLink} />
       <ConfirmModal
         open={confirmDelete}

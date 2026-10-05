@@ -1,5 +1,5 @@
 import { test, expect } from 'deepspace/testing'
-import { createOuting, deleteOuting, testTitle } from './helpers/outing'
+import { addOption, command, createOuting, deleteOuting, outingWithMember, testTitle } from './helpers/outing'
 import { captureConsoleErrors } from './helpers/errors'
 
 /**
@@ -181,4 +181,174 @@ test('UX-01: create and join show a pending state; a refusal shows its message a
   await host.page.goto('/home?invite=not-a-real-token')
   await host.page.getByRole('button', { name: 'Join outing' }).click()
   await expect(host.page.getByRole('alert')).toHaveText('This invite link is not valid.')
+})
+
+const card = (page: import('@playwright/test').Page, name: string) =>
+  page.getByTestId('option-card').filter({ has: page.getByTestId('option-name').getByText(name, { exact: true }) })
+
+test('OPT-03: every unknown fact (price, hours, address) renders as "Unconfirmed"; no fact renders without a source', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const { id } = await createOuting(host.page, 'opt03')
+  try {
+    await addOption(host.page, id, 'Bare place')
+    await addOption(host.page, id, 'Known place', { address: '1 Main St', link: 'https://known.test' })
+    await host.page.goto(`/home?outing=${id}`)
+    const bare = card(host.page, 'Bare place')
+    await expect(bare.getByTestId('fact-address')).toHaveText('Unconfirmed', { timeout: 15_000 })
+    await expect(bare.getByTestId('fact-price')).toHaveText('Unconfirmed')
+    await expect(bare.getByTestId('fact-hours')).toHaveText('Unconfirmed')
+    await expect(bare.getByRole('link')).toHaveCount(0)
+    // A known address is shown with its source: who proposed it.
+    const known = card(host.page, 'Known place')
+    await expect(known.getByTestId('fact-address')).toHaveText('1 Main St')
+    await expect(known.getByTestId('option-origin')).toHaveText('Proposed by Host')
+    await expect(known.getByTestId('fact-price')).toHaveText('Unconfirmed')
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('OPT-09: edit and delete controls appear only when the caller may use them', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'opt09')
+  try {
+    await addOption(member.page, id, 'Member place')
+    const locked = await addOption(member.page, id, 'Locked place')
+    await addOption(host.page, id, 'Host place')
+    await command(host.page, 'setResponse', { id, input: { optionId: locked, value: 'yes' } })
+
+    await member.page.goto(`/home?outing=${id}`)
+    const m = (name: string) => card(member.page, name)
+    await expect(m('Member place').getByRole('button', { name: /^Edit/ })).toBeVisible({ timeout: 15_000 })
+    await expect(m('Member place').getByRole('button', { name: /^Remove/ })).toBeVisible()
+    await expect(m('Locked place').getByRole('button', { name: /^(Edit|Remove)/ })).toHaveCount(0)
+    await expect(m('Host place').getByRole('button', { name: /^(Edit|Remove)/ })).toHaveCount(0)
+    await expect(m('Host place').getByRole('button', { name: 'Confirm this plan' })).toHaveCount(0)
+
+    await host.page.goto(`/home?outing=${id}`)
+    const h = (name: string) => card(host.page, name)
+    await expect(h('Host place').getByRole('button', { name: /^Edit/ })).toBeVisible({ timeout: 15_000 })
+    await expect(h('Member place').getByRole('button', { name: /^Edit/ })).toHaveCount(0)
+    await expect(h('Member place').getByRole('button', { name: /^Remove/ })).toBeVisible()
+    await expect(h('Locked place').getByRole('button', { name: /^Remove/ })).toBeVisible()
+
+    // Finalized: nobody gets edit/delete controls.
+    await command(host.page, 'finalize', { id, input: { optionId: locked } })
+    await expect(host.page.getByTestId('confirmed-plan')).toBeVisible({ timeout: 15_000 })
+    await expect(host.page.getByRole('button', { name: /^(Edit|Remove) / })).toHaveCount(0)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test("VOTE-05: each option shows counts and voter names; the caller's response is highlighted; Can't do counts are prominent", async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'vote05')
+  try {
+    const optionId = await addOption(host.page, id, 'Taco place')
+    await command(host.page, 'setResponse', { id, input: { optionId, value: 'yes' } })
+    await command(member.page, 'setResponse', { id, input: { optionId, value: 'no' } })
+    await member.page.goto(`/home?outing=${id}`)
+    const c = card(member.page, 'Taco place')
+    await expect(c.getByTestId('count-yes')).toHaveText('1', { timeout: 15_000 })
+    await expect(c.getByTestId('count-maybe')).toHaveText('0')
+    await expect(c.getByTestId('count-no')).toHaveText('1')
+    await expect(c.getByTestId('voters-yes')).toHaveText('Host')
+    await expect(c.getByTestId('voters-no')).toHaveText('Member')
+    await expect(c.getByTestId('respond-no')).toHaveAttribute('aria-pressed', 'true')
+    await expect(c.getByTestId('respond-yes')).toHaveAttribute('aria-pressed', 'false')
+    // A nonzero Can't do count is emphasized for everyone else.
+    await host.page.goto(`/home?outing=${id}`)
+    const hc = card(host.page, 'Taco place')
+    await expect(hc.getByTestId('respond-no')).toHaveClass(/text-destructive/, { timeout: 15_000 })
+    await expect(hc.getByTestId('count-no')).toHaveClass(/font-bold/)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('VOTE-07: clicking your current choice sends null and clears it', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const { id } = await createOuting(host.page, 'vote07')
+  try {
+    await addOption(host.page, id, 'Pizza')
+    await host.page.goto(`/home?outing=${id}`)
+    const c = card(host.page, 'Pizza')
+    const sent: unknown[] = []
+    host.page.on('request', (r) => {
+      if (r.url().endsWith('/api/outing/setResponse')) sent.push(JSON.parse(r.postData()!).input.value)
+    })
+    await c.getByTestId('respond-maybe').click()
+    await expect(c.getByTestId('respond-maybe')).toHaveAttribute('aria-pressed', 'true', { timeout: 15_000 })
+    await expect(c.getByTestId('count-maybe')).toHaveText('1')
+    await c.getByTestId('respond-maybe').click()
+    await expect(c.getByTestId('respond-maybe')).toHaveAttribute('aria-pressed', 'false', { timeout: 15_000 })
+    await expect(c.getByTestId('count-maybe')).toHaveText('0')
+    expect(sent).toEqual(['maybe', null])
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('FIN-05: the confirmed view shows title, place, address/link, date/time with timezone, and that nothing is booked', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const { id } = await createOuting(host.page, 'fin05')
+  try {
+    await addOption(host.page, id, 'Final spot', { link: 'https://final.test' })
+    await host.page.goto(`/home?outing=${id}`)
+    await card(host.page, 'Final spot').getByRole('button', { name: 'Confirm this plan' }).click()
+    const plan = host.page.getByTestId('confirmed-plan')
+    await expect(plan).toBeVisible({ timeout: 15_000 })
+    await expect(plan.getByTestId('confirmed-title')).toContainText('fin05')
+    await expect(plan.getByTestId('confirmed-place')).toHaveText('Final spot')
+    await expect(plan.getByTestId('confirmed-address')).toHaveText('Unconfirmed')
+    await expect(plan.getByTestId('confirmed-link')).toHaveText('https://final.test')
+    await expect(plan.getByTestId('confirmed-when')).toHaveText(/6:00 PM C[SD]T · America\/Chicago/)
+    await expect(plan.getByTestId('nothing-booked')).toHaveText(/Nothing is booked/)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('FIN-07: after reopen the previous pick shows as pre-selected', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const { id } = await createOuting(host.page, 'fin07')
+  try {
+    const picked = await addOption(host.page, id, 'Picked')
+    await addOption(host.page, id, 'Other')
+    await command(host.page, 'finalize', { id, input: { optionId: picked } })
+    await host.page.goto(`/home?outing=${id}`)
+    await host.page.getByRole('button', { name: 'Reopen planning' }).click()
+    await expect(host.page.getByTestId('confirmed-plan')).toHaveCount(0, { timeout: 15_000 })
+    await expect(card(host.page, 'Picked').getByTestId('previous-pick')).toBeVisible()
+    await expect(card(host.page, 'Other').getByTestId('previous-pick')).toHaveCount(0)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('UX-01: option commands show pending; a refused edit shows its message and the card keeps the server value', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'ux01 options')
+  try {
+    const optionId = await addOption(member.page, id, 'Original name')
+    await member.page.goto(`/home?outing=${id}`)
+    await card(member.page, 'Original name').getByRole('button', { name: /^Edit/ }).click()
+    const form = member.page.getByTestId('option-form')
+    await form.getByLabel('Place name').fill('Renamed')
+    // Someone else responds while the dialog is open, so the option locks.
+    await command(host.page, 'setResponse', { id, input: { optionId, value: 'yes' } })
+    await member.page.route('**/api/outing/editOption', async (route) => {
+      await new Promise((r) => setTimeout(r, 600))
+      await route.continue()
+    })
+    await form.getByRole('button', { name: 'Save' }).click()
+    await expect(form.getByRole('button', { name: 'Saving…' })).toBeDisabled()
+    await expect(form.getByRole('alert')).toHaveText(/no longer be changed/, { timeout: 15_000 })
+    await member.page.keyboard.press('Escape')
+    await expect(card(member.page, 'Original name')).toBeVisible()
+    await expect(member.page.getByTestId('option-name').getByText('Renamed', { exact: true })).toHaveCount(0)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
 })
