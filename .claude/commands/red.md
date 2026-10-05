@@ -1,8 +1,8 @@
 ---
 description: Write the failing test for one acceptance criterion and stop
-argument-hint: <AC-ID>
+argument-hint: <AC-ID or task ID like T2.2>
 ---
-Acceptance criterion: $ARGUMENTS
+Target: $ARGUMENTS. If it is a task ID, apply every step to each AC listed for that task in `docs/tasks.md`.
 
 1. Read $ARGUMENTS in `docs/spec.md` §8, plus the sections it depends on (§4 data, §5 commands and codes, §6 matrix, §7 suggestions). Find its task in `docs/tasks.md`.
 2. Write only the test, at the level the AC states ([unit] → `src/domain/*.test.ts`, [api] → `tests/api.spec.ts`, [collab] → `tests/collab.spec.ts`, [smoke] → `tests/smoke.spec.ts`). Name it `'$ARGUMENTS: <behavior>'`. Assert the AC's observable result, not just a status code.

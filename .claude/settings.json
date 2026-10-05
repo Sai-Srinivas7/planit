@@ -1,9 +1,24 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(npx deepspace test run:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git tag:*)"
+    ],
     "ask": [
       "Edit(docs/spec.md)",
       "Write(docs/spec.md)",
       "Bash(npx deepspace deploy:*)",
+      "Bash(npx deepspace integrations invoke:*)",
+      "Bash(npx deepspace secrets:*)",
       "Bash(git push:*)"
     ]
   }
