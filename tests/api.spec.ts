@@ -1,5 +1,5 @@
 import { test, expect } from 'deepspace/testing'
-import { command, createOuting, deleteOuting, outingInput, readOutings, testTitle } from './helpers/outing'
+import { addOption, command, createOuting, deleteOuting, outingInput, outingWithMember, readOuting, readOutings, testTitle } from './helpers/outing'
 
 test.describe('API tests', () => {
   test('auth proxy forwards to auth worker', async ({ request }) => {
@@ -226,5 +226,90 @@ test('OUT-07: after the host deletes an outing it is gone and its invite link re
     expect(join.body).toMatchObject({ success: false, error: 'INVITE_INVALID' })
   } finally {
     if (!deleted) await deleteOuting(host.page, id)
+  }
+})
+
+test('VOTE-02: a userId in setResponse input naming another user is ignored; the response belongs to the caller', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'vote02')
+  try {
+    const optionId = await addOption(host.page, id, 'Place A')
+    const res = await command(member.page, 'setResponse', { id, input: { optionId, value: 'no', userId: host.userId } }, { 'X-User-Id': host.userId! })
+    expect(res.body).toEqual({ success: true, data: {} })
+    const outing = await readOuting(host.page, id)
+    expect(outing.responses).toEqual([{ userId: member.userId, optionId, value: 'no' }])
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('BASE-04: 20 concurrent setResponse commands from two members on different options all land, no lost updates', async ({ users }) => {
+  test.setTimeout(90_000)
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'base04')
+  try {
+    const optionIds: string[] = []
+    for (let i = 0; i < 10; i++) optionIds.push(await addOption(host.page, id, `Place ${i}`))
+
+    // Fire all 20 from inside the pages at once (one token fetch each, then 20 overlapping POSTs).
+    const fire = (page: typeof host.page, value: string) =>
+      page.evaluate(async ({ id, optionIds, value }) => {
+        const { token } = await (await fetch('/api/auth/token', { method: 'POST', credentials: 'include' })).json()
+        return Promise.all(optionIds.map(async (optionId) => {
+          const res = await fetch('/api/outing/setResponse', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            body: JSON.stringify({ id, input: { optionId, value } }),
+          })
+          return (await res.json()).success as boolean
+        }))
+      }, { id, optionIds, value })
+    const results = (await Promise.all([fire(host.page, 'yes'), fire(member.page, 'maybe')])).flat()
+    expect(results).toEqual(Array(20).fill(true))
+
+    const outing = await readOuting(host.page, id)
+    expect(outing.responses).toHaveLength(20)
+    for (const optionId of optionIds) {
+      expect(outing.responses).toContainEqual({ userId: host.userId, optionId, value: 'yes' })
+      expect(outing.responses).toContainEqual({ userId: member.userId, optionId, value: 'maybe' })
+    }
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('FIN-04: concurrent setResponse and finalize (20 runs): the response is stored before finalization or refused, never after', async ({ users }) => {
+  test.setTimeout(180_000)
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'fin04')
+  try {
+    const outcomes = { storedBefore: 0, refused: 0 }
+    for (let i = 0; i < 20; i++) {
+      const optionId = await addOption(host.page, id, `Run ${i}`)
+      const [vote, fin] = await Promise.all([
+        command(member.page, 'setResponse', { id, input: { optionId, value: 'yes' } }),
+        command(host.page, 'finalize', { id, input: { optionId } }),
+      ])
+      expect(fin.body, `run ${i} finalize`).toEqual({ success: true, data: {} })
+      const outing = await readOuting(host.page, id)
+      // The finalize was not lost or overwritten by a stale write.
+      expect(outing.state, `run ${i}`).toBe('finalized')
+      expect(outing.selectedOptionId, `run ${i}`).toBe(optionId)
+      const stored = outing.responses.some((r: any) => r.userId === member.userId && r.optionId === optionId)
+      if (vote.body.success) {
+        expect(stored, `run ${i}: accepted response must be stored`).toBe(true)
+        outcomes.storedBefore++
+      } else {
+        expect(vote.body.error, `run ${i}`).toBe('OUTING_FINALIZED')
+        expect(stored, `run ${i}: refused response must not be stored`).toBe(false)
+        outcomes.refused++
+      }
+      const reopened = await command(host.page, 'reopen', { id, input: {} })
+      expect(reopened.body.success, `run ${i} reopen`).toBe(true)
+    }
+    expect(outcomes.storedBefore + outcomes.refused).toBe(20)
+    console.log(`FIN-04 outcomes: ${JSON.stringify(outcomes)}`)
+  } finally {
+    await deleteOuting(host.page, id)
   }
 })

@@ -7,7 +7,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | BASE-01 | collab | `BASE-01: the users fixture signs in three distinct accounts: host, member, outsider` (`tests/collab.spec.ts`) | Not seen failing (test of the harness; accounts `Host`, `Member`, `Outsider` created in T0.1) | Test accounts `planit-{host,member,outsider}@deepspace.test` |  |  |
 | BASE-02 | unit | `BASE-02: … reads only as collaborator, and has no anonymous entry` (`src/schemas/outings-schema.test.ts`), strengthened for spec v1.1.3 | 2026-10-05: `expected undefined to be defined` — no `outings` schema registered | `src/schemas/outings-schema.ts`, registered in `src/schemas.ts` (ported from prototype `src/schemas/outings-schema.ts`) |  |  |
 | BASE-03 | collab | `BASE-03: the outsider receives no outing records, including after new writes` (`tests/collab.spec.ts`; live `outing-count` + fresh socket read) | Fault-injected 2026-10-05: `outings` read policy `collaborator` → `true` → outsider count `8`, expected `0`. Restored, green. Writes so far are two `createOuting`s; extend with update writes (join/option) when those commands exist. | `outings` read `collaborator` (`src/schemas/outings-schema.ts`); `src/features/outing/OutingList.tsx` (count only), `src/pages/(app)/home.tsx` |  |  |
-| BASE-04 | api |  |  |  |  |  |
+| BASE-04 | api | `BASE-04: …` (`tests/api.spec.ts`; 10 options × 2 members, 20 overlapping POSTs) | Fault-injected 2026-10-05: `blockConcurrencyWhile` removed → 6 of 20 responses stored. Restored, green. | `AppRecordRoom.fetch` serializes via `blockConcurrencyWhile` (`worker.ts`) |  |  |
 | BASE-05 | manual | Manual: `src/domain/suggestions/fixtures/*.json` (+ `requests/`), log in `docs/DEVELOPMENT_LOG.md` Block 0 / T0.8 | n/a (manual) | Recorded 2026-10-05 via `integrations invoke`: geocoding ×2, forecast, places-search ×2 (`ll` supported), chat-completion (`claude-haiku-4-5`, $0.00089); ≈ $0.072 total |  |  |
 | BASE-06 | api | `BASE-06: /internal/outing is not publicly reachable and a client X-User-Id is ignored` (`tests/api.spec.ts`, reads via `tests/helpers/outing.ts` `readOutings` over each user's own socket) | Fault-injected 2026-10-05: (1) route forwards client `X-User-Id` → host does not receive the outing (stored under forged member ID); (2) public `POST /internal/outing` forwarded raw to the room → direct hit executed a command. Restored, green. | `AppRecordRoom.fetch` override in `worker.ts` (exact path `/internal/outing`, `blockConcurrencyWhile`) ported from prototype `worker.ts:54-82`; `src/server/outing-room.ts`; route builds a fresh room request with the verified user ID only; `src/domain/{types,errors,commands}.ts` (minimal `createOuting`) |  |  |
 | OUT-01 | api | `OUT-01: …` (`tests/api.spec.ts`) + unit `createOuting builds the spec §4.3 record…` |  | `createOuting` in `src/domain/commands.ts`; `src/server/outing-room.ts` create path |  |  |
@@ -35,7 +35,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | OPT-08 | unit | `OPT-08: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-09 | smoke |  |  |  |  |  |
 | VOTE-01 | unit | `VOTE-01: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
-| VOTE-02 | api |  |  |  |  |  |
+| VOTE-02 | api | `VOTE-02: …` (`tests/api.spec.ts`; forged `input.userId` and `X-User-Id`) |  | zod strips `userId`; route forwards only the JWT user |  |  |
 | VOTE-03 | unit | `VOTE-03: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
 | VOTE-04 | unit | `VOTE-04: …` (`responses.test.ts`) |  | `src/domain/tally.ts` |  |  |
 | VOTE-05 | smoke |  |  |  |  |  |
@@ -44,7 +44,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | FIN-01 | unit | `FIN-01: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-02 | unit | `FIN-02: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-03 | unit | `FIN-03: …` (`responses.test.ts`) + §6 matrix; requestSuggestions half added in Block 4 |  | `finalize` / `reopen` in `commands.ts` |  |  |
-| FIN-04 | api |  |  |  |  |  |
+| FIN-04 | api | `FIN-04: …` (`tests/api.spec.ts`; 20 runs, both orderings observed: 8 stored-before / 12 refused) | Fault-injected 2026-10-05: `blockConcurrencyWhile` removed → run 2 finalize overwritten (`state` back to `open`). Restored, green. | Serialized room + `setResponse` state check |  |  |
 | FIN-05 | smoke |  |  |  |  |  |
 | FIN-06 | unit | `FIN-06: …` (`responses.test.ts`) |  | `planText` in `src/domain/summary.ts` |  |  |
 | FIN-07 | unit | `FIN-07: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |

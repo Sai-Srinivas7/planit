@@ -96,3 +96,22 @@ export async function createOuting(page: Page, label: string, over: Record<strin
 export async function deleteOuting(page: Page, id: string | undefined) {
   if (id) await command(page, 'deleteOuting', { id, input: {} }).catch(() => undefined)
 }
+
+/** One outing's payload as the page's user receives it, or undefined. */
+export async function readOuting(page: Page, id: string): Promise<any> {
+  return (await readOutings(page)).find((r) => r.recordId === id)?.data.payload
+}
+
+/** Host creates an outing, member joins it. */
+export async function outingWithMember(host: Page, member: Page, label: string) {
+  const created = await createOuting(host, label)
+  const joined = await command(member, 'joinOuting', { input: { token: created.inviteToken } })
+  if (joined.body?.success !== true) throw new Error(`join failed: ${JSON.stringify(joined.body)}`)
+  return created
+}
+
+export async function addOption(page: Page, id: string, name: string, extra: Record<string, unknown> = {}): Promise<string> {
+  const res = await command(page, 'addOption', { id, input: { name, ...extra } })
+  if (res.body?.success !== true) throw new Error(`addOption failed: ${JSON.stringify(res.body)}`)
+  return res.body.data.optionId
+}
