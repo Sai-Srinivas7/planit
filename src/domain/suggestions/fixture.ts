@@ -3,6 +3,7 @@
  * network. Failure scenarios are chosen by flags in the outing's location
  * that only these adapters read, e.g. "__fail_places__ Dallas, TX".
  *   __fail_geocode__ · __fail_forecast__ · __fail_places__ · __fail_explain__ · __bad_explain__
+ *   __slow__ (places answers after 1.5 s, so concurrent requests overlap a running run)
  * Server-only: never import from client code (the places fixture contains provider URLs).
  */
 
@@ -45,6 +46,7 @@ export function makeFixtureAdapters(location: string, now: Date = new Date()): A
     places: {
       async search() {
         fail('__fail_places__')
+        if (flags.has('__slow__')) await new Promise((r) => setTimeout(r, 1500))
         return placesDallas.data.local_results as PlaceResult[]
       },
     },

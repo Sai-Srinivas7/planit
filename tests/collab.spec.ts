@@ -16,7 +16,7 @@
  * cleanup. No need to manage browser contexts manually.
  */
 import { test, expect, loadAllTestAccounts } from 'deepspace/testing'
-import { command, deleteOuting, outingWithMember, readOutings, testTitle } from './helpers/outing'
+import { command, createOuting, deleteOuting, outingWithMember, readOutings, testTitle } from './helpers/outing'
 
 // A machine that has never created test accounts is the normal state of a
 // fresh checkout, and there `users()` throws — turning "you have no pool yet"
@@ -163,5 +163,39 @@ test('PREF-05, COM-03: member edits preferences and posts; host sees both live; 
     await expect(hostComment).toHaveCount(0, { timeout: 15_000 })
   } finally {
     await deleteOuting(host.page, id)
+  }
+})
+test('SUG-11: run status (running, done, failed + message) is visible live to members; the outsider receives nothing', async ({ users }) => {
+  const [host, member, outsider] = await users(['Host', 'Member', 'Outsider'])
+  const slow = await createOuting(host.page, 'sug11 slow', { location: '__slow__ Dallas, TX' })
+  const broken = await createOuting(host.page, 'sug11 broken', { location: '__fail_places__ Dallas, TX' })
+  try {
+    for (const o of [slow, broken]) await command(member.page, 'joinOuting', { input: { token: o.inviteToken } })
+    await outsider.page.goto('/home')
+    await expect(outsider.page.getByTestId('outing-count')).toHaveText('0', { timeout: 15_000 })
+
+    await member.page.goto(`/home?outing=${slow.id}`)
+    const status = member.page.getByTestId('suggestion-status')
+    await expect(member.page.getByTestId('outing-page')).toBeVisible({ timeout: 15_000 })
+    const run = command(host.page, 'requestSuggestions', { id: slow.id, input: {} })
+    await expect(status).toHaveAttribute('data-status', 'running', { timeout: 15_000 })
+    await expect(status).toHaveText('Finding places…')
+    await run
+    await expect(status).toHaveAttribute('data-status', 'done', { timeout: 15_000 })
+    await expect(status).toHaveText('Added 3 suggested places.')
+    await expect(member.page.getByTestId('option-card')).toHaveCount(3)
+
+    await member.page.goto(`/home?outing=${broken.id}`)
+    await expect(member.page.getByTestId('outing-page')).toBeVisible({ timeout: 15_000 })
+    await command(host.page, 'requestSuggestions', { id: broken.id, input: {} })
+    await expect(member.page.getByTestId('suggestion-status')).toHaveAttribute('data-status', 'failed', { timeout: 15_000 })
+    await expect(member.page.getByTestId('suggestion-status')).toHaveText('Place search is unavailable right now. You can still add places yourself.')
+
+    // The outsider's live list and a fresh subscription on their socket get nothing.
+    await expect(outsider.page.getByTestId('outing-count')).toHaveText('0')
+    expect(await readOutings(outsider.page)).toEqual([])
+  } finally {
+    await deleteOuting(host.page, slow.id)
+    await deleteOuting(host.page, broken.id)
   }
 })

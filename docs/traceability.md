@@ -59,29 +59,29 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | COM-03 | collab | `PREF-05, COM-03: …` (`tests/collab.spec.ts`) |  | Realtime → `Conversation.tsx` |  |  |
 | COM-04 | smoke | `COM-04: …` (`tests/smoke.spec.ts`) |  | `names.ts` `useNames` (directory `getName`, "Unknown" fallback) used by group, votes, comments, "Proposed by" |  |  |
 | COM-05 | unit | `COM-05: …` (`conversation.test.ts`) |  | `deleteComment` hard delete |  |  |
-| SUG-01 | unit | `SUG-01: …` unit (`src/domain/suggest-commands.test.ts`); api pending T4.9 |  | `requestSuggestions` reuse in `commands.ts` |  |  |
+| SUG-01 | unit | `SUG-01: …` unit (`suggest-commands.test.ts`) + api `SUG-01: two concurrent requestSuggestions trigger one provider run` (`tests/api.spec.ts`, `__slow__` fixture) | Api red on first run: fixture run finished before the 2nd request (two runs); added `__slow__` fixture flag to force overlap | Reuse in `requestSuggestions`; route `requestSuggestions` orchestration (`outing-routes.ts`) |  |  |
 | SUG-02 | unit | `SUG-02: …` (`src/domain/suggest-commands.test.ts`) |  | `SUGGESTION_LIMITS`; app-wide counter in room storage (`worker.ts`, `outing-room.ts`) |  |  |
 | SUG-03 | unit | `SUG-03: …` (`src/domain/suggestions/suggestions.test.ts`, recorded places fixture incl. duplicate venue) |  | `normalize.ts` `normalizePlaces` |  |  |
 | SUG-04 | unit | `SUG-04: …` (`src/domain/suggestions/suggestions.test.ts`) |  | `explain.ts` `parseExplanations` (one fence stripped, zod, known IDs, ≤240) |  |  |
 | SUG-05 | unit | `SUG-05: …` (`src/domain/suggestions/suggestions.test.ts`) | Fault-injected 2026-10-05: venue names appended to the system prompt → SUG-05 red. Restored, green. | `explain.ts` `buildExplainRequest` (explicit field whitelist; venue text only in user JSON) |  |  |
-| SUG-06 | api |  |  |  |  |  |
-| SUG-07 | unit | `SUG-07: …` unit (`src/domain/suggestions/suggestions.test.ts`: pick + pipeline); smoke pending T4.11 |  | `forecast.ts` `pickWeather`; pipeline treats forecast as optional |  |  |
+| SUG-06 | api | `SUG-06: …` (`tests/api.spec.ts`, `__fail_places__`) |  | Pipeline places failure → `failSuggestions` (`outing-routes.ts`) |  |  |
+| SUG-07 | unit | `SUG-07: …` unit (`suggestions.test.ts`) + smoke `SUG-07: the header shows the forecast…` (`tests/smoke.spec.ts`) |  | `pickWeather`; `WeatherLine` in `SuggestionStatus.tsx` |  |  |
 | SUG-08 | unit | `SUG-08: …` (`src/domain/suggestions/suggestions.test.ts`) |  | pipeline: explainer errors/rejections → `explanation: null` |  |  |
 | SUG-09 | unit | `SUG-09: …` (`src/domain/suggestions/suggestions.test.ts`: resolver + pipeline) |  | `geocode.ts` `resolveLocation` |  |  |
 | SUG-10 | unit | `SUG-10: …` (`src/domain/suggest-commands.test.ts`) |  | `publishSuggestions` state recheck |  |  |
-| SUG-11 | collab |  |  |  |  |  |
+| SUG-11 | collab | `SUG-11: …` (`tests/collab.spec.ts`) | Fault-injected 2026-10-05: read policy `true` → outsider count `4`, expected `0` (run via `test run e2e` because BASE-02 now fails first under `all`). Restored, green. | Realtime `suggestions` field → `SuggestionStatus`; read policy `collaborator` |  |  |
 | SUG-12 | unit | `SUG-12: …` (`src/domain/suggest-commands.test.ts`) |  | `publishSuggestions` append + dedupe |  |  |
 | SUG-13 | unit | `SUG-13: …` ×2 (`src/domain/suggestions/suggestions.test.ts`: fixture pipeline with fetch tripwire; live Explainer adapter on recorded fixture) |  | `fixture.ts`, `live.ts`, `pipeline.ts` |  |  |
-| SUG-14 | smoke |  |  |  |  |  |
+| SUG-14 | smoke | `SUG-14: …` (`tests/smoke.spec.ts`) |  | `SuggestionStatus.tsx` (host + open only; disabled while `isRunActive`) |  |  |
 | SUG-15 | unit | `SUG-15: …` (`src/domain/suggest-commands.test.ts`) |  | `isRunActive` (2-minute stale) |  |  |
-| SUG-16 | manual |  |  |  |  |  |
+| SUG-16 | manual |  |  | Code ready: `src/domain/suggestions/live.ts`, `adaptersFor` (`PROVIDERS=live`), billing in `src/integrations.ts`. Live local run pending Sai (paid). |  |  |
 | UX-01 | smoke | `UX-01: …` create/join, option refusal, comment pending (`tests/smoke.spec.ts`) |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
 | UX-02 | smoke |  |  |  |  |  |
 | UX-03 | smoke |  |  |  |  |  |
 | UX-04 | manual |  |  |  |  |  |
 | UX-05 | manual |  |  |  |  |  |
 | SEC-01 | api | `SEC-01: every public command without a valid JWT returns 401 UNAUTHENTICATED` (`tests/api.spec.ts`) | 2026-10-05: before route existed, expected 401, received 404. Fault-injected: (1) auth check skipped → `createOuting with no Authorization header` 200; (2) unverified JWT payload trusted → `createOuting with unsigned forged JWT` 200. Restored, green. | `src/server/outing-routes.ts` (JWT via scaffold `resolveAuth`, checked before allowlist), registered in `worker.ts`; ported from prototype `src/server/outing-routes.ts:7-10` |  |  |
-| SEC-02 | api | First half: `SEC-02: browser calls to /api/integrations/* return 403, signed in or not` (`tests/api.spec.ts`). Second half (bundle has no provider URLs) pending T4.13. | Fault-injected 2026-10-05: original scaffold proxy restored with its outbound `apiWorkerFetch` replaced by an offline stub (no paid call) → `GET openweathermap/geocoding (anonymous)` 200, expected 403. Restored, green. | First half: `/api/integrations/:name/:endpoint` → 403 in `src/server/http-routes.ts`, ported from prototype `src/server/http-routes.ts:232-236` |  |  |
+| SEC-02 | api | `SEC-02: browser calls to /api/integrations/* return 403…` + `SEC-02: the built client bundle contains no provider URLs` (`tests/api.spec.ts`, runs `npm run build`, scans `dist/client`) | Fault-injected: (1) proxy reopened with offline stub → 200; (2) `makeFixtureAdapters` imported into `OutingPage.tsx` → `dist/client/assets/home-*.js` flagged. Restored, green. | `/api/integrations/:name/:endpoint` → 403; provider calls only in worker (`adaptersFor` → `buildCronContext(...).integrations.call`); fixtures server-only |  |  |
 | SEC-03 | manual |  |  |  |  |  |
 | SEC-04 | api |  |  |  |  |  |
 | REL-01 | manual |  |  |  |  |  |

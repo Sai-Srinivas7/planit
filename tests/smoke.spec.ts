@@ -1,5 +1,5 @@
 import { test, expect } from 'deepspace/testing'
-import { addOption, command, createOuting, deleteOuting, outingWithMember, testTitle } from './helpers/outing'
+import { addOption, command, createOuting, deleteOuting, outingWithMember, readOuting, testTitle } from './helpers/outing'
 import { captureConsoleErrors } from './helpers/errors'
 
 /**
@@ -417,6 +417,61 @@ test('UX-01: posting a comment shows a pending state', async ({ users }) => {
     await expect(host.page.getByRole('button', { name: 'Sending…' })).toBeDisabled()
     await expect(host.page.getByTestId('comment-body')).toHaveText(['On my way'], { timeout: 15_000 })
     await expect(host.page.getByLabel('Message', { exact: true })).toHaveValue('')
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+test('SUG-07: the header shows the forecast with its time after a run, or "Forecast unavailable"', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10)
+  const ok = await createOuting(host.page, 'sug07 ok', { date: tomorrow })
+  const down = await createOuting(host.page, 'sug07 down', { date: tomorrow, location: '__fail_forecast__ Dallas, TX' })
+  try {
+    await host.page.goto(`/home?outing=${ok.id}`)
+    await expect(host.page.getByTestId('outing-weather')).toHaveCount(0) // nothing before any run
+    await host.page.getByTestId('suggest-button').click()
+    await expect(host.page.getByTestId('outing-weather')).toHaveText(/^Forecast for .+ C[SD]T: -?\d+°C, \S/, { timeout: 15_000 })
+    // Suggested options show their source and explanation; unknown facts stay Unconfirmed.
+    const suggested = host.page.getByTestId('option-card').first()
+    await expect(suggested.getByTestId('option-origin')).toHaveText('Suggested place')
+    await expect(suggested.getByRole('link', { name: /View on Google Maps/ })).toHaveAttribute('href', /google\.com\/maps/)
+    await expect(suggested.getByTestId('option-explanation')).toContainText('Why it might fit (AI)')
+    await expect(suggested.getByTestId('fact-price')).toHaveText('Unconfirmed')
+
+    await host.page.goto(`/home?outing=${down.id}`)
+    await host.page.getByTestId('suggest-button').click()
+    await expect(host.page.getByTestId('outing-weather')).toHaveText('Forecast unavailable', { timeout: 15_000 })
+  } finally {
+    await deleteOuting(host.page, ok.id)
+    await deleteOuting(host.page, down.id)
+  }
+})
+
+test('SUG-14: the suggestion button is shown only to the host of an open outing and is disabled while a run is running', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const created = await createOuting(host.page, 'sug14', { location: '__slow__ Dallas, TX' })
+  const { id } = created
+  try {
+    await command(member.page, 'joinOuting', { input: { token: created.inviteToken } })
+    await member.page.goto(`/home?outing=${id}`)
+    await expect(member.page.getByTestId('outing-page')).toBeVisible({ timeout: 15_000 })
+    await expect(member.page.getByTestId('suggest-button')).toHaveCount(0)
+
+    await host.page.goto(`/home?outing=${id}`)
+    const button = host.page.getByTestId('suggest-button')
+    await expect(button).toBeEnabled({ timeout: 15_000 })
+    await button.click()
+    await expect(button).toBeDisabled()
+    await expect(button).toHaveText('Finding places…')
+    await expect(host.page.getByTestId('suggestion-status')).toHaveAttribute('data-status', 'running')
+    await expect(host.page.getByTestId('suggestion-status')).toHaveText('Added 3 suggested places.', { timeout: 15_000 })
+    await expect(button).toBeEnabled()
+
+    // Finalized: no button for anyone.
+    const optionId = (await readOuting(host.page, id)).options[0].id
+    await command(host.page, 'finalize', { id, input: { optionId } })
+    await expect(host.page.getByTestId('confirmed-plan')).toBeVisible({ timeout: 15_000 })
+    await expect(host.page.getByTestId('suggest-button')).toHaveCount(0)
   } finally {
     await deleteOuting(host.page, id)
   }

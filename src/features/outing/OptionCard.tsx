@@ -94,12 +94,22 @@ export function OptionCard({ outingId, outing, entry, me, nameOf, onEdit }: Prop
         <dd data-testid="fact-price">Unconfirmed</dd>
         <dt className="text-muted-foreground">Hours</dt>
         <dd data-testid="fact-hours">Unconfirmed</dd>
-        {(option.link || option.sourceUrl) && (
+        {option.link && (
           <>
-            <dt className="text-muted-foreground">{option.origin === 'suggested' ? 'Source' : 'Link'}</dt>
+            <dt className="text-muted-foreground">{option.origin === 'suggested' ? 'Website' : 'Link'}</dt>
             <dd>
-              <a className="inline-flex items-center gap-1 underline" href={(option.link ?? option.sourceUrl)!} target="_blank" rel="noopener noreferrer">
-                {option.origin === 'suggested' ? 'View on Google Maps' : 'Open link'} <ExternalLink size={12} aria-hidden />
+              <a className="inline-flex items-center gap-1 underline" href={option.link} target="_blank" rel="noopener noreferrer">
+                Open link <ExternalLink size={12} aria-hidden />
+              </a>
+            </dd>
+          </>
+        )}
+        {option.sourceUrl && (
+          <>
+            <dt className="text-muted-foreground">Source</dt>
+            <dd>
+              <a className="inline-flex items-center gap-1 underline" href={option.sourceUrl} target="_blank" rel="noopener noreferrer">
+                View on Google Maps <ExternalLink size={12} aria-hidden />
               </a>
             </dd>
           </>

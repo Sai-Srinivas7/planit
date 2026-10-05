@@ -1,3 +1,7 @@
+import { execSync } from 'node:child_process'
+import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { test, expect } from 'deepspace/testing'
 import { addOption, command, createOuting, deleteOuting, outingInput, outingWithMember, readOuting, readOutings, testTitle } from './helpers/outing'
 
@@ -327,4 +331,74 @@ test('PREF-02: a userId in setPreference input naming another user is ignored', 
   } finally {
     await deleteOuting(host.page, id)
   }
+})
+
+test('SUG-01: two concurrent requestSuggestions trigger one provider run (fixture providers)', async ({ users }) => {
+  const [host] = await users(['Host'])
+  // __slow__ keeps the first run in progress while the second request arrives.
+  const { id } = await createOuting(host.page, 'sug01', { location: '__slow__ Dallas, TX' })
+  try {
+    const [a, b] = await Promise.all([
+      command(host.page, 'requestSuggestions', { id, input: {} }),
+      command(host.page, 'requestSuggestions', { id, input: {} }),
+    ])
+    const bodies = [a.body, b.body]
+    expect(bodies.every((x) => x.success === true)).toBe(true)
+    // Exactly one request ran the pipeline; the other reused the active run.
+    expect(bodies.map((x) => x.data.reused).sort()).toEqual([false, true])
+    expect(bodies.find((x) => !x.data.reused).data).toEqual({ status: 'done', reused: false })
+    expect(bodies.find((x) => x.data.reused).data).toEqual({ status: 'running', reused: true })
+    // No internal snapshot leaks into the public response.
+    expect(JSON.stringify(bodies)).not.toContain('inviteToken')
+
+    const outing = await readOuting(host.page, id)
+    expect(outing.suggestions).toMatchObject({ status: 'done', runs: 1, resolvedLocation: 'Dallas, Texas, US' })
+    expect(outing.options).toHaveLength(3)
+    expect(outing.options.every((o: any) => o.origin === 'suggested' && o.sourceUrl && o.fetchedAt)).toBe(true)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('SUG-06: a places failure ends the run failed with a readable message; options, responses, and comments are unchanged', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const created = await createOuting(host.page, 'sug06', { location: '__fail_places__ Dallas, TX' })
+  const { id } = created
+  try {
+    await command(member.page, 'joinOuting', { input: { token: created.inviteToken } })
+    const optionId = await addOption(member.page, id, 'Manual pick')
+    await command(member.page, 'setResponse', { id, input: { optionId, value: 'yes' } })
+    await command(member.page, 'postComment', { id, input: { body: 'Keep this' } })
+    const before = await readOuting(host.page, id)
+
+    const res = await command(host.page, 'requestSuggestions', { id, input: {} })
+    expect(res.body).toEqual({ success: true, data: { status: 'failed', reused: false } })
+    const after = await readOuting(host.page, id)
+    expect(after.suggestions).toMatchObject({ status: 'failed', runs: 1, message: 'Place search is unavailable right now. You can still add places yourself.' })
+    expect(after.options).toEqual(before.options)
+    expect(after.responses).toEqual(before.responses)
+    expect(after.comments).toEqual(before.comments)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+const PROVIDER_HOSTS = /serpapi\.com|openweathermap\.org|anthropic\.com/i
+
+test('SEC-02: the built client bundle contains no provider URLs', async () => {
+  test.setTimeout(180_000)
+  const root = fileURLToPath(new URL('..', import.meta.url))
+  execSync('npm run build', { cwd: root, stdio: 'pipe', timeout: 150_000 })
+  const files: string[] = []
+  const walk = (dir: string) => {
+    for (const name of readdirSync(dir)) {
+      const path = join(dir, name)
+      if (statSync(path).isDirectory()) walk(path)
+      else files.push(path)
+    }
+  }
+  walk(join(root, 'dist', 'client'))
+  expect(files.filter((f) => f.endsWith('.js')).length, 'client JS was built').toBeGreaterThan(0)
+  const offenders = files.filter((f) => PROVIDER_HOSTS.test(readFileSync(f, 'utf8')))
+  expect(offenders.map((f) => f.slice(root.length))).toEqual([])
 })

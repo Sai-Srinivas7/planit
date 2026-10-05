@@ -18,6 +18,7 @@ import { GroupPanel } from './GroupPanel'
 import { useNames } from './names'
 import { OptionCard } from './OptionCard'
 import { OptionDialog } from './OptionDialog'
+import { SuggestionStatus, WeatherLine } from './SuggestionStatus'
 import { useOuting } from './useOuting'
 
 export function OutingPage({ id, onBack }: { id: string; onBack: () => void }) {
@@ -67,6 +68,7 @@ export function OutingPage({ id, onBack }: { id: string; onBack: () => void }) {
           <span className="flex items-center gap-1.5" data-testid="outing-when">
             <CalendarDays size={14} aria-hidden /> {formatInZone(outing.startAt, outing.timezone)} · {outing.timezone}
           </span>
+          <WeatherLine outing={outing} />
         </p>
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" onClick={() => setInviteOpen(true)}><Link2 size={16} aria-hidden /> Copy invite</Button>
@@ -96,6 +98,7 @@ export function OutingPage({ id, onBack }: { id: string; onBack: () => void }) {
               <Button variant="outline" onClick={() => setEditing('new')}><Plus size={16} aria-hidden /> Add place</Button>
             )}
           </div>
+          <SuggestionStatus outingId={id} outing={outing} isHost={isHost} />
           {outing.options.length === 0 && (
             <p className="rounded-lg border border-dashed p-6 text-center text-muted-foreground">
               No places yet. Add a favorite spot{isHost ? ' or ask for suggestions' : ''}.
