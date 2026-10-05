@@ -67,3 +67,26 @@ export const setPreferenceInput = z.object({
 export const postCommentInput = z.object({ body: text(1, 1000) })
 
 export const commentRefInput = z.object({ commentId: ref })
+
+// Internal commands (worker code only; spec §5). Validated anyway to keep payload invariants.
+export const publishSuggestionsInput = z.object({
+  places: z
+    .array(
+      z.object({
+        name: text(1, 120),
+        address: z.string().max(200).nullable(),
+        link: z.string().max(2000).regex(/^https?:\/\//i).nullable(),
+        sourceUrl: z.string().max(2000).regex(/^https?:\/\//i),
+        providerPlaceId: z.string().min(1).max(200),
+        explanation: z.string().max(240).nullable(),
+      }),
+    )
+    .max(3),
+  weather: z.union([
+    z.literal('unavailable'),
+    z.object({ forecastAt: z.string(), tempC: z.number(), description: z.string().max(80) }),
+  ]),
+  resolvedLocation: z.string().max(200),
+})
+
+export const failSuggestionsInput = z.object({ message: z.string().min(1).max(300) })

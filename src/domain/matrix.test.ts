@@ -51,6 +51,7 @@ const inputs: Record<string, Record<string, unknown>> = {
   deleteComment: { commentId: 'c-x' },
   finalize: { optionId: 'opt-y' },
   reopen: {},
+  requestSuggestions: {},
 }
 
 // [row label, command, kind, expected per column]
@@ -72,6 +73,7 @@ const ROWS: [string, string, Kind, string[]][] = [
   ["deleteComment (other's)", 'deleteComment', 'others', ['NOT_MEMBER', 'NOT_AUTHOR', 'NOT_AUTHOR', OK, OK]],
   ['finalize', 'finalize', 'none', ['NOT_MEMBER', 'NOT_HOST', 'NOT_HOST', OK, 'INVALID_STATE']],
   ['reopen', 'reopen', 'none', ['NOT_MEMBER', 'NOT_HOST', 'NOT_HOST', 'INVALID_STATE', OK]],
+  ['requestSuggestions', 'requestSuggestions', 'none', ['NOT_MEMBER', 'NOT_HOST', 'NOT_HOST', OK, 'OUTING_FINALIZED']],
 ]
 
 describe('§6 authorization matrix', () => {

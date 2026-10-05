@@ -43,7 +43,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | VOTE-07 | unit | `VOTE-07: …` unit (`responses.test.ts`) + smoke (`tests/smoke.spec.ts`, request body `[maybe, null]`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
 | FIN-01 | unit | `FIN-01: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-02 | unit | `FIN-02: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
-| FIN-03 | unit | `FIN-03: …` (`responses.test.ts`) + §6 matrix; requestSuggestions half added in Block 4 |  | `finalize` / `reopen` in `commands.ts` |  |  |
+| FIN-03 | unit | `FIN-03: …` (`responses.test.ts`) + `FIN-03: requestSuggestions while finalized…` (`suggest-commands.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-04 | api | `FIN-04: …` (`tests/api.spec.ts`; 20 runs, both orderings observed: 8 stored-before / 12 refused) | Fault-injected 2026-10-05: `blockConcurrencyWhile` removed → run 2 finalize overwritten (`state` back to `open`). Restored, green. | Serialized room + `setResponse` state check |  |  |
 | FIN-05 | smoke | `FIN-05: …` (`tests/smoke.spec.ts`) |  | `src/features/outing/ConfirmedPlan.tsx` |  |  |
 | FIN-06 | unit | `FIN-06: …` (`responses.test.ts`) |  | `planText` in `src/domain/summary.ts` |  |  |
@@ -59,21 +59,21 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | COM-03 | collab | `PREF-05, COM-03: …` (`tests/collab.spec.ts`) |  | Realtime → `Conversation.tsx` |  |  |
 | COM-04 | smoke | `COM-04: …` (`tests/smoke.spec.ts`) |  | `names.ts` `useNames` (directory `getName`, "Unknown" fallback) used by group, votes, comments, "Proposed by" |  |  |
 | COM-05 | unit | `COM-05: …` (`conversation.test.ts`) |  | `deleteComment` hard delete |  |  |
-| SUG-01 | unit |  |  |  |  |  |
-| SUG-02 | unit |  |  |  |  |  |
-| SUG-03 | unit |  |  |  |  |  |
-| SUG-04 | unit |  |  |  |  |  |
-| SUG-05 | unit |  |  |  |  |  |
+| SUG-01 | unit | `SUG-01: …` unit (`src/domain/suggest-commands.test.ts`); api pending T4.9 |  | `requestSuggestions` reuse in `commands.ts` |  |  |
+| SUG-02 | unit | `SUG-02: …` (`src/domain/suggest-commands.test.ts`) |  | `SUGGESTION_LIMITS`; app-wide counter in room storage (`worker.ts`, `outing-room.ts`) |  |  |
+| SUG-03 | unit | `SUG-03: …` (`src/domain/suggestions/suggestions.test.ts`, recorded places fixture incl. duplicate venue) |  | `normalize.ts` `normalizePlaces` |  |  |
+| SUG-04 | unit | `SUG-04: …` (`src/domain/suggestions/suggestions.test.ts`) |  | `explain.ts` `parseExplanations` (one fence stripped, zod, known IDs, ≤240) |  |  |
+| SUG-05 | unit | `SUG-05: …` (`src/domain/suggestions/suggestions.test.ts`) | Fault-injected 2026-10-05: venue names appended to the system prompt → SUG-05 red. Restored, green. | `explain.ts` `buildExplainRequest` (explicit field whitelist; venue text only in user JSON) |  |  |
 | SUG-06 | api |  |  |  |  |  |
-| SUG-07 | unit |  |  |  |  |  |
-| SUG-08 | unit |  |  |  |  |  |
-| SUG-09 | unit |  |  |  |  |  |
-| SUG-10 | unit |  |  |  |  |  |
+| SUG-07 | unit | `SUG-07: …` unit (`src/domain/suggestions/suggestions.test.ts`: pick + pipeline); smoke pending T4.11 |  | `forecast.ts` `pickWeather`; pipeline treats forecast as optional |  |  |
+| SUG-08 | unit | `SUG-08: …` (`src/domain/suggestions/suggestions.test.ts`) |  | pipeline: explainer errors/rejections → `explanation: null` |  |  |
+| SUG-09 | unit | `SUG-09: …` (`src/domain/suggestions/suggestions.test.ts`: resolver + pipeline) |  | `geocode.ts` `resolveLocation` |  |  |
+| SUG-10 | unit | `SUG-10: …` (`src/domain/suggest-commands.test.ts`) |  | `publishSuggestions` state recheck |  |  |
 | SUG-11 | collab |  |  |  |  |  |
-| SUG-12 | unit |  |  |  |  |  |
-| SUG-13 | unit |  |  |  |  |  |
+| SUG-12 | unit | `SUG-12: …` (`src/domain/suggest-commands.test.ts`) |  | `publishSuggestions` append + dedupe |  |  |
+| SUG-13 | unit | `SUG-13: …` ×2 (`src/domain/suggestions/suggestions.test.ts`: fixture pipeline with fetch tripwire; live Explainer adapter on recorded fixture) |  | `fixture.ts`, `live.ts`, `pipeline.ts` |  |  |
 | SUG-14 | smoke |  |  |  |  |  |
-| SUG-15 | unit |  |  |  |  |  |
+| SUG-15 | unit | `SUG-15: …` (`src/domain/suggest-commands.test.ts`) |  | `isRunActive` (2-minute stale) |  |  |
 | SUG-16 | manual |  |  |  |  |  |
 | UX-01 | smoke | `UX-01: …` create/join, option refusal, comment pending (`tests/smoke.spec.ts`) |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
 | UX-02 | smoke |  |  |  |  |  |

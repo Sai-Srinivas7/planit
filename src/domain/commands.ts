@@ -9,6 +9,7 @@
 
 import type { z } from 'zod'
 import { type CommandError, isCommandError as isError, refuse } from './errors'
+import { normalizeName } from './suggestions/normalize'
 import { toStartAt } from './time'
 import { CAPS, type Option, type Outing } from './types'
 import {
@@ -16,9 +17,11 @@ import {
   commentRefInput,
   createOutingInput,
   editOptionInput,
+  failSuggestionsInput,
   joinOutingInput,
   optionRefInput,
   postCommentInput,
+  publishSuggestionsInput,
   setPreferenceInput,
   setResponseInput,
 } from './validate'
@@ -50,7 +53,22 @@ export type CommandResult = { outing: Outing | null; data: Record<string, unknow
 export type CommandContext = {
   /** Id generator; injected by tests for determinism. */
   newId?: () => string
+  /** App-wide suggestion runs started today (UTC), from room storage (D-16). */
+  appRunsToday?: number
 }
+
+/** Internal commands: callable only by worker code, never through the public route (spec §5). */
+export const INTERNAL_COMMANDS = ['publishSuggestions', 'failSuggestions'] as const
+
+export const SUGGESTION_LIMITS = { perOuting: 3, appPerDay: 30, staleMs: 2 * 60 * 1000 } as const
+
+export const CONFIRMED_BEFORE_SUGGESTIONS = 'Plan was confirmed before suggestions finished.'
+
+/** A run stuck in `running` for more than 2 minutes counts as failed (SUG-15). */
+export const isRunActive = (outing: Outing, now: Date) =>
+  outing.suggestions.status === 'running' &&
+  !!outing.suggestions.startedAt &&
+  now.getTime() - Date.parse(outing.suggestions.startedAt) <= SUGGESTION_LIMITS.staleMs
 
 /** Same response for an unknown token and a deleted outing's token (INV-03). */
 export const INVITE_INVALID_MESSAGE = 'This invite link is not valid.'
@@ -265,9 +283,82 @@ export function applyCommand(
       return { outing: next, data: {} }
     }
 
+    case 'requestSuggestions': {
+      if (!outing) return notFound()
+      if (!outing.members.includes(userId)) return notMember()
+      if (outing.hostId !== userId) return refuse('NOT_HOST', 'Only the host can ask for suggestions.')
+      if (outing.state === 'finalized') return finalized()
+      // A second request while a run is active reuses it: no provider call, no counters (SUG-01).
+      if (isRunActive(outing, now)) return { outing, data: { status: 'running', reused: true } }
+      if (outing.suggestions.runs >= SUGGESTION_LIMITS.perOuting) {
+        return refuse('LIMIT_REACHED', 'This outing has used its 3 suggestion runs. You can still add places yourself.')
+      }
+      if ((ctx.appRunsToday ?? 0) >= SUGGESTION_LIMITS.appPerDay) {
+        return refuse('LIMIT_REACHED', 'PlanIt has reached today’s suggestion limit. Try again tomorrow, or add places yourself.')
+      }
+      const next = structuredClone(outing)
+      next.suggestions = { ...next.suggestions, status: 'running', runs: outing.suggestions.runs + 1, startedAt: now.toISOString(), message: null }
+      return { outing: next, data: { status: 'running', reused: false } }
+    }
+
+    case 'publishSuggestions': {
+      const v = parse(publishSuggestionsInput, input)
+      if (isError(v)) return v
+      if (!outing) return notFound()
+      if (outing.hostId !== userId) return refuse('NOT_HOST', 'Only the host can publish suggestions.')
+      const next = structuredClone(outing)
+      if (outing.state !== 'open') {
+        // Results are discarded; options stay untouched (SUG-10).
+        next.suggestions = { ...next.suggestions, status: 'failed', message: CONFIRMED_BEFORE_SUGGESTIONS }
+        return { outing: next, data: { status: 'failed' } }
+      }
+      const seenIds = new Set(outing.options.map((o) => o.providerPlaceId).filter(Boolean))
+      const seenNames = new Set(outing.options.map((o) => normalizeName(o.name)))
+      let added = 0
+      for (const p of v.places) {
+        if (next.options.length >= CAPS.options) break
+        const key = normalizeName(p.name)
+        if (seenIds.has(p.providerPlaceId) || seenNames.has(key)) continue // append, skip duplicates (SUG-12, D-15)
+        seenIds.add(p.providerPlaceId)
+        seenNames.add(key)
+        next.options.push({
+          id: newId(),
+          createdBy: userId,
+          createdAt: now.toISOString(),
+          origin: 'suggested',
+          name: p.name,
+          address: p.address,
+          link: p.link,
+          note: null,
+          sourceUrl: p.sourceUrl,
+          providerPlaceId: p.providerPlaceId,
+          explanation: p.explanation,
+          fetchedAt: now.toISOString(),
+        })
+        added += 1
+      }
+      next.suggestions = {
+        ...next.suggestions,
+        status: 'done',
+        message: added === 0 ? 'No new places to add.' : `Added ${added} suggested ${added === 1 ? 'place' : 'places'}.`,
+        weather: v.weather,
+        resolvedLocation: v.resolvedLocation,
+      }
+      return { outing: next, data: { status: 'done', added } }
+    }
+
+    case 'failSuggestions': {
+      const v = parse(failSuggestionsInput, input)
+      if (isError(v)) return v
+      if (!outing) return notFound()
+      if (outing.hostId !== userId) return refuse('NOT_HOST', 'Only the host can update suggestions.')
+      const next = structuredClone(outing)
+      next.suggestions = { ...next.suggestions, status: 'failed', message: v.message }
+      return { outing: next, data: { status: 'failed' } }
+    }
+
     default:
-      // ponytail: suggestion commands arrive in Block 4.
-      throw new Error(`${command} not implemented`)
+      throw new Error(`unknown command ${command}`)
   }
 }
 

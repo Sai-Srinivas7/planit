@@ -32,7 +32,7 @@ import {
   registerStaticRoutes,
   resolveAuth,
 } from './src/server/http-routes.js'
-import { runOutingCommand, type ExecuteTool, type RoomCommand } from './src/server/outing-room.js'
+import { runOutingCommand, type DailyCounter, type ExecuteTool, type RoomCommand } from './src/server/outing-room.js'
 import { registerOutingRoutes } from './src/server/outing-routes.js'
 import { registerRealtimeRoutes } from './src/server/realtime-routes.js'
 
@@ -71,7 +71,13 @@ export class AppRecordRoom extends RecordRoom<Env> {
       )
       return res.json()
     }
-    return this.state.blockConcurrencyWhile(() => runOutingCommand(exec, userId, body, new Date()))
+    const now = new Date()
+    const key = `suggestionRuns:${now.toISOString().slice(0, 10)}`
+    const counter: DailyCounter = {
+      get: async () => (await this.state.storage.get<number>(key)) ?? 0,
+      increment: async () => this.state.storage.put(key, ((await this.state.storage.get<number>(key)) ?? 0) + 1),
+    }
+    return this.state.blockConcurrencyWhile(() => runOutingCommand(exec, userId, body, now, {}, counter))
   }
 }
 
@@ -143,6 +149,11 @@ export interface Env extends DOBindings<typeof __DO_MANIFEST__> {
    * an authenticated app owner/admin. deepspace dev/test set it locally.
    */
   ALLOW_DEBUG_ROUTES?: string
+  /**
+   * Suggestion providers: 'fixture' (recorded JSON, no network) or 'live'.
+   * Unset → fixture where deepspace dev/test set ALLOW_DEBUG_ROUTES, live elsewhere.
+   */
+  PROVIDERS?: string
 }
 
 export type AppContext = { Bindings: Env }

@@ -14,6 +14,9 @@ export type ExecuteTool = (tool: string, params: Record<string, unknown>) => Pro
 
 export type RoomCommand = { command: string; id?: unknown; input: Record<string, unknown> }
 
+/** App-wide suggestion runs for the current UTC day, in room storage (D-16). */
+export type DailyCounter = { get(): Promise<number>; increment(): Promise<void> }
+
 type StoredRecord = { recordId: string; data: { payload: Outing | string } }
 
 const parsePayload = (r: StoredRecord): Outing =>
@@ -50,9 +53,10 @@ export async function runOutingCommand(
   body: RoomCommand,
   now: Date,
   ctx: CommandContext = {},
+  counter?: DailyCounter,
 ): Promise<Response> {
   try {
-    return await execute(exec, userId, body, now, ctx)
+    return await execute(exec, userId, body, now, ctx, counter)
   } catch (err) {
     console.error(`[outing-room] ${body.command} failed:`, err instanceof Error ? err.message : String(err))
     return Response.json(
@@ -62,8 +66,17 @@ export async function runOutingCommand(
   }
 }
 
-async function execute(exec: ExecuteTool, userId: string, body: RoomCommand, now: Date, ctx: CommandContext): Promise<Response> {
+async function execute(
+  exec: ExecuteTool,
+  userId: string,
+  body: RoomCommand,
+  now: Date,
+  ctx: CommandContext,
+  counter?: DailyCounter,
+): Promise<Response> {
   const { recordId, outing } = await load(exec, body)
+  const isRequest = body.command === 'requestSuggestions'
+  if (isRequest && counter) ctx = { ...ctx, appRunsToday: await counter.get() }
   const result = applyCommand(outing, userId, body.command, body.input, now, ctx)
   if (isCommandError(result)) {
     return Response.json({ success: false, error: result.code, message: result.message }, { status: 400 })
@@ -78,6 +91,11 @@ async function execute(exec: ExecuteTool, userId: string, body: RoomCommand, now
     must(await exec('records.delete', { collection: 'outings', recordId }), 'records.delete')
   } else if (next !== outing) {
     must(await exec('records.update', { collection: 'outings', recordId, data: columns(next) }), 'records.update')
+  }
+  if (isRequest && data.reused === false) {
+    await counter?.increment()
+    // The route runs the fetch phase outside the room from this snapshot; it is stripped before responding.
+    return Response.json({ success: true, data: { ...data, outing: next } })
   }
   return Response.json({ success: true, data: body.command === 'joinOuting' ? { id: recordId, ...data } : data })
 }

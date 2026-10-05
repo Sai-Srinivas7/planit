@@ -7,8 +7,14 @@
  */
 
 import type { Hono } from 'hono'
+import { buildCronContext } from 'deepspace/worker'
 import type { AppContext, Env } from '../../worker.js'
 import { isPublicCommand } from '../domain/commands.js'
+import type { Adapters } from '../domain/suggestions/adapters.js'
+import { makeFixtureAdapters } from '../domain/suggestions/fixture.js'
+import { makeLiveAdapters } from '../domain/suggestions/live.js'
+import { runPipeline, type PipelineResult } from '../domain/suggestions/pipeline.js'
+import type { Outing } from '../domain/types.js'
 import { resolveAuth } from './http-routes.js'
 
 const MAX_BODY_BYTES = 12 * 1024
@@ -36,8 +42,50 @@ export function registerOutingRoutes(app: Hono<AppContext>): void {
     if (!isObject(body) || (body.input !== undefined && !isObject(body.input))) {
       return c.json({ success: false, error: 'INVALID_INPUT', message: 'Invalid request.' }, 400)
     }
+    if (command === 'requestSuggestions') return requestSuggestions(c.env, auth.userId, body.id)
     return roomCall(c.env, auth.userId, { command, id: body.id, input: body.input ?? {} })
   })
+}
+
+/** Fixture providers unless configured otherwise; local dev/test default to fixtures so tests never pay. */
+export function adaptersFor(env: Env, location: string): Adapters {
+  const mode = env.PROVIDERS ?? (env.ALLOW_DEBUG_ROUTES === 'true' ? 'fixture' : 'live')
+  if (mode === 'fixture') return makeFixtureAdapters(location)
+  const ctx = buildCronContext(env, env.OWNER_USER_ID)
+  return makeLiveAdapters((endpoint, params) => ctx.integrations.call(endpoint, params))
+}
+
+/**
+ * Spec §7: reserve in the room (exact limits, reuse while running), fetch
+ * outside the room, then publish or fail back in the room. Runs inside the
+ * request; a dead worker leaves the run to go stale after 2 minutes (SUG-15).
+ */
+async function requestSuggestions(env: Env, userId: string, id: unknown): Promise<Response> {
+  const reserve = await roomCall(env, userId, { command: 'requestSuggestions', id, input: {} })
+  const reserved = (await reserve.json()) as { success: boolean; data?: { status: string; reused: boolean; outing?: Outing } }
+  if (!reserved.success || !reserved.data || reserved.data.reused || !reserved.data.outing) {
+    return Response.json(reserved, { status: reserve.status })
+  }
+
+  const outing = reserved.data.outing
+  let result: PipelineResult
+  try {
+    result = await runPipeline(adaptersFor(env, outing.location), outing)
+  } catch (err) {
+    console.error('[suggestions] pipeline failed:', err instanceof Error ? err.message : String(err))
+    result = { ok: false, message: 'Suggestions failed. Try again later, or add places yourself.' }
+  }
+
+  const finish = result.ok
+    ? await roomCall(env, userId, {
+        command: 'publishSuggestions',
+        id,
+        input: { places: result.places, weather: result.weather, resolvedLocation: result.resolvedLocation },
+      })
+    : await roomCall(env, userId, { command: 'failSuggestions', id, input: { message: result.message } })
+  const finished = (await finish.json()) as { success: boolean; data?: { status: string } }
+  if (!finished.success || !finished.data) return Response.json(finished, { status: finish.status })
+  return Response.json({ success: true, data: { status: finished.data.status, reused: false } })
 }
 
 const isObject = (v: unknown): v is Record<string, unknown> =>

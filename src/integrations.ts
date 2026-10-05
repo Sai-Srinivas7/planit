@@ -17,5 +17,9 @@
 
 export const integrations: Record<string, { billing: 'developer' | 'user' }> = {
   google: { billing: 'user' },
-  // openai: { billing: 'developer' },
+  // PlanIt's providers (spec §7): called only from worker code via
+  // integrations.call, billed to the app owner. The browser proxy is blocked.
+  serpapi: { billing: 'developer' },
+  openweathermap: { billing: 'developer' },
+  anthropic: { billing: 'developer' },
 }
