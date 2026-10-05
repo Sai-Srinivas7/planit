@@ -16,6 +16,7 @@
  * cleanup. No need to manage browser contexts manually.
  */
 import { test, expect, loadAllTestAccounts } from 'deepspace/testing'
+import { command, readOutings, testTitle } from './helpers/outing'
 
 // A machine that has never created test accounts is the normal state of a
 // fresh checkout, and there `users()` throws — turning "you have no pool yet"
@@ -60,4 +61,41 @@ test('each browser renders its own signed-in account', async ({ users }) => {
       timeout: 15_000,
     })
   }
+})
+
+test('BASE-01: the users fixture signs in three distinct accounts: host, member, outsider', async ({ users }) => {
+  const trio = await users(['Host', 'Member', 'Outsider'])
+  expect(new Set(trio.map((u) => u.userId)).size).toBe(3)
+  for (const user of trio) {
+    await user.page.goto('/home')
+    await user.page.getByRole('button', { name: 'Account menu' }).click()
+    await expect(user.page.getByTestId('nav-user-email')).toHaveText(user.email, { timeout: 15_000 })
+  }
+})
+
+test('BASE-03: the outsider receives no outing records, including after new writes', async ({ users }) => {
+  const [host, outsider] = await users(['Host', 'Outsider'])
+  await Promise.all([host.page.goto('/home'), outsider.page.goto('/home')])
+  const hostCount = host.page.getByTestId('outing-count')
+  const outsiderCount = outsider.page.getByTestId('outing-count')
+  await expect(outsiderCount).toHaveText('0', { timeout: 15_000 })
+  const before = Number(await hostCount.textContent({ timeout: 15_000 }))
+
+  // Two writes while both sockets are open.
+  const ids: string[] = []
+  for (const label of ['base03 a', 'base03 b']) {
+    const res = await command(host.page, 'createOuting', {
+      input: { title: testTitle(label), location: 'Dallas, TX', date: '2030-01-01', time: '18:00', timezone: 'America/Chicago' },
+    })
+    expect(res.body).toMatchObject({ success: true })
+    ids.push(res.body.data.id)
+  }
+
+  // Positive control: the host's live list picks up both writes without a reload…
+  await expect(hostCount).toHaveText(String(before + 2), { timeout: 15_000 })
+  // …while the outsider's live list, and a fresh subscription on their socket, get nothing.
+  await expect(outsiderCount).toHaveText('0')
+  const outsiderView = await readOutings(outsider.page)
+  expect(outsiderView.filter((r) => ids.includes(r.recordId))).toEqual([])
+  expect(outsiderView).toEqual([])
 })

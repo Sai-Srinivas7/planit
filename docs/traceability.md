@@ -4,9 +4,9 @@ Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, comm
 
 | AC | Level | Test (name/file) | Seen failing | Implemented | Browser-verified | Deployed-verified |
 |---|---|---|---|---|---|---|
-| BASE-01 | collab |  |  |  |  |  |
+| BASE-01 | collab | `BASE-01: the users fixture signs in three distinct accounts: host, member, outsider` (`tests/collab.spec.ts`) | Not seen failing (test of the harness; accounts `Host`, `Member`, `Outsider` created in T0.1) | Test accounts `planit-{host,member,outsider}@deepspace.test` |  |  |
 | BASE-02 | unit | `BASE-02: registered outings schema denies client create, update, and delete for every role` (`src/schemas/outings-schema.test.ts`) | 2026-10-05: `expected undefined to be defined` — no `outings` schema registered | `src/schemas/outings-schema.ts`, registered in `src/schemas.ts` (ported from prototype `src/schemas/outings-schema.ts`) |  |  |
-| BASE-03 | collab |  |  |  |  |  |
+| BASE-03 | collab | `BASE-03: the outsider receives no outing records, including after new writes` (`tests/collab.spec.ts`; live `outing-count` + fresh socket read) | Fault-injected 2026-10-05: `outings` read policy `collaborator` → `true` → outsider count `8`, expected `0`. Restored, green. Writes so far are two `createOuting`s; extend with update writes (join/option) when those commands exist. | `outings` read `collaborator` (`src/schemas/outings-schema.ts`); `src/features/outing/OutingList.tsx` (count only), `src/pages/(app)/home.tsx` |  |  |
 | BASE-04 | api |  |  |  |  |  |
 | BASE-05 | manual |  |  |  |  |  |
 | BASE-06 | api | `BASE-06: /internal/outing is not publicly reachable and a client X-User-Id is ignored` (`tests/api.spec.ts`, reads via `tests/helpers/outing.ts` `readOutings` over each user's own socket) | Fault-injected 2026-10-05: (1) route forwards client `X-User-Id` → host does not receive the outing (stored under forged member ID); (2) public `POST /internal/outing` forwarded raw to the room → direct hit executed a command. Restored, green. | `AppRecordRoom.fetch` override in `worker.ts` (exact path `/internal/outing`, `blockConcurrencyWhile`) ported from prototype `worker.ts:54-82`; `src/server/outing-room.ts`; route builds a fresh room request with the verified user ID only; `src/domain/{types,errors,commands}.ts` (minimal `createOuting`) |  |  |
