@@ -9,7 +9,7 @@ Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, comm
 | BASE-03 | collab |  |  |  |  |  |
 | BASE-04 | api |  |  |  |  |  |
 | BASE-05 | manual |  |  |  |  |  |
-| BASE-06 | api |  |  |  |  |  |
+| BASE-06 | api | `BASE-06: /internal/outing is not publicly reachable and a client X-User-Id is ignored` (`tests/api.spec.ts`, reads via `tests/helpers/outing.ts` `readOutings` over each user's own socket) | Fault-injected 2026-10-05: (1) route forwards client `X-User-Id` → host does not receive the outing (stored under forged member ID); (2) public `POST /internal/outing` forwarded raw to the room → direct hit executed a command. Restored, green. | `AppRecordRoom.fetch` override in `worker.ts` (exact path `/internal/outing`, `blockConcurrencyWhile`) ported from prototype `worker.ts:54-82`; `src/server/outing-room.ts`; route builds a fresh room request with the verified user ID only; `src/domain/{types,errors,commands}.ts` (minimal `createOuting`) |  |  |
 | OUT-01 | api |  |  |  |  |  |
 | OUT-02 | unit |  |  |  |  |  |
 | OUT-03 | unit |  |  |  |  |  |
@@ -80,7 +80,7 @@ Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, comm
 | UX-03 | smoke |  |  |  |  |  |
 | UX-04 | manual |  |  |  |  |  |
 | UX-05 | manual |  |  |  |  |  |
-| SEC-01 | api |  |  |  |  |  |
+| SEC-01 | api | `SEC-01: every public command without a valid JWT returns 401 UNAUTHENTICATED` (`tests/api.spec.ts`) | 2026-10-05: before route existed, expected 401, received 404. Fault-injected: (1) auth check skipped → `createOuting with no Authorization header` 200; (2) unverified JWT payload trusted → `createOuting with unsigned forged JWT` 200. Restored, green. | `src/server/outing-routes.ts` (JWT via scaffold `resolveAuth`, checked before allowlist), registered in `worker.ts`; ported from prototype `src/server/outing-routes.ts:7-10` |  |  |
 | SEC-02 | api |  |  |  |  |  |
 | SEC-03 | manual |  |  |  |  |  |
 | SEC-04 | api |  |  |  |  |  |

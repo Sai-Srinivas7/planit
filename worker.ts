@@ -32,6 +32,8 @@ import {
   registerStaticRoutes,
   resolveAuth,
 } from './src/server/http-routes.js'
+import { runOutingCommand, type ExecuteTool, type RoomCommand } from './src/server/outing-room.js'
+import { registerOutingRoutes } from './src/server/outing-routes.js'
 import { registerRealtimeRoutes } from './src/server/realtime-routes.js'
 
 // Dynamic deploy reads this manifest to create the app's DO bindings.
@@ -47,6 +49,29 @@ export const __DO_MANIFEST__ = [
 export class AppRecordRoom extends RecordRoom<Env> {
   constructor(state: DurableObjectState, env: Env) {
     super(state, env, schemas, { ownerUserId: env.OWNER_USER_ID })
+  }
+
+  /**
+   * Serialized outing command endpoint (spec §4.1). Only the worker can reach
+   * it: no public route forwards this path into the room, and the route sends
+   * a fresh request whose X-User-Id is the verified caller.
+   */
+  override async fetch(request: Request): Promise<Response> {
+    if (new URL(request.url).pathname !== '/internal/outing') return super.fetch(request)
+    const userId = request.headers.get('X-User-Id')
+    if (!userId) return Response.json({ success: false, error: 'UNAUTHENTICATED', message: 'Sign in.' }, { status: 401 })
+    const body = (await request.json()) as RoomCommand
+    const exec: ExecuteTool = async (tool, params) => {
+      const res = await super.fetch(
+        new Request('https://internal/api/tools/execute', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-User-Id': userId, 'X-App-Action': 'true' },
+          body: JSON.stringify({ tool, params }),
+        }),
+      )
+      return res.json()
+    }
+    return this.state.blockConcurrencyWhile(() => runOutingCommand(exec, userId, body, new Date()))
   }
 }
 
@@ -137,6 +162,7 @@ app.use('*', async (c, next) => {
 registerAuthAndIntegrationRoutes(app)
 registerRealtimeRoutes(app)
 registerActionRoutes(app, resolveAuth)
+registerOutingRoutes(app)
 // The in-app assistant stores chat history in `ai-chats` / `ai-messages`,
 // which only the copilot overlay declares. When present, registerAgent enables
 // both that website AI and the user's local Codex/Claude/etc. assistant.
