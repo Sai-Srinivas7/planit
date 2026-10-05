@@ -136,3 +136,32 @@ test('OPT-04, VOTE-06, FIN-08: member adds and responds, host sees it live; host
     await deleteOuting(host.page, id)
   }
 })
+
+test('PREF-05, COM-03: member edits preferences and posts; host sees both live; a deleted comment disappears live', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'block3 live')
+  try {
+    await Promise.all([host.page.goto(`/home?outing=${id}`), member.page.goto(`/home?outing=${id}`)])
+    const memberRow = host.page.getByTestId('group-panel').locator(`[data-user-id="${member.userId}"]`)
+    await expect(memberRow.getByTestId('person-preferences')).toHaveText('No preferences yet', { timeout: 15_000 })
+
+    // PREF-05
+    await member.page.getByRole('button', { name: 'Add my preferences' }).click()
+    const form = member.page.getByTestId('preferences-form')
+    await form.getByLabel('Setting').selectOption('outdoor')
+    await form.getByLabel('Outdoors').check()
+    await form.getByRole('button', { name: 'Save preferences' }).click()
+    await expect(memberRow.getByTestId('person-preferences')).toHaveText('Flexible per person · Outdoor · Outdoors', { timeout: 15_000 })
+
+    // COM-03: post appears live, delete disappears live.
+    await member.page.getByLabel('Message', { exact: true }).fill('Picnic?')
+    await member.page.getByRole('button', { name: 'Send' }).click()
+    const hostComment = host.page.getByTestId('comment').filter({ hasText: 'Picnic?' })
+    await expect(hostComment).toBeVisible({ timeout: 15_000 })
+    await expect(hostComment.getByTestId('comment-author')).toHaveText('Member')
+    await member.page.getByTestId('comment').filter({ hasText: 'Picnic?' }).getByRole('button', { name: 'Delete message' }).click()
+    await expect(hostComment).toHaveCount(0, { timeout: 15_000 })
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})

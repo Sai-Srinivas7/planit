@@ -50,14 +50,14 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | FIN-07 | unit | `FIN-07: …` unit (`responses.test.ts`) + smoke "previous pick" (`tests/smoke.spec.ts`) |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-08 | collab | `OPT-04, VOTE-06, FIN-08: …` (`tests/collab.spec.ts`) |  | Realtime `useQuery` → `OutingPage` / `OptionCard` / `ConfirmedPlan` |  |  |
 | PREF-01 | unit | `PREF-01: …` (`src/domain/conversation.test.ts`) + §6 matrix |  | `setPreference` in `commands.ts` |  |  |
-| PREF-02 | api |  |  |  |  |  |
+| PREF-02 | api | `PREF-02: …` (`tests/api.spec.ts`) |  | zod strips `userId`; JWT identity only |  |  |
 | PREF-03 | unit | `PREF-03: …` (`conversation.test.ts`) | Red on first run: duplicate interests hit `.max(8)` before dedupe; bound moved after dedupe | `setPreferenceInput` (fixed enums, dedupe) in `validate.ts` |  |  |
-| PREF-04 | smoke |  |  |  |  |  |
-| PREF-05 | collab |  |  |  |  |  |
+| PREF-04 | smoke | `PREF-04: …` (`tests/smoke.spec.ts`) |  | `src/features/outing/GroupPanel.tsx` (+ preferences dialog) |  |  |
+| PREF-05 | collab | `PREF-05, COM-03: …` (`tests/collab.spec.ts`) |  | Realtime → `GroupPanel` |  |  |
 | COM-01 | unit | `COM-01: …` (`conversation.test.ts`) |  | `postComment` (trim, server timestamp, cap 200) |  |  |
 | COM-02 | unit | `COM-02: …` (`conversation.test.ts`) + §6 matrix |  | `deleteComment` (author or host) |  |  |
-| COM-03 | collab |  |  |  |  |  |
-| COM-04 | smoke |  |  |  |  |  |
+| COM-03 | collab | `PREF-05, COM-03: …` (`tests/collab.spec.ts`) |  | Realtime → `Conversation.tsx` |  |  |
+| COM-04 | smoke | `COM-04: …` (`tests/smoke.spec.ts`) |  | `names.ts` `useNames` (directory `getName`, "Unknown" fallback) used by group, votes, comments, "Proposed by" |  |  |
 | COM-05 | unit | `COM-05: …` (`conversation.test.ts`) |  | `deleteComment` hard delete |  |  |
 | SUG-01 | unit |  |  |  |  |  |
 | SUG-02 | unit |  |  |  |  |  |
@@ -75,7 +75,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | SUG-14 | smoke |  |  |  |  |  |
 | SUG-15 | unit |  |  |  |  |  |
 | SUG-16 | manual |  |  |  |  |  |
-| UX-01 | smoke | `UX-01: …` create/join + `UX-01: option commands …` refused edit (`tests/smoke.spec.ts`) |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
+| UX-01 | smoke | `UX-01: …` create/join, option refusal, comment pending (`tests/smoke.spec.ts`) |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
 | UX-02 | smoke |  |  |  |  |  |
 | UX-03 | smoke |  |  |  |  |  |
 | UX-04 | manual |  |  |  |  |  |

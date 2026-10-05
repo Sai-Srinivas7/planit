@@ -313,3 +313,18 @@ test('FIN-04: concurrent setResponse and finalize (20 runs): the response is sto
     await deleteOuting(host.page, id)
   }
 })
+
+test('PREF-02: a userId in setPreference input naming another user is ignored', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'pref02')
+  try {
+    const pref = { budget: '50_plus', interests: ['music'], setting: 'outdoor' }
+    const res = await command(member.page, 'setPreference', { id, input: { ...pref, userId: host.userId } }, { 'X-User-Id': host.userId! })
+    expect(res.body).toEqual({ success: true, data: {} })
+    const outing = await readOuting(host.page, id)
+    expect(outing.people.find((p: any) => p.userId === member.userId).preferences).toEqual(pref)
+    expect(outing.people.find((p: any) => p.userId === host.userId).preferences).toBeUndefined()
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})

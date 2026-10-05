@@ -352,3 +352,72 @@ test('UX-01: option commands show pending; a refused edit shows its message and 
     await deleteOuting(host.page, id)
   }
 })
+
+test('PREF-04: the group panel shows each member by display name with preferences, marks the host, and says budget is not a venue price', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'pref04')
+  try {
+    await command(member.page, 'setPreference', { id, input: { budget: '20_50', interests: ['coffee', 'art'], setting: 'indoor' } })
+    await host.page.goto(`/home?outing=${id}`)
+    const panel = host.page.getByTestId('group-panel')
+    const person = (uid: string) => panel.locator(`[data-user-id="${uid}"]`)
+    await expect(person(member.userId!).getByTestId('person-name')).toHaveText('Member', { timeout: 15_000 })
+    await expect(person(member.userId!).getByTestId('person-preferences')).toHaveText('$20–50 per person · Indoor · Coffee, Art')
+    await expect(person(member.userId!).getByTestId('host-badge')).toHaveCount(0)
+    await expect(person(host.userId!).getByTestId('person-name')).toHaveText('Host')
+    await expect(person(host.userId!).getByTestId('host-badge')).toBeVisible()
+    await expect(person(host.userId!).getByTestId('person-preferences')).toHaveText('No preferences yet')
+    await expect(panel.getByTestId('budget-note')).toHaveText('Budget is a stated preference, not a verified venue price.')
+
+    // Setting preferences through the dialog.
+    await panel.getByRole('button', { name: 'Add my preferences' }).click()
+    const form = host.page.getByTestId('preferences-form')
+    await form.getByLabel('Budget per person').selectOption('under_20')
+    await form.getByLabel('Food').check()
+    await form.getByRole('button', { name: 'Save preferences' }).click()
+    await expect(person(host.userId!).getByTestId('person-preferences')).toHaveText('Under $20 per person · Either · Food', { timeout: 15_000 })
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('COM-04: every name shown (group, votes, comments, "Proposed by") is the account display name from the directory', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'com04')
+  try {
+    const optionId = await addOption(member.page, id, 'Named place')
+    await command(member.page, 'setResponse', { id, input: { optionId, value: 'maybe' } })
+    await command(member.page, 'postComment', { id, input: { body: 'Hello from Member' } })
+    await command(host.page, 'postComment', { id, input: { body: 'Hello from Host' } })
+    await host.page.goto(`/home?outing=${id}`)
+    const c = card(host.page, 'Named place')
+    await expect(c.getByTestId('option-origin')).toHaveText('Proposed by Member', { timeout: 15_000 })
+    await expect(c.getByTestId('voters-maybe')).toHaveText('Member')
+    await expect(host.page.getByTestId('group-panel').getByTestId('person-name')).toHaveText(['Host', 'Member'])
+    const comments = host.page.getByTestId('comment')
+    await expect(comments.getByTestId('comment-author')).toHaveText(['Member', 'Host'])
+    await expect(comments.getByTestId('comment-body')).toHaveText(['Hello from Member', 'Hello from Host'])
+    await expect(host.page.getByText('Unknown')).toHaveCount(0)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('UX-01: posting a comment shows a pending state', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const { id } = await createOuting(host.page, 'ux01 comment')
+  try {
+    await host.page.goto(`/home?outing=${id}`)
+    await host.page.route('**/api/outing/postComment', async (route) => {
+      await new Promise((r) => setTimeout(r, 600))
+      await route.continue()
+    })
+    await host.page.getByLabel('Message', { exact: true }).fill('On my way')
+    await host.page.getByRole('button', { name: 'Send' }).click()
+    await expect(host.page.getByRole('button', { name: 'Sending…' })).toBeDisabled()
+    await expect(host.page.getByTestId('comment-body')).toHaveText(['On my way'], { timeout: 15_000 })
+    await expect(host.page.getByLabel('Message', { exact: true })).toHaveValue('')
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})

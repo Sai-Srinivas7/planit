@@ -13,6 +13,8 @@ import { formatInZone } from '../../domain/time'
 import type { Option } from '../../domain/types'
 import { useCommand } from '../../lib/outing-api'
 import { ConfirmedPlan } from './ConfirmedPlan'
+import { Conversation } from './Conversation'
+import { GroupPanel } from './GroupPanel'
 import { useNames } from './names'
 import { OptionCard } from './OptionCard'
 import { OptionDialog } from './OptionDialog'
@@ -111,7 +113,10 @@ export function OutingPage({ id, onBack }: { id: string; onBack: () => void }) {
             />
           ))}
         </section>
-        <aside className="grid content-start gap-4" data-testid="outing-sidebar" />
+        <aside className="grid content-start gap-4" data-testid="outing-sidebar">
+          <GroupPanel outingId={id} outing={outing} me={userId ?? ''} nameOf={nameOf} />
+          <Conversation outingId={id} outing={outing} me={userId ?? ''} nameOf={nameOf} />
+        </aside>
       </div>
 
       {editing && <OptionDialog outingId={id} option={editing === 'new' ? null : editing} onClose={() => setEditing(null)} />}
