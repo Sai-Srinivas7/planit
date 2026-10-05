@@ -99,3 +99,35 @@ test('BASE-06: /internal/outing is not publicly reachable and a client X-User-Id
   expect(memberView.some((r) => r.data.payload.title === `${title} direct`)).toBe(false)
   expect(hostView.some((r) => r.data.payload.title === `${title} direct`)).toBe(false)
 })
+
+// Spec §7 / D-01 provider endpoints. These must never be reachable from a browser.
+const PROVIDER_ENDPOINTS = [
+  'openweathermap/geocoding',
+  'openweathermap/forecast',
+  'serpapi/places-search',
+  'anthropic/chat-completion',
+]
+
+test('SEC-02: browser calls to /api/integrations/* return 403, signed in or not', async ({ request, users }) => {
+  const [host] = await users(['Host'])
+  await host.page.goto('/home')
+  const token = await host.page.evaluate(async () => {
+    const res = await fetch('/api/auth/token', { method: 'POST', credentials: 'include' })
+    return (await res.json()).token as string
+  })
+
+  for (const endpoint of PROVIDER_ENDPOINTS) {
+    for (const [who, headers] of [['anonymous', {}], ['signed-in', { Authorization: `Bearer ${token}` }]] as const) {
+      for (const method of ['GET', 'POST'] as const) {
+        const where = `${method} ${endpoint} (${who})`
+        const res = await request.fetch(`/api/integrations/${endpoint}`, {
+          method,
+          headers,
+          data: method === 'POST' ? { q: 'Dallas', limit: 5 } : undefined,
+        })
+        expect(res.status(), where).toBe(403)
+        expect(await res.json(), where).toEqual({ error: expect.any(String) })
+      }
+    }
+  }
+})

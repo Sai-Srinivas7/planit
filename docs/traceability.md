@@ -81,7 +81,7 @@ Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, comm
 | UX-04 | manual |  |  |  |  |  |
 | UX-05 | manual |  |  |  |  |  |
 | SEC-01 | api | `SEC-01: every public command without a valid JWT returns 401 UNAUTHENTICATED` (`tests/api.spec.ts`) | 2026-10-05: before route existed, expected 401, received 404. Fault-injected: (1) auth check skipped → `createOuting with no Authorization header` 200; (2) unverified JWT payload trusted → `createOuting with unsigned forged JWT` 200. Restored, green. | `src/server/outing-routes.ts` (JWT via scaffold `resolveAuth`, checked before allowlist), registered in `worker.ts`; ported from prototype `src/server/outing-routes.ts:7-10` |  |  |
-| SEC-02 | api |  |  |  |  |  |
+| SEC-02 | api | First half: `SEC-02: browser calls to /api/integrations/* return 403, signed in or not` (`tests/api.spec.ts`). Second half (bundle has no provider URLs) pending T4.13. | Fault-injected 2026-10-05: original scaffold proxy restored with its outbound `apiWorkerFetch` replaced by an offline stub (no paid call) → `GET openweathermap/geocoding (anonymous)` 200, expected 403. Restored, green. | First half: `/api/integrations/:name/:endpoint` → 403 in `src/server/http-routes.ts`, ported from prototype `src/server/http-routes.ts:232-236` |  |  |
 | SEC-03 | manual |  |  |  |  |  |
 | SEC-04 | api |  |  |  |  |  |
 | REL-01 | manual |  |  |  |  |  |
