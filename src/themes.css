@@ -44,3 +44,31 @@
   --color-shell: #fafafa;
   --color-shell-panel: #ffffff;
 }
+
+/* PlanIt — warm light theme (palette from the prototype). */
+[data-theme="planit"] {
+  color-scheme: light;
+  --color-background: #f8f7f3;
+  --color-foreground: #252a27;
+  --color-card: #ffffff;
+  --color-card-foreground: #252a27;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #252a27;
+  --color-primary: #b83c1d;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #edece5;
+  --color-secondary-foreground: #252a27;
+  --color-muted: #edece5;
+  --color-muted-foreground: #5c6159;
+  --color-accent: #f1efe7;
+  --color-accent-foreground: #252a27;
+  --color-destructive: #b42318;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #dedfd6;
+  --color-input: #cfd1c6;
+  --color-ring: #b83c1d;
+  --shadow-card: 0 1px 2px 0 rgba(37, 42, 39, 0.04);
+  --shadow-card-hover: 0 2px 8px 0 rgba(37, 42, 39, 0.08);
+  --color-shell: #f8f7f3;
+  --color-shell-panel: #ffffff;
+}

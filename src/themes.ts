@@ -18,6 +18,11 @@
 
 export const THEMES = [
   {
+    id: 'planit',
+    label: 'PlanIt',
+    description: 'Warm light theme for PlanIt.',
+  },
+  {
     id: 'slate',
     label: 'Slate',
     description: 'Neutral dark placeholder default. Replace with your own theme.',

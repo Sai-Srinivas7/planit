@@ -79,20 +79,26 @@ test('BASE-03: the outsider receives no outing records, including after new writ
   const hostCount = host.page.getByTestId('outing-count')
   const outsiderCount = outsider.page.getByTestId('outing-count')
   await expect(outsiderCount).toHaveText('0', { timeout: 15_000 })
-  const before = Number(await hostCount.textContent({ timeout: 15_000 }))
+  await expect(hostCount).toHaveText(/\d+/, { timeout: 15_000 })
 
   // Two writes while both sockets are open.
   const ids: string[] = []
+  const titles: string[] = []
   for (const label of ['base03 a', 'base03 b']) {
+    const title = testTitle(label)
     const res = await command(host.page, 'createOuting', {
-      input: { title: testTitle(label), location: 'Dallas, TX', date: '2030-01-01', time: '18:00', timezone: 'America/Chicago' },
+      input: { title, location: 'Dallas, TX', date: '2030-01-01', time: '18:00', timezone: 'America/Chicago' },
     })
     expect(res.body).toMatchObject({ success: true })
     ids.push(res.body.data.id)
+    titles.push(title)
   }
 
-  // Positive control: the host's live list picks up both writes without a reload…
-  await expect(hostCount).toHaveText(String(before + 2), { timeout: 15_000 })
+  // Positive control: the host's live list picks up both writes without a reload
+  // (titles, not a count: other parallel tests create Host outings too)…
+  for (const title of titles) {
+    await expect(host.page.getByTestId('outing-title').filter({ hasText: title })).toBeVisible({ timeout: 15_000 })
+  }
   // …while the outsider's live list, and a fresh subscription on their socket, get nothing.
   await expect(outsiderCount).toHaveText('0')
   const outsiderView = await readOutings(outsider.page)

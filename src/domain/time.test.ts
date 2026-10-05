@@ -28,6 +28,11 @@ describe('time', () => {
     expect(toStartAt('2026-11-01', '01:30', 'America/Chicago')).toBe('2026-11-01T06:30:00.000Z')
   })
 
+  test('formatInZone renders malformed values as unavailable instead of throwing', () => {
+    expect(formatInZone('', '')).toBe('Time unavailable')
+    expect(formatInZone('2030-01-06T00:00:00.000Z', 'Mars/Olympus')).toBe('Time unavailable')
+  })
+
   test('timezone validation accepts IANA zones only', () => {
     expect(isValidTimeZone('America/Chicago')).toBe(true)
     expect(isValidTimeZone('Mars/Olympus')).toBe(false)

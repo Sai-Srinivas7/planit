@@ -48,6 +48,8 @@ export function toStartAt(date: string, time: string, tz: string): string | null
 
 /** The outing's start, shown in the outing's own timezone whatever the viewer's zone is. */
 export function formatInZone(startAt: string, tz: string): string {
+  // A malformed record must not take the whole page down.
+  if (Number.isNaN(Date.parse(startAt)) || !isValidTimeZone(tz)) return 'Time unavailable'
   return new Intl.DateTimeFormat('en-US', {
     timeZone: tz,
     weekday: 'short',

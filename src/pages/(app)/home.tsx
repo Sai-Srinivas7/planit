@@ -1,14 +1,37 @@
-import { useAuthProfileReady } from 'deepspace'
-import { APP_NAME } from '../../constants'
+/**
+ * PlanIt home. Routes by query string: ?invite=<token> → invite gate,
+ * ?outing=<id> → outing page, otherwise the caller's outings.
+ */
+
+import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { AuthOverlay, useAuth } from 'deepspace'
+import { Button } from '@/components/ui'
+import { InviteGate } from '../../features/outing/InviteGate'
 import { OutingList } from '../../features/outing/OutingList'
+import { OutingPage } from '../../features/outing/OutingPage'
 
 export default function HomePage() {
-  const { isSignedIn } = useAuthProfileReady({ requireUser: true })
+  const { isLoaded, isSignedIn } = useAuth()
+  const [params, setParams] = useSearchParams()
+  const invite = params.get('invite')
+  const outingId = params.get('outing')
 
+  if (!isLoaded) return <p role="status" className="p-8 text-center text-muted-foreground">Loading…</p>
+  if (invite) return <InviteGate token={invite} signedIn={isSignedIn} onJoined={(id) => setParams({ outing: id })} />
+  if (!isSignedIn) return <SignedOutHome />
+  if (outingId) return <OutingPage id={outingId} onBack={() => setParams({})} />
+  return <OutingList onOpen={(id) => setParams({ outing: id })} />
+}
+
+function SignedOutHome() {
+  const [signingIn, setSigningIn] = useState(false)
   return (
-    <div className="flex min-h-full flex-col items-center justify-center gap-3 bg-background px-6 text-center text-foreground">
-      <h1 className="text-2xl font-semibold">{APP_NAME}</h1>
-      {isSignedIn && <OutingList />}
-    </div>
+    <section className="mx-auto grid max-w-lg gap-4 px-4 py-16 text-center">
+      <h1 className="text-3xl font-bold tracking-tight">Turn &ldquo;we should&rdquo; into a plan</h1>
+      <p className="text-muted-foreground">Create a private outing, invite friends, and agree on one place together.</p>
+      <div><Button onClick={() => setSigningIn(true)}>Sign in to start planning</Button></div>
+      {signingIn && <AuthOverlay onClose={() => setSigningIn(false)} />}
+    </section>
   )
 }

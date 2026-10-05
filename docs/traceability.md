@@ -15,14 +15,14 @@ Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, comm
 | OUT-03 | unit | `OUT-03: …` (`src/domain/time.test.ts`) | First run passed for OUT-03; DST probe bug caught by OUT-04 (±3h probes missed the transition) and fixed | `toStartAt`, `formatInZone` in `src/domain/time.ts` |  |  |
 | OUT-04 | unit | `OUT-04: …` (`time.test.ts`, `commands.test.ts`) | Red on first run: `03:00` just after the gap returned null; probes widened to ±24h | `toStartAt` returns null in a DST gap → `createOuting` INVALID_INPUT |  |  |
 | OUT-05 | unit | `OUT-05: …` (`src/domain/commands.test.ts`) |  | `createOuting` refuses `startAt <= now` (injected `now`) |  |  |
-| OUT-06 | smoke |  |  |  |  |  |
+| OUT-06 | smoke | `OUT-06: …` smoke (`tests/smoke.spec.ts`) + unit `OutingList.test.ts` (pluralization) | Red on first run: page crashed ("Invalid time value") on T0.5-era records with empty `startAt`; `formatInZone` now degrades to "Time unavailable" | `src/features/outing/OutingList.tsx` cards (title, location, `formatInZone` + IANA zone, state), `outingWord` |  |  |
 | OUT-07 | unit | `OUT-07: …` unit (`commands.test.ts`) + api (`tests/api.spec.ts`) |  | `deleteOuting` (host only) → `records.delete` |  |  |
-| OUT-08 | smoke |  |  |  |  |  |
+| OUT-08 | smoke | `OUT-08: …` (`tests/smoke.spec.ts`) |  | `CreateOutingDialog.tsx` (title, location, date, time, timezone only); `InviteGate.tsx` has no inputs |  |  |
 | INV-01 | api | `INV-01: …` (`tests/api.spec.ts`) |  | Room token lookup (`records.query` by `inviteToken`) in `outing-room.ts` |  |  |
 | INV-02 | unit | `INV-02: …` (`commands.test.ts`) |  | `joinOuting` no-op for members |  |  |
 | INV-03 | api | `INV-03: …` (`tests/api.spec.ts`) |  | `INVITE_INVALID_MESSAGE` for any missing record |  |  |
-| INV-04 | smoke |  |  |  |  |  |
-| INV-05 | smoke |  |  |  |  |  |
+| INV-04 | smoke | `INV-04: …` (`tests/smoke.spec.ts`, compares gate HTML for valid vs invalid token) |  | `src/features/outing/InviteGate.tsx` renders from the token only |  |  |
+| INV-05 | smoke | `INV-05: …` (`tests/smoke.spec.ts`) |  | Copy invite dialog in `OutingPage.tsx` |  |  |
 | INV-06 | unit | `INV-06: …` (`commands.test.ts`) — join half; "can post comments" half added with T3.3 |  | `joinOuting` has no state check |  |  |
 | INV-07 | unit | `INV-07: …` (`commands.test.ts`) |  | `CAPS.members` check in `joinOuting` |  |  |
 | OPT-01 | unit |  |  |  |  |  |
@@ -75,7 +75,7 @@ Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, comm
 | SUG-14 | smoke |  |  |  |  |  |
 | SUG-15 | unit |  |  |  |  |  |
 | SUG-16 | manual |  |  |  |  |  |
-| UX-01 | smoke |  |  |  |  |  |
+| UX-01 | smoke | `UX-01: …` (`tests/smoke.spec.ts`) — create + join; later blocks add their commands |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
 | UX-02 | smoke |  |  |  |  |  |
 | UX-03 | smoke |  |  |  |  |  |
 | UX-04 | manual |  |  |  |  |  |

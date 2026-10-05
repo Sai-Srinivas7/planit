@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from 'deepspace/testing'
+import { createOuting, deleteOuting, testTitle } from './helpers/outing'
 import { captureConsoleErrors } from './helpers/errors'
 
 /**
@@ -68,4 +69,116 @@ test.describe('Smoke tests', () => {
     await waitForApp(page)
     await expect(page.locator('text=404')).toBeVisible()
   })
+})
+
+test('OUT-06: home lists only the caller\'s outings with title, location, date/time with timezone, state, and a pluralized count', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await createOuting(host.page, 'out06')
+  try {
+    await host.page.goto('/home')
+    const card = host.page.getByTestId('outing-card').filter({ has: host.page.getByTestId('outing-title').filter({ hasText: 'out06' }) })
+    await expect(card).toHaveCount(1, { timeout: 15_000 })
+    await expect(card).toContainText('Dallas, TX')
+    await expect(card.getByTestId('outing-when')).toHaveText(/6:00 PM C[SD]T · America\/Chicago$/)
+    await expect(card.getByTestId('outing-state')).toHaveText('Planning')
+
+    const n = Number(await host.page.getByTestId('outing-count').textContent())
+    await expect(host.page.getByTestId('outing-count-label')).toHaveText(`${n} ${n === 1 ? 'outing' : 'outings'}`)
+
+    await member.page.goto('/home')
+    await expect(member.page.getByTestId('outing-count')).toHaveText(/\d+/, { timeout: 15_000 })
+    await expect(member.page.getByTestId('outing-title').filter({ hasText: 'out06' })).toHaveCount(0)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('OUT-08: there is no name field on create or join', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id, inviteToken } = await createOuting(host.page, 'out08')
+  try {
+    await host.page.goto('/home')
+    await host.page.getByRole('button', { name: 'New outing' }).click()
+    const form = host.page.getByTestId('create-outing-form')
+    await expect(form).toBeVisible()
+    const names = await form.locator('input, select, textarea').evaluateAll((els) => els.map((e) => (e as HTMLInputElement).name))
+    expect(names.sort()).toEqual(['date', 'location', 'time', 'timezone', 'title'])
+    await expect(form.getByLabel(/\bname\b/i)).toHaveCount(0)
+
+    await member.page.goto(`/home?invite=${inviteToken}`)
+    const gate = member.page.getByTestId('invite-gate')
+    await expect(gate.getByRole('button', { name: 'Join outing' })).toBeVisible({ timeout: 15_000 })
+    await expect(gate.locator('input, select, textarea')).toHaveCount(0)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('INV-04: the signed-out invite page shows no outing details and renders identically for valid and invalid tokens', async ({ page, users }) => {
+  const [host] = await users(['Host'])
+  const { id, inviteToken } = await createOuting(host.page, 'inv04 secret title')
+  try {
+    const render = async (token: string) => {
+      await page.goto(`/home?invite=${token}`)
+      const gate = page.getByTestId('invite-gate')
+      await expect(gate).toBeVisible({ timeout: 15_000 })
+      return gate.innerHTML()
+    }
+    const valid = await render(inviteToken)
+    const invalid = await render('00000000-0000-4000-8000-000000000000')
+    expect(valid).toBe(invalid)
+    await expect(page.getByText('inv04 secret title')).toHaveCount(0)
+    await expect(page.getByText('Dallas')).toHaveCount(0)
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('INV-05: any member sees Copy invite and the link contains the outing token', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id, inviteToken } = await createOuting(host.page, 'inv05')
+  try {
+    await member.page.goto(`/home?invite=${inviteToken}`)
+    await member.page.getByRole('button', { name: 'Join outing' }).click()
+    await expect(member.page.getByTestId('outing-page')).toBeVisible({ timeout: 15_000 })
+    for (const user of [member, host]) {
+      if (user === host) await host.page.goto(`/home?outing=${id}`)
+      await user.page.getByRole('button', { name: 'Copy invite' }).click()
+      await expect(user.page.getByTestId('invite-link')).toBeVisible()
+      expect(await user.page.getByTestId('invite-link').inputValue()).toBe(`${new URL(user.page.url()).origin}/home?invite=${inviteToken}`)
+    }
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('UX-01: create and join show a pending state; a refusal shows its message and nothing appears saved', async ({ users }) => {
+  const [host] = await users(['Host'])
+  await host.page.goto('/home')
+  await expect(host.page.getByTestId('outing-count')).toHaveText(/\d+/, { timeout: 15_000 })
+  const title = testTitle('ux01 refused')
+
+  // Pending: hold the request briefly so the in-flight state is observable.
+  await host.page.route('**/api/outing/createOuting', async (route) => {
+    await new Promise((r) => setTimeout(r, 800))
+    await route.continue()
+  })
+  await host.page.getByRole('button', { name: 'New outing' }).click()
+  const form = host.page.getByTestId('create-outing-form')
+  await form.getByLabel('Title').fill(title)
+  await form.getByLabel('Where (city or area)').fill('Dallas, TX')
+  await form.getByLabel('Date').fill('2020-01-01') // in the past → INVALID_INPUT
+  await form.getByLabel('Time', { exact: true }).fill('18:00')
+  await form.getByRole('button', { name: 'Create outing' }).click()
+  await expect(form.getByRole('button', { name: 'Creating…' })).toBeDisabled()
+
+  await expect(form.getByRole('alert')).toHaveText('Pick a start time in the future.', { timeout: 15_000 })
+  await expect(form).toBeVisible() // dialog stays open on refusal
+  await host.page.keyboard.press('Escape')
+  await expect(host.page.getByTestId('outing-title').filter({ hasText: title })).toHaveCount(0)
+
+  // Join refusal: an unknown invite shows the server's message.
+  await host.page.goto('/home?invite=not-a-real-token')
+  await host.page.getByRole('button', { name: 'Join outing' }).click()
+  await expect(host.page.getByRole('alert')).toHaveText('This invite link is not valid.')
 })
