@@ -23,7 +23,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | INV-03 | api | `INV-03: …` (`tests/api.spec.ts`) |  | `INVITE_INVALID_MESSAGE` for any missing record |  |  |
 | INV-04 | smoke | `INV-04: …` (`tests/smoke.spec.ts`, compares gate HTML for valid vs invalid token) |  | `src/features/outing/InviteGate.tsx` renders from the token only |  |  |
 | INV-05 | smoke | `INV-05: …` (`tests/smoke.spec.ts`) |  | Copy invite dialog in `OutingPage.tsx` |  |  |
-| INV-06 | unit | `INV-06: …` (`commands.test.ts`) — join half; "can post comments" half added with T3.3 |  | `joinOuting` has no state check |  |  |
+| INV-06 | unit | `INV-06: joining a finalized outing succeeds` (`commands.test.ts`) + `INV-06: a member who joins a finalized outing can post comments` (`conversation.test.ts`) |  | `joinOuting` has no state check |  |  |
 | INV-07 | unit | `INV-07: …` (`commands.test.ts`) |  | `CAPS.members` check in `joinOuting` |  |  |
 | OPT-01 | unit | `OPT-01: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-02 | unit | `OPT-02: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
@@ -49,16 +49,16 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | FIN-06 | unit | `FIN-06: …` (`responses.test.ts`) |  | `planText` in `src/domain/summary.ts` |  |  |
 | FIN-07 | unit | `FIN-07: …` unit (`responses.test.ts`) + smoke "previous pick" (`tests/smoke.spec.ts`) |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-08 | collab | `OPT-04, VOTE-06, FIN-08: …` (`tests/collab.spec.ts`) |  | Realtime `useQuery` → `OutingPage` / `OptionCard` / `ConfirmedPlan` |  |  |
-| PREF-01 | unit |  |  |  |  |  |
+| PREF-01 | unit | `PREF-01: …` (`src/domain/conversation.test.ts`) + §6 matrix |  | `setPreference` in `commands.ts` |  |  |
 | PREF-02 | api |  |  |  |  |  |
-| PREF-03 | unit |  |  |  |  |  |
+| PREF-03 | unit | `PREF-03: …` (`conversation.test.ts`) | Red on first run: duplicate interests hit `.max(8)` before dedupe; bound moved after dedupe | `setPreferenceInput` (fixed enums, dedupe) in `validate.ts` |  |  |
 | PREF-04 | smoke |  |  |  |  |  |
 | PREF-05 | collab |  |  |  |  |  |
-| COM-01 | unit |  |  |  |  |  |
-| COM-02 | unit |  |  |  |  |  |
+| COM-01 | unit | `COM-01: …` (`conversation.test.ts`) |  | `postComment` (trim, server timestamp, cap 200) |  |  |
+| COM-02 | unit | `COM-02: …` (`conversation.test.ts`) + §6 matrix |  | `deleteComment` (author or host) |  |  |
 | COM-03 | collab |  |  |  |  |  |
 | COM-04 | smoke |  |  |  |  |  |
-| COM-05 | unit |  |  |  |  |  |
+| COM-05 | unit | `COM-05: …` (`conversation.test.ts`) |  | `deleteComment` hard delete |  |  |
 | SUG-01 | unit |  |  |  |  |  |
 | SUG-02 | unit |  |  |  |  |  |
 | SUG-03 | unit |  |  |  |  |  |

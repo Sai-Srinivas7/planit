@@ -60,7 +60,7 @@ export const setResponseInput = z.object({
 
 export const setPreferenceInput = z.object({
   budget: z.enum(BUDGETS),
-  interests: z.array(z.enum(INTERESTS)).max(INTERESTS.length).transform((v) => [...new Set(v)]),
+  interests: z.array(z.enum(INTERESTS)).max(32).transform((v) => [...new Set(v)]),
   setting: z.enum(SETTINGS),
 })
 
