@@ -48,9 +48,10 @@ export function registerOutingRoutes(app: Hono<AppContext>): void {
 }
 
 /** Fixture providers unless configured otherwise; local dev/test default to fixtures so tests never pay. */
+export const providerMode = (env: Env) => env.PROVIDERS ?? (env.ALLOW_DEBUG_ROUTES === 'true' ? 'fixture' : 'live')
+
 export function adaptersFor(env: Env, location: string): Adapters {
-  const mode = env.PROVIDERS ?? (env.ALLOW_DEBUG_ROUTES === 'true' ? 'fixture' : 'live')
-  if (mode === 'fixture') return makeFixtureAdapters(location)
+  if (providerMode(env) === 'fixture') return makeFixtureAdapters(location)
   const ctx = buildCronContext(env, env.OWNER_USER_ID)
   return makeLiveAdapters((endpoint, params) => ctx.integrations.call(endpoint, params))
 }
@@ -61,7 +62,7 @@ export function adaptersFor(env: Env, location: string): Adapters {
  * request; a dead worker leaves the run to go stale after 2 minutes (SUG-15).
  */
 async function requestSuggestions(env: Env, userId: string, id: unknown): Promise<Response> {
-  const reserve = await roomCall(env, userId, { command: 'requestSuggestions', id, input: {} })
+  const reserve = await roomCall(env, userId, { command: 'requestSuggestions', id, input: {}, billable: providerMode(env) !== 'fixture' })
   const reserved = (await reserve.json()) as { success: boolean; data?: { status: string; reused: boolean; outing?: Outing } }
   if (!reserved.success || !reserved.data || reserved.data.reused || !reserved.data.outing) {
     return Response.json(reserved, { status: reserve.status })

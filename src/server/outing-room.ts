@@ -12,7 +12,17 @@ import type { Outing } from '../domain/types.js'
 type ToolResult = { success: boolean; data?: any; error?: string }
 export type ExecuteTool = (tool: string, params: Record<string, unknown>) => Promise<ToolResult>
 
-export type RoomCommand = { command: string; id?: unknown; input: Record<string, unknown> }
+export type RoomCommand = {
+  command: string
+  id?: unknown
+  input: Record<string, unknown>
+  /**
+   * Set only by worker code for requestSuggestions: whether the run will call
+   * paid providers. Only billable runs count toward the app-wide daily cap
+   * (fixture runs cost nothing). Never taken from client input.
+   */
+  billable?: boolean
+}
 
 /** App-wide suggestion runs for the current UTC day, in room storage (D-16). */
 export type DailyCounter = { get(): Promise<number>; increment(): Promise<void> }
@@ -76,7 +86,8 @@ async function execute(
 ): Promise<Response> {
   const { recordId, outing } = await load(exec, body)
   const isRequest = body.command === 'requestSuggestions'
-  if (isRequest && counter) ctx = { ...ctx, appRunsToday: await counter.get() }
+  const countsToward = isRequest && body.billable !== false && !!counter
+  if (countsToward) ctx = { ...ctx, appRunsToday: await counter!.get() }
   const result = applyCommand(outing, userId, body.command, body.input, now, ctx)
   if (isCommandError(result)) {
     return Response.json({ success: false, error: result.code, message: result.message }, { status: 400 })
@@ -93,7 +104,7 @@ async function execute(
     must(await exec('records.update', { collection: 'outings', recordId, data: columns(next) }), 'records.update')
   }
   if (isRequest && data.reused === false) {
-    await counter?.increment()
+    if (countsToward) await counter!.increment()
     // The route runs the fetch phase outside the room from this snapshot; it is stripped before responding.
     return Response.json({ success: true, data: { ...data, outing: next } })
   }

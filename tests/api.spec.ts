@@ -402,3 +402,56 @@ test('SEC-02: the built client bundle contains no provider URLs', async () => {
   const offenders = files.filter((f) => PROVIDER_HOSTS.test(readFileSync(f, 'utf8')))
   expect(offenders.map((f) => f.slice(root.length))).toEqual([])
 })
+
+test('SEC-04: no route returns raw users rows (no emails)', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const emails = [host.email, member.email]
+  const bodies: string[] = []
+  const created = await createOuting(host.page, 'sec04')
+  try {
+    const record = async (p: Promise<{ status: number; body: unknown }>) => bodies.push(JSON.stringify((await p).body))
+    await record(command(member.page, 'joinOuting', { input: { token: created.inviteToken } }))
+    const opt = await command(member.page, 'addOption', { id: created.id, input: { name: 'P' } })
+    bodies.push(JSON.stringify(opt.body))
+    const optionId = opt.body.data.optionId
+    for (const [name, input] of [
+      ['editOption', { optionId, name: 'Q' }],
+      ['setResponse', { optionId, value: 'yes' }],
+      ['setPreference', { budget: 'flexible', interests: [], setting: 'either' }],
+      ['postComment', { body: 'hi' }],
+      ['requestSuggestions', {}],
+      ['finalize', { optionId }],
+      ['reopen', {}],
+      ['deleteOuting', {}],
+    ] as const) {
+      await record(command(member.page, name, { id: created.id, input }))
+      await record(command(host.page, name, { id: created.id, input }))
+    }
+    // Other data-returning routes, as a signed-in non-owner.
+    await member.page.goto('/home')
+    const raw = await member.page.evaluate(async () => {
+      const { token } = await (await fetch('/api/auth/token', { method: 'POST', credentials: 'include' })).json()
+      const auth = { Authorization: `Bearer ${token}` }
+      const out: string[] = []
+      for (const [method, url] of [
+        ['GET', '/api/integrations'],
+        ['GET', '/api/integrations/status'],
+        ['POST', '/api/actions/listUsers'],
+        ['GET', '/api/debug/users'],
+        ['GET', '/api/users'],
+      ]) {
+        const res = await fetch(url, { method, headers: { ...auth, 'Content-Type': 'application/json' }, body: method === 'POST' ? '{}' : undefined })
+        out.push(`${method} ${url} ${res.status} ${await res.text()}`)
+      }
+      return out
+    })
+    bodies.push(...raw)
+    for (const body of bodies) {
+      for (const email of emails) expect(body, body.slice(0, 120)).not.toContain(email)
+      // The public integration catalog has `email` as a schema property name; it holds no user data.
+      if (!body.startsWith('GET /api/integrations 200')) expect(body, body.slice(0, 120)).not.toMatch(/"email"\s*:/)
+    }
+  } finally {
+    await deleteOuting(host.page, created.id)
+  }
+})
