@@ -476,3 +476,82 @@ test('SUG-14: the suggestion button is shown only to the host of an open outing 
     await deleteOuting(host.page, id)
   }
 })
+
+test('UX-02: first load shows a loading state, not a blank page', async ({ users }) => {
+  const [host] = await users(['Host'])
+  // Hold the session check so the pre-auth frame is observable.
+  await host.page.route('**/api/auth/**', async (route) => {
+    await new Promise((r) => setTimeout(r, 1500))
+    await route.continue()
+  })
+  await host.page.goto('/home', { waitUntil: 'commit' })
+  await expect(host.page.getByTestId('app-loading')).toHaveText('Loading PlanIt…', { timeout: 10_000 })
+  await host.page.unroute('**/api/auth/**')
+  await expect(host.page.getByTestId('outing-count')).toBeVisible({ timeout: 15_000 })
+})
+
+test('UX-03: the Live indicator shows only while signed in and connected (and UX-05: after reconnect the page shows server state)', async ({ page, users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id } = await outingWithMember(host.page, member.page, 'ux03')
+  try {
+    // Signed out: no indicator at all.
+    await page.goto('/home')
+    await expect(page.getByTestId('nav-sign-in-button')).toBeVisible({ timeout: 15_000 })
+    await expect(page.getByTestId('live-indicator')).toHaveCount(0)
+
+    // Real socket drop: close the record socket and refuse reconnects until "back online".
+    let offline = false
+    const sockets: { close: () => Promise<void> }[] = []
+    await member.page.routeWebSocket(/\/ws\//, (ws) => {
+      if (offline) return void ws.close()
+      ws.connectToServer()
+      sockets.push(ws)
+    })
+    await member.page.goto(`/home?outing=${id}`)
+    await expect(member.page.getByTestId('live-indicator')).toHaveText('Live', { timeout: 15_000 })
+
+    offline = true
+    for (const ws of sockets.splice(0)) await ws.close()
+    await expect(member.page.getByTestId('live-indicator')).toHaveCount(0, { timeout: 15_000 })
+    await expect(member.page.getByTestId('connection-status')).toBeVisible()
+
+    // A change made while the member is offline…
+    await addOption(host.page, id, 'Added while offline')
+    offline = false
+    await expect(member.page.getByTestId('live-indicator')).toHaveText('Live', { timeout: 30_000 })
+    // …is on the member's page after reconnect, without a reload.
+    await expect(member.page.getByTestId('option-name').getByText('Added while offline')).toBeVisible({ timeout: 15_000 })
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('UX-04 (automated part): at 390px there is no horizontal scroll and every control has an accessible name', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const { id } = await createOuting(host.page, 'ux04 long title to stress the phone layout')
+  try {
+    const optionId = await addOption(host.page, id, 'A place with a really quite long name for wrapping', { address: '1234 Some Very Long Street Name, Dallas, TX 75201', link: 'https://example.com/a/very/long/path/that/should/wrap/nicely' })
+    await command(host.page, 'setResponse', { id, input: { optionId, value: 'yes' } })
+    await command(host.page, 'postComment', { id, input: { body: 'x'.repeat(300) } })
+    await host.page.setViewportSize({ width: 390, height: 844 })
+    for (const url of ['/home', `/home?outing=${id}`]) {
+      await host.page.goto(url)
+      await expect(host.page.getByTestId(url === '/home' ? 'outing-count' : 'outing-page')).toBeVisible({ timeout: 15_000 })
+      const overflow = await host.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+      expect(overflow, `${url} horizontal overflow`).toBeLessThanOrEqual(0)
+      const unnamed = await host.page.evaluate(() =>
+        [...document.querySelectorAll('button, a[href], input, select, textarea')]
+          .filter((el) => {
+            const e = el as HTMLElement
+            if (e.offsetParent === null) return false
+            const labelled = e.getAttribute('aria-label') || e.getAttribute('aria-labelledby') || (e as HTMLInputElement).labels?.length
+            return !labelled && !e.textContent?.trim() && !e.getAttribute('title')
+          })
+          .map((e) => e.outerHTML.slice(0, 120)),
+      )
+      expect(unnamed, `${url} unnamed controls`).toEqual([])
+    }
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})

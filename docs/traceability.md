@@ -76,10 +76,10 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | SUG-15 | unit | `SUG-15: …` (`src/domain/suggest-commands.test.ts`) |  | `isRunActive` (2-minute stale) |  |  |
 | SUG-16 | manual |  |  | Code ready: `src/domain/suggestions/live.ts`, `adaptersFor` (`PROVIDERS=live`), billing in `src/integrations.ts`. Live local run pending Sai (paid). |  |  |
 | UX-01 | smoke | `UX-01: …` create/join, option refusal, comment pending (`tests/smoke.spec.ts`) |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
-| UX-02 | smoke |  |  |  |  |  |
-| UX-03 | smoke |  |  |  |  |  |
-| UX-04 | manual |  |  |  |  |  |
-| UX-05 | manual |  |  |  |  |  |
+| UX-02 | smoke | `UX-02: …` (`tests/smoke.spec.ts`, session check held 1.5 s) |  | `AuthBoot` loading panel in `src/pages/(app)/_layout.tsx`; per-view loading states (list, outing) |  |  |
+| UX-03 | smoke | `UX-03: …` (`tests/smoke.spec.ts`, real socket drop via `routeWebSocket`) |  | `src/features/outing/LiveIndicator.tsx` (signed in + `useRecordContext().status === connected`) |  |  |
+| UX-04 | manual | Automated part: `UX-04 (automated part): …` (`tests/smoke.spec.ts`); keyboard pass still manual |  | Responsive Tailwind layout; labelled controls |  |  |
+| UX-05 | manual | Automated evidence in `UX-03: … (and UX-05 …)` (`tests/smoke.spec.ts`): change made while offline appears after reconnect; manual check still due |  | SDK resubscribes on reconnect; UI renders only server state |  |  |
 | SEC-01 | api | `SEC-01: every public command without a valid JWT returns 401 UNAUTHENTICATED` (`tests/api.spec.ts`) | 2026-10-05: before route existed, expected 401, received 404. Fault-injected: (1) auth check skipped → `createOuting with no Authorization header` 200; (2) unverified JWT payload trusted → `createOuting with unsigned forged JWT` 200. Restored, green. | `src/server/outing-routes.ts` (JWT via scaffold `resolveAuth`, checked before allowlist), registered in `worker.ts`; ported from prototype `src/server/outing-routes.ts:7-10` |  |  |
 | SEC-02 | api | `SEC-02: browser calls to /api/integrations/* return 403…` + `SEC-02: the built client bundle contains no provider URLs` (`tests/api.spec.ts`, runs `npm run build`, scans `dist/client`) | Fault-injected: (1) proxy reopened with offline stub → 200; (2) `makeFixtureAdapters` imported into `OutingPage.tsx` → `dist/client/assets/home-*.js` flagged. Restored, green. | `/api/integrations/:name/:endpoint` → 403; provider calls only in worker (`adaptersFor` → `buildCronContext(...).integrations.call`); fixtures server-only |  |  |
 | SEC-03 | manual |  |  |  |  |  |

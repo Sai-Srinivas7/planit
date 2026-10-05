@@ -62,7 +62,12 @@ function AuthBoot({ children }: { children: ReactNode }) {
   const { error, warning } = useToast()
 
   if (!isLoaded) {
-    return <div aria-busy="true" className="fixed inset-0 bg-background" />
+    // UX-02: first paint is a loading state, never a blank page.
+    return (
+      <div aria-busy="true" className="fixed inset-0 flex items-center justify-center bg-background">
+        <p role="status" className="text-sm text-muted-foreground" data-testid="app-loading">Loading PlanIt…</p>
+      </div>
+    )
   }
 
   return (
