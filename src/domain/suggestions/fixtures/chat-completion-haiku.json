@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "success": true,
+  "data": {
+    "model": "claude-haiku-4-5-20251001",
+    "id": "msg_011CfjcjEZrYHnaWKwf4CJFK",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+      {
+        "type": "text",
+        "text": "```json\n{\n  \"explanations\": [\n    {\n      \"candidateId\": \"c1\",\n      \"text\": \"Houndstooth Coffee offers a cozy indoor setting perfect for groups to enjoy quality coffee and food together. Its casual atmosphere suits casual group outings within your budget.\"\n    },\n    {\n      \"candidateId\": \"c2\",\n      \"text\": \"This cafe provides an indoor venue ideal for groups interested in coffee and food. The relaxed environment makes it suitable for social gatherings and group meals.\"\n    }\n  ]\n}\n```"
+      }
+    ],
+    "container": null,
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "stop_details": null,
+    "usage": {
+      "input_tokens": 230,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 132,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "totalTokens": 362
+    },
+    "diagnostics": null,
+    "costUsd": 0.0008900000000000001
+  }
+}

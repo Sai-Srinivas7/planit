@@ -1,0 +1,2994 @@
+{
+  "ok": true,
+  "success": true,
+  "data": {
+    "search_metadata": {
+      "id": "6ac3f5c255cfe125b91e5c49",
+      "status": "Success",
+      "json_endpoint": "[redacted]",
+      "markdown_endpoint": "[redacted]",
+      "created_at": "2026-10-05 19:08:50 UTC",
+      "processed_at": "2026-10-05 19:08:50 UTC",
+      "google_maps_url": "https://www.google.com/maps/search/coffee+food+indoor/@32.7767,-96.7970,14z/data=!3m1!4b1!4m2!2m1!6e5?hl=en",
+      "raw_html_file": "[redacted]",
+      "prettify_html_file": "[redacted]",
+      "total_time_taken": 1.3
+    },
+    "search_parameters": {
+      "engine": "google_maps",
+      "type": "search",
+      "q": "coffee food indoor",
+      "ll": "@32.7767,-96.7970,14z",
+      "google_domain": "google.com",
+      "hl": "en"
+    },
+    "search_information": {
+      "local_results_state": "Results for exact spelling",
+      "query_displayed": "coffee food indoor"
+    },
+    "local_results": [
+      {
+        "position": 1,
+        "title": "Daily Coffee",
+        "place_id": "ChIJwYgq0HefToYRXPGZyN4AaDg",
+        "data_id": "0x864e9f77d02a88c1:0x386800dec899f15c",
+        "data_cid": "4064499620550144348",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9f77d02a88c1%3A0x386800dec899f15c&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9f77d02a88c1%3A0x386800dec899f15c&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.806418,
+          "longitude": -96.7944663
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJwYgq0HefToYRXPGZyN4AaDg",
+        "provider_id": "/g/11zh2ct_bw",
+        "rating": 4.9,
+        "reviews": 18,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "2801 N Central Expy, Dallas, TX 75204",
+        "country": "United States",
+        "open_state": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "hours": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "operating_hours": {
+          "monday": "7 AM–3 PM",
+          "tuesday": "7 AM–3 PM",
+          "wednesday": "7 AM–3 PM",
+          "thursday": "7 AM–3 PM",
+          "friday": "7 AM–3 PM",
+          "saturday": "12:30 AM–3 PM",
+          "sunday": "Closed"
+        },
+        "phone": "(469) 431-5135",
+        "website": "https://dailycoffeeshops.com/",
+        "extensions": [
+          {
+            "service_options": [
+              "No-contact delivery",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee"
+            ]
+          },
+          {
+            "popular_for": [
+              "Solo dining"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee"
+            ]
+          },
+          {
+            "dining_options": [
+              "Dessert"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Trendy"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking garage",
+              "Free parking lot",
+              "Free street parking",
+              "On-site parking",
+              "Usually plenty of parking"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "no_contact_delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF6aDJjdF9idxgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The PB&J latté is PHENOMENAL!!\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWloNoU0iR57JqV0b0ReOnzhmL1Cpi857ZhMeYne-vdMfE4enStQvUmK3Smd9YW2sNslTuTEjlkwuFXcWhMZzbt6JoUxuEk8fv-NDthAHmWuuP9GsJylBkBHCkPLJM04aUj1Qqj8mJM43sH8=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/aBMPbHicHcTLcoIwFADQL4qEgoqd6UItlUkNRQSp7mqMRMgDexN8_KRr_6YzPYvzfAhrO3j1PCmCQW1MLbkD_suMtlzbATPKqztADBB40yTPikqa1JT4lA_H5LzBe5zzL30XaunPu1M0HO8E5VvNUX-gxzjkem1Xfak-g7U6TLbVC6QgC1fEjWwv7uObVYLu7ns7Iqa8uriNjj1K362YJqpyLpssgNzkrJ0l8zZbEorDn7LxV-cmUoSGASTR28XHGCPxP0P6D-lAR9w"
+      },
+      {
+        "position": 2,
+        "title": "Daily Coffee",
+        "place_id": "ChIJla4hB3OZToYR6OTAQDE69No",
+        "data_id": "0x864e99730721ae95:0xdaf43a3140c0e4e8",
+        "data_cid": "15777299377799881960",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e99730721ae95%3A0xdaf43a3140c0e4e8&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e99730721ae95%3A0xdaf43a3140c0e4e8&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8036013,
+          "longitude": -96.79968579999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJla4hB3OZToYR6OTAQDE69No",
+        "provider_id": "/g/11n4s9f1q_",
+        "rating": 5,
+        "reviews": 69,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "3232 McKinney Ave, Dallas, TX 75204",
+        "country": "United States",
+        "open_state": "Closes soon · 3 PM · Opens 7:30 AM Tue",
+        "hours": "Closes soon · 3 PM · Opens 7:30 AM Tue",
+        "operating_hours": {
+          "monday": "7:30 AM–3 PM",
+          "tuesday": "7:30 AM–3 PM",
+          "wednesday": "7:30 AM–3 PM",
+          "thursday": "7:30 AM–3 PM",
+          "friday": "7:30 AM–3 PM",
+          "saturday": "Closed",
+          "sunday": "Closed"
+        },
+        "website": "http://orders.dailycoffeeshops.com/",
+        "extensions": [
+          {
+            "service_options": [
+              "No-contact delivery",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Solo dining"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Prepared foods"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Trendy"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free street parking"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "no_contact_delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFuNHM5ZjFxXxgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The milk was steamed perfectly, and the espresso was so delightful.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFurAOvfvyQqnPpg8ObNFKd-7PQuHFQMmhs0oabj1NnxBC_edcIP8fVq1bXdY9eOfQdKUM_MXAnRxBln4_PAY786dWLlYpVRoZuYBw2O0Wlnr3KzthAScRhq7xNfgmMv16EB9gbTlpYKpY8f_cNQoPH8uTc0CfCFqsnlXCSw1-hhoQNMZzf3xWuLg=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/dpydeXicHcTbboMgAADQL7LibKpdsgd1M128265KX8wEgSwIeEFt_3S_0qclOw_n98nmWU2vpsmZvaNSUt7pqRuRFHMn5h2SvUnVZKhRbnfTi_H-nYV69LKFLPdiELmibtamYYQNJy_0KSySnk1Afrc_Vio2P2g6jD5zl1wHq60xPHYZKXD0lTRJ7Yly87nYN7kHHfeAq5hDdS3lTUN_fclAxcVoR4-ZeWdUssHZUkL7ZLEOH_6RtheuYKSgSxqUFjI_ufqCQECCcJgEr4PzahmMySJNbg9ib5WO6dtqAQAM9j8yxB8u9FfH"
+      },
+      {
+        "position": 3,
+        "title": "Everyday Works",
+        "place_id": "ChIJkRzr6webToYRcHDXWn0sOVU",
+        "data_id": "0x864e9b07ebeb1c91:0x55392c7d5ad77070",
+        "data_cid": "6140988483802984560",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9b07ebeb1c91%3A0x55392c7d5ad77070&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9b07ebeb1c91%3A0x55392c7d5ad77070&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7404638,
+          "longitude": -96.8563873
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJkRzr6webToYRcHDXWn0sOVU",
+        "provider_id": "/g/11s3dk0sz1",
+        "rating": 4.8,
+        "reviews": 293,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Market"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop",
+          "market"
+        ],
+        "address": "516 S Hampton Rd #180, Dallas, TX 75208",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "6:30 AM–4 PM",
+          "tuesday": "Closed",
+          "wednesday": "6:30 AM–4 PM",
+          "thursday": "6:30 AM–4 PM",
+          "friday": "6:30 AM–4 PM",
+          "saturday": "7 AM–5 PM",
+          "sunday": "8 AM–5 PM"
+        },
+        "phone": "(214) 613-6074",
+        "website": "https://www.everydayworkscoffee.com/",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Identifies as Latino-owned",
+              "Identifies as women-owned",
+              "Small business"
+            ]
+          },
+          {
+            "service_options": [
+              "Outdoor seating",
+              "No-contact delivery",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Comfort food",
+              "Healthy options",
+              "Organic dishes",
+              "Prepared foods",
+              "Quick bite",
+              "Small plates",
+              "Vegan options",
+              "Vegetarian options"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Lunch",
+              "Catering",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Gender-neutral restroom",
+              "Restroom",
+              "Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Family-friendly",
+              "Groups",
+              "LGBTQ+ friendly",
+              "Transgender safespace"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "Good for kids",
+              "Kids' menu"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking lot",
+              "Free street parking",
+              "On-site parking",
+              "Usually plenty of parking"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed",
+              "Dogs allowed inside",
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "no_contact_delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFzM2RrMHN6MRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The food and snacks are amazing but the coffee steals the show every time!\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhEpsYiL_4rptQCu69K0SGKKektNFJmUlY69mua8dIdb3DZYyU7NHHhHDVeH83eACJe1f07uUT_71l5FPX_1dxcCwj46aRtlJThnGkED8CUh3fg_dJyCZj7-DxWaaaHzEfa4OIeTjeBPWA3QmWwW37qloMi6Dlw1axVUfCHIAF8I4npYC5v7gKPkJQ=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/pUscZHicHcRLUoMwAADQE1FgQgl1xgUmUD61UoUi3TARAikEghAEvKlXceWMb_F-fpmUw_SgqpyBXS1Ezek80bEQvaS93BWiU-thUoZRrJtqn0oDM2eYsvspN8ZBXtBsHkLt7RiGtJVnN-gSnpmHbiZW6ZcfAN-yLYFnz2MevlLPAtRGAdUrDc5JnEOd793oPdfLtUBLY5jkVfIgZv2xdbCFEgaqOi-DDd0aqOA1JYR4305FjBefxg19ilIbXLp0SQH85OL5bmK-6GS9JhXyfNu1fKMfMrT_gnUYtcHlcdE1TVPY_4XS_wH0ElTP"
+      },
+      {
+        "position": 4,
+        "title": "La Reunion",
+        "place_id": "ChIJc-3kskKZToYR-HQN_3Vve6o",
+        "data_id": "0x864e9942b2e4ed73:0xaa7b6f75ff0d74f8",
+        "data_cid": "12284534961164088568",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9942b2e4ed73%3A0xaa7b6f75ff0d74f8&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9942b2e4ed73%3A0xaa7b6f75ff0d74f8&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7467062,
+          "longitude": -96.8284347
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJc-3kskKZToYR-HQN_3Vve6o",
+        "provider_id": "/g/11h7_p_w4x",
+        "rating": 4.5,
+        "reviews": 837,
+        "price": "$10–20",
+        "extracted_price": 10,
+        "type": "Cafe",
+        "types": [
+          "Cafe",
+          "Cocktail bar"
+        ],
+        "type_id": "cafe",
+        "type_ids": [
+          "cafe",
+          "cocktail_bar"
+        ],
+        "address": "229 N Bishop Ave, Dallas, TX 75208",
+        "country": "United States",
+        "open_state": "Open · Closes 2 AM",
+        "hours": "Open · Closes 2 AM",
+        "operating_hours": {
+          "monday": "8 AM–2 AM",
+          "tuesday": "8 AM–2 AM",
+          "wednesday": "8 AM–2 AM",
+          "thursday": "8 AM–2 AM",
+          "friday": "8 AM–2 AM",
+          "saturday": "10 AM–2 AM",
+          "sunday": "10 AM–2 AM"
+        },
+        "phone": "(972) 282-5918",
+        "website": "http://lareunioncoffee.com/",
+        "description": "Neighborhood coffee, wine & food spot. Neighborhood parlor offering sophisticated espresso drinks & cocktails, plus creative shared plates.",
+        "extensions": [
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Fast service",
+              "Great beer selection",
+              "Great coffee",
+              "Great tea selection",
+              "Live music",
+              "Live performances"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Alcohol",
+              "Beer",
+              "Cocktails",
+              "Coffee",
+              "Comfort food",
+              "Happy hour drinks",
+              "Happy hour food",
+              "Hard liquor",
+              "Late-night food",
+              "Prepared foods",
+              "Quick bite",
+              "Small plates",
+              "Vegan options",
+              "Vegetarian options",
+              "Wine"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Brunch",
+              "Lunch",
+              "Dinner",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Gender-neutral restroom",
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Trendy"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking lot",
+              "Free street parking",
+              "Usually somewhat difficult to find a space"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed inside",
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFoN19wX3c0eBgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The coffee is exactly right and the BEC sandwich is big enough for two.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWknDH6WZz3E33eZ-_mPEm9XiAxY7dwuD4mBAfqvCDLAvWkCfVk6O4MMx0p7wbxearEwdlTGUYqcG8w4qt1Wp1NH-AqDqZwyTkBBNzvXkgwhPf7-y_AbluWd-e_wbslcKtag_atr=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/tRbEz3icHcTbCoIwAADQL1oqSlbQw7yQ0E3CWvkiOueMzcvcdNYP9g39TdB5ON9PrVQvN4bBa3tBu45yMkoy4K5VpFUL3DUG7SXAEkgDRpc4QawNoiVK33Zo2yQFWROHzfr-hPPDLfUYOI0HKzH5wQFOiPnVjS3PzvE4m72ri5nkQ6hLnuyuD4F3K-0IZaHeOkUAikCk-pUwzzu9pzujuo4rF7wyWPARlYBkupAc71VOs1wNW22Zpgnq_xi0P31iRiw"
+      },
+      {
+        "position": 5,
+        "title": "Pax & Beneficia Coffee - Deep Ellum",
+        "place_id": "ChIJJfyp-3iZToYRKYlxu3FyS28",
+        "data_id": "0x864e9978fba9fc25:0x6f4b7271bb718929",
+        "data_cid": "8019629394264951081",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9978fba9fc25%3A0x6f4b7271bb718929&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9978fba9fc25%3A0x6f4b7271bb718929&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.782289899999995,
+          "longitude": -96.78141049999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJJfyp-3iZToYRKYlxu3FyS28",
+        "provider_id": "/g/11xddx_8xq",
+        "rating": 4.7,
+        "reviews": 87,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "2900 Canton St Ste 130, Dallas, TX 75226",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "8 AM–5 PM",
+          "tuesday": "8 AM–5 PM",
+          "wednesday": "8 AM–5 PM",
+          "thursday": "8 AM–5 PM",
+          "friday": "8 AM–5 PM",
+          "saturday": "8 AM–5 PM",
+          "sunday": "8 AM–5 PM"
+        },
+        "phone": "(972) 803-3715",
+        "website": "https://paxandbeneficia.com/",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Small business"
+            ]
+          },
+          {
+            "service_options": [
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Quick bite",
+              "Small plates"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Brunch",
+              "Lunch",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Restroom"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Tourists"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking garage",
+              "Free parking lot",
+              "Free street parking",
+              "Paid parking garage",
+              "Paid parking lot",
+              "Paid street parking",
+              "Usually plenty of parking"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF4ZGR4Xzh4cRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"It’s a very non-distracting place & the coffee and the food is great.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFFRnoCQa0SU_m5GHvfrqBGnrZWfM2eSDCU56uUBy3PNAtsasnTSfbz0pxB2ZMY8Vy1eEMy4Kibb0JbQ36m2Z_Ik_8x_fGTyh0Gt_MWopC5s_Gr7AaaljMEJfspfeubQDXGaOfYxaGEKDOE5koBJVh0eA6nBIdmubpmLOumnXvqPT6t2YXQewbw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/Osn5cHicHcRLcoIwAADQEyERhDqd6YKfqShFBBTYMAQTaIUkkiDQm_YmXXamb_F-flspuXhV1a7VVw1jTYdHgYeaUYmpXNWsVxsuFD6weVGt423jtrvdmTInqkCclr0B359keNiQDsWVBBqOXSc1zDG1F_30YUlRCZrEBH0DPttaEeTby7LGXrBsDp8IAR9FutlrRbm_l9u5JDBZWgBlGVwZdwxRwuHFqqruK_B8IjjBI4rcDFYhyecKegc39Iw7s_1LC7BlUnt_60fE-2M49jR7Pk6JKbU8i_CEprdpDQBQ2v9rhf4BBuhWug"
+      },
+      {
+        "position": 6,
+        "title": "Huitzitzilin Café",
+        "place_id": "ChIJ5RaZSwGbToYRqzBDEiT2y6Y",
+        "data_id": "0x864e9b014b9916e5:0xa6cbf624124330ab",
+        "data_cid": "12018970665353949355",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9b014b9916e5%3A0xa6cbf624124330ab&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9b014b9916e5%3A0xa6cbf624124330ab&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.746010399999996,
+          "longitude": -96.85018459999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJ5RaZSwGbToYRqzBDEiT2y6Y",
+        "provider_id": "/g/11xcm3djlv",
+        "rating": 4.7,
+        "reviews": 159,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "1836 W Jefferson Blvd #120, Dallas, TX 75208",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "7 AM–4 PM",
+          "tuesday": "7 AM–4 PM",
+          "wednesday": "7 AM–4 PM",
+          "thursday": "7 AM–4 PM",
+          "friday": "7 AM–4 PM",
+          "saturday": "7 AM–3 PM",
+          "sunday": "7 AM–1 PM"
+        },
+        "phone": "(214) 377-8503",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Identifies as Latino-owned",
+              "Small business"
+            ]
+          },
+          {
+            "service_options": [
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Quick bite"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Catering",
+              "Dessert",
+              "Seating",
+              "Table service"
+            ]
+          },
+          {
+            "amenities": [
+              "Restroom"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Family-friendly",
+              "LGBTQ+ friendly",
+              "Transgender safespace"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "Good for kids"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking lot",
+              "Free street parking",
+              "Usually plenty of parking"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed",
+              "Dogs allowed inside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          },
+          {
+            "accessibility": [
+              "Assistive hearing loop"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF4Y20zZGpsdhgCOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&orderType=2&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The coffee and sandwich was delicious but the atmosphere is next level.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWliKTCoIcA6IYrEHtDRTESn-808PXOP6P1v87yPLfKTr90R6slVHevb7upU3pEG_n7twQymnI1qv2XuVlK1YrVQKolkfe9Guxi4xpy43SLGi_3qNPsx4jPMjOKedRug8i3HE3sRPteLpaKG=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/fI-i_HicHcTBboIwAADQL6qUlQAu8WAcAVLUWpHhyWhXAVfbSluEr_S8v1niO7y_V2utNp-eJ1o0a5RqBHeG90xJy6WdMXX3Gm0AM8B4y4yS8lt0uFypnC3D_Ngnmf2iZbKXIIYxqbckJP4QRxMprrjs55CGRlQZHy6R0wekk_QkI_vcTXeZ-4_ho3aVwP6xr3ZYid8rn6du7IJRTwHaF2l3Qo8NMWNwI-vbFvMf6pq4Q1mCDCWWF_qM08XThxCC9j0D8h9fjUdN"
+      },
+      {
+        "position": 7,
+        "title": "Wayward Coffee Co",
+        "place_id": "ChIJXzuaIneZToYRPhzUg4oksRM",
+        "data_id": "0x864e9977229a3b5f:0x13b1248a83d41c3e",
+        "data_cid": "1418955534934219838",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9977229a3b5f%3A0x13b1248a83d41c3e&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9977229a3b5f%3A0x13b1248a83d41c3e&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7948399,
+          "longitude": -96.82943829999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJXzuaIneZToYRPhzUg4oksRM",
+        "provider_id": "/g/11kjpflwx6",
+        "rating": 4.5,
+        "reviews": 381,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "2025 E Irving Blvd #102, Dallas, TX 75207",
+        "country": "United States",
+        "open_state": "Open · Closes 7 PM",
+        "hours": "Open · Closes 7 PM",
+        "operating_hours": {
+          "monday": "7 AM–7 PM",
+          "tuesday": "7 AM–7 PM",
+          "wednesday": "7 AM–7 PM",
+          "thursday": "7 AM–7 PM",
+          "friday": "7 AM–7 PM",
+          "saturday": "7 AM–7 PM",
+          "sunday": "7 AM–7 PM"
+        },
+        "website": "http://waywardcoffee.co/",
+        "extensions": [
+          {
+            "service_options": [
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Fast service",
+              "Great coffee",
+              "Great tea selection",
+              "Serves local specialty"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Alcohol",
+              "Beer",
+              "Coffee",
+              "Prepared foods",
+              "Small plates",
+              "Vegan options",
+              "Vegetarian options",
+              "Wine"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Gender-neutral restroom",
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Family-friendly",
+              "Groups",
+              "LGBTQ+ friendly",
+              "Tourists",
+              "Transgender safespace"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "Good for kids"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking lot",
+              "Free street parking",
+              "Paid parking lot",
+              "Usually plenty of parking"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          },
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFranBmbHd4NhgCOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&orderType=2&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"Not a lot of food options but that’s ok as the coffee was great!\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmYfj6-qE8fuXYVAqgi-EM36nHaXaAAzrx-2BHxR9OqDNan_yVhfqS0WtsgifDnWXlTwqE-uYdYmRA8Yrg-3FhF9UQm5E4cFscbf4NQfL7XCFyWTj_ciLYfYu7fbptDTBWDLjHEUjy7gSzh=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/jG9ULHicHcTBboIwGADgJ_oFh4Iu2aFKCQfUiWjpyUClLQQKpSWKL7nz3mbJvsP3-yOtHcyn47TSW4i-F201mWpkvbKVsgvWd44YDDADxkFx-p2RjvLGB403fMrpDWlRAz54voqLvEDoPb7gYxe_0u1Jh8dC3eeb5PriEmtEzUNF8jZ7agwTfdAuRRs6CvAiGW2v526NVywyrOSr45knQb6PZpI1d1YnlNMp4OVgw2xHwqSJ8bWZA3F5y6_n0nVdkP8zUH-4HEfY"
+      },
+      {
+        "position": 8,
+        "title": "Otto's Coffee & Fine Foods",
+        "place_id": "ChIJb1aU8BiZToYRtIp3Wyo3OGA",
+        "data_id": "0x864e9918f094566f:0x6038372a5b778ab4",
+        "data_cid": "6933352281399593652",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9918f094566f%3A0x6038372a5b778ab4&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9918f094566f%3A0x6038372a5b778ab4&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7798765,
+          "longitude": -96.7999844
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJb1aU8BiZToYRtIp3Wyo3OGA",
+        "provider_id": "/g/11gh2sx9qn",
+        "rating": 4.6,
+        "reviews": 756,
+        "price": "$10–20",
+        "extracted_price": 10,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "1321 Commerce St, Dallas, TX 75202",
+        "country": "United States",
+        "open_state": "Open · Closes 10 PM",
+        "hours": "Open · Closes 10 PM",
+        "operating_hours": {
+          "monday": "6 AM–10 PM",
+          "tuesday": "6 AM–10 PM",
+          "wednesday": "6 AM–10 PM",
+          "thursday": "6 AM–10 PM",
+          "friday": "6 AM–10 PM",
+          "saturday": "6 AM–10 PM",
+          "sunday": "6 AM–10 PM"
+        },
+        "phone": "(214) 651-3685",
+        "website": "https://www.adolphus.com/restaurants-bars/ottos-coffee-and-fine-foods?utm_source=google-gbp&utm_medium=organic&utm_campaign=gbp",
+        "description": "Refined cafe with sidewalk seats. Single-origin brews & liege waffles offered in a sophisticated environment with outdoor tables.",
+        "extensions": [
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Quick bite"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Brunch",
+              "Lunch",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Gender-neutral restroom",
+              "Restroom",
+              "Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Tourists"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "High chairs"
+            ]
+          },
+          {
+            "parking": [
+              "Free street parking",
+              "Paid street parking",
+              "Valet parking"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          },
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "user_review": "\"Amazing pastries, decor, and selection of coffee concoctions.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmHrk2tTKs9K0y0yNGUH1H7G9RcFiIPma1d6ytZHVNdCw-Zn3bKyJV2STPWjplmXW5YvC1ZJ7Yi9exv4d3Tr3BNjlIKW7JdTQMk-JCEePLcUOSjHInRIiwotVNWCUddjtOoDvxv=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/M0FerHicHcRdToMwAADgExUKqIQlPihOCjhAKHTjTduG_5bQDsYJd4bdxsTv4XvcW61ndTDNsXWMRspm5FfFFyqF5kIbVE5mMytAFVDmG8ozTCa0DLbGsfJiuMM9CUpkITfwcvrZhdn0Y7GXXdeoSpi_gVo4v_EeVXaBM9LP43Qmz5fVt-rIvXQev61PzMGL8570YxgTN2L4-zSAyD_y7IuWadGjUORht0ldJcQvGet1Kj_W2_q6WRBC0P5PgfgDBDtETQ"
+      },
+      {
+        "position": 9,
+        "title": "JuJu's Coffee",
+        "place_id": "ChIJgx8kXZ-fToYR22t4xhMnLyk",
+        "data_id": "0x864e9f9f5d241f83:0x292f2713c6786bdb",
+        "data_cid": "2967633645348088795",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9f9f5d241f83%3A0x292f2713c6786bdb&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9f9f5d241f83%3A0x292f2713c6786bdb&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.812593299999996,
+          "longitude": -96.76218709999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJgx8kXZ-fToYR22t4xhMnLyk",
+        "provider_id": "/g/11txzm5k71",
+        "rating": 4.8,
+        "reviews": 264,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Coffee roastery",
+          "Coffee store",
+          "Coffee wholesaler"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop",
+          "coffee_roasters",
+          "coffee_store",
+          "coffee_wholesaler"
+        ],
+        "address": "6038 La Vista Dr, Dallas, TX 75206",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "6 AM–5 PM",
+          "tuesday": "Closed",
+          "wednesday": "6 AM–5 PM",
+          "thursday": "6 AM–5 PM",
+          "friday": "6 AM–5 PM",
+          "saturday": "6 AM–5 PM",
+          "sunday": "7 AM–2 PM"
+        },
+        "phone": "(214) 882-1834",
+        "website": "http://jujuscoffee.com/",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Small business"
+            ]
+          },
+          {
+            "service_options": [
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Fast service",
+              "Great coffee",
+              "Great tea selection",
+              "Serves local specialty"
+            ]
+          },
+          {
+            "popular_for": [
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance"
+            ]
+          },
+          {
+            "offerings": [
+              "Alcohol",
+              "Coffee"
+            ]
+          },
+          {
+            "dining_options": [
+              "Dessert"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Lively",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "College students"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking lot",
+              "Free street parking",
+              "On-site parking",
+              "Usually somewhat difficult to find a space"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed inside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          },
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF0eHptNWs3MRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"Their banana bread latte is amazing.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk45UR-5MCusmbOV3e3GK0GhgQPURQg2PWMIRzz9CXIh3Sp2p3RzfEN9JNcnajFiaNq5SCJHnRv-hWmBWuLLLRA-jl1z5xTX7mIiet737BYDRWxwfruETTK_sopIs7d5dRqi22Ogw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/btln5nicHcTdboIwGADQJ6ogtSEu2YXiH4qIn7jqldFaWxy0hZZheEMfYW-zZOfi_L6lc8Z-eF4p8UBoLUreWt4wrRxXbsB05QljEbPIepMVZDn9HpEjILKNWlvddl-Y4-XGX0qxz46wF0FGtzH0_Tg6xRIfTGAw9I95Ol6nTF2fi-Ka1uQQrVcKfpCk1ZS2SZLABD3LYU9e-Sms4oK7EIfT8wzoq3s07TzPNxerTWzDO7lDXQTBTnSf3dD3fST_Z0j9AWBaRHI"
+      },
+      {
+        "position": 10,
+        "title": "Flying Horse Cafe",
+        "place_id": "ChIJEceT6RiZToYRMrByntNyrQU",
+        "data_id": "0x864e9918e993c711:0x5ad72d39e72b032",
+        "data_cid": "409109394382565426",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9918e993c711%3A0x5ad72d39e72b032&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9918e993c711%3A0x5ad72d39e72b032&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.779978799999995,
+          "longitude": -96.7992266
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJEceT6RiZToYRMrByntNyrQU",
+        "provider_id": "/g/11b6b8ddkm",
+        "rating": 4.6,
+        "reviews": 711,
+        "price": "$10–20",
+        "extracted_price": 10,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "1401 Commerce St, Dallas, TX 75201",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "6:30 AM–4 PM",
+          "tuesday": "6:30 AM–4 PM",
+          "wednesday": "6:30 AM–4 PM",
+          "thursday": "6:30 AM–4 PM",
+          "friday": "6:30 AM–4 PM",
+          "saturday": "7 AM–4 PM",
+          "sunday": "7 AM–2 PM"
+        },
+        "phone": "(214) 741-1731",
+        "website": "https://flyinghorsecafe.shop/",
+        "description": "Espresso & cafe meals in historic hotel. Historic hotel venue featuring espresso, pastries & cafe fare in a comfy setting with local artwork.",
+        "extensions": [
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Prepared foods",
+              "Quick bite"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Brunch",
+              "Catering",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Restroom"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Groups",
+              "Tourists"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Paid parking lot",
+              "Paid street parking"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed",
+              "Dogs allowed inside",
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          },
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "user_review": "\"The coffee is great and so is the oatmeal.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlvNLbBu__GuXx8KktH6v-uwPY7ZdGY4g-2ZsP1nSEdfKfdbQauwLdpB79aRSJBGIqKv5Vo01sZ32so85bnzXDtQunObZeapPl-sJfOe9hpFnMoweXNGpAPCvBhrEp3piqbZkfUqg=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/cQO2Y3icHcRNcoIwGADQE0VAVLQzXUhVUCzGn7aYjUMgJB1pEvgScLyhR-htnPEt3v9DGKPhzXFq4Q-4UrxmFlhbKGmYNINC_TlcAyoAgTOPD_j0U3fplob2colsdpsmVxNPOmR7fA5IGZ1HHA0JYE8el2WVVCXd57bfljoMZvnhuAmjdZN042_lekD8IajpmMp7tjB7K3eUsFzjGsGm2rGZ0Cv5qXqWpZGe448uFO1S-_q3oeRafTX8vfdc10XidYHkEzZLRrQ"
+      },
+      {
+        "position": 11,
+        "title": "Weekend Coffee",
+        "place_id": "ChIJX9ZIuBiZToYRNNDGW85oT7w",
+        "data_id": "0x864e9918b848d65f:0xbc4f68ce5bc6d034",
+        "data_cid": "13569179437802901556",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9918b848d65f%3A0xbc4f68ce5bc6d034&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9918b848d65f%3A0xbc4f68ce5bc6d034&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7801915,
+          "longitude": -96.7982092
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJX9ZIuBiZToYRNNDGW85oT7w",
+        "provider_id": "/g/11b75hwcb_",
+        "rating": 4.5,
+        "reviews": 426,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "1511 Commerce St, Dallas, TX 75201",
+        "country": "United States",
+        "open_state": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "hours": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "operating_hours": {
+          "monday": "7 AM–3 PM",
+          "tuesday": "7 AM–3 PM",
+          "wednesday": "7 AM–3 PM",
+          "thursday": "7 AM–3 PM",
+          "friday": "7 AM–3 PM",
+          "saturday": "7 AM–3 PM",
+          "sunday": "7 AM–3 PM"
+        },
+        "phone": "(214) 261-4545",
+        "website": "http://ahhweekend.com/",
+        "description": "Sleek, bright stop for coffee & pastries. Espresso drinks, pour-over coffee & pastries served in a hip, bright space inside the Joule Hotel.",
+        "extensions": [
+          {
+            "service_options": [
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great dessert",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Quick bite"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Dessert"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Restroom",
+              "Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Tourists"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free street parking",
+              "Paid parking lot"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          },
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "user_review": "\"Coffee was great breakfast tacos, and pastries were good\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn4b45xLgQUYOxf7yBDjCXUK5X_4r0c3GBPZ5CZ1z-e-yNx9cFza8F1WRiul8awVqHQIxCmIfR0iYFmI18TPVxYj6E6TdfHv85Yb2NSii4YeLzmVwSsqTxGsH79fj5sS7igBjxE3A=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/64COX3icHcRdEoFAAADgE602tSozHhSpYUgl1othbds2_chGWzd0BLcx43v4vp-sbR9iqihFpo1YXbOCvgR9krpqadWOSF0q7CEAEUAocy8M4mOl33QkN2x_wDuZGr29yJ3TYY1OF_0JibaygzNyzuoAKOi30iLucDVd9RjyV2Feu6Tx9r50Sj8NIcdu6atmHCQS55PlJL6n3ttE-DbeRpzrmG6GMuki0cRyJTzDSnMkIoMzO5dLbT7rVAghyP4TUP0Abe9EQA"
+      },
+      {
+        "position": 12,
+        "title": "Lemmon Drop Coffee Shop Dallas",
+        "place_id": "ChIJiQhrH-KfToYRRVPNKuf6Ths",
+        "data_id": "0x864e9fe21f6b0889:0x1b4efae72acd5345",
+        "data_cid": "1967785957969974085",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9fe21f6b0889%3A0x1b4efae72acd5345&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9fe21f6b0889%3A0x1b4efae72acd5345&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8121303,
+          "longitude": -96.78370489999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJiQhrH-KfToYRRVPNKuf6Ths",
+        "provider_id": "/g/11splf7vk0",
+        "rating": 4.8,
+        "reviews": 117,
+        "type": "Coffee roastery",
+        "types": [
+          "Coffee roastery"
+        ],
+        "type_id": "coffee_roasters",
+        "type_ids": [
+          "coffee_roasters"
+        ],
+        "address": "2505 N Fitzhugh Ave, Dallas, TX 75204",
+        "country": "United States",
+        "phone": "(214) 641-6377",
+        "website": "https://lemmondropcoffee.com/",
+        "extensions": [
+          {
+            "service_options": [
+              "Onsite services",
+              "Takeout"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible parking lot"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          }
+        ],
+        "service_options": {
+          "onsite_services": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "user_review": "\"Breakfast burritos/tacos and excellently made coffees!\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkg6uBp6tpJw50FJbJ_rFLG9GwBW_DdzimwhSZQDXvFqaVSUk4zR1jG4D0VINIvbWB0EkbVjzmgGTJ4uEQv9KJtN9oOAgymhc8FrjqdKXiR30-kXqWjKEY-n94sUsIbYYgf77vKvwuwzTpW=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/ltJjPnicHcTNboIwAADgJ6rUiDqWeJDwI2VxE5GCFyOVtYLQQksbeUnPvs2SfYfv_WJKCflpWQ-2mFHO6aMaZTUQ3qmqUzPCW4sKCYgE0trukp8UN3Q1umKlBDJLGKASXYbgK3RC4-KLd5vurWHH88HLddBfs-OpsadkXoe2B7NoH-kSu9BvyqyeWhqmyB79g3ZipPYO_97SZ8vIRzDU_S3O78kCgibvcR37BegcW55kVBYF_V2vdazNaKZU4I2ZQwgB-5-A7g-5vkgQ"
+      },
+      {
+        "position": 13,
+        "title": "Urban Coffee",
+        "place_id": "ChIJUd5EkheZToYRzh0IgCZ0iNA",
+        "data_id": "0x864e99179244de51:0xd088742680081dce",
+        "data_cid": "15026387865427254734",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e99179244de51%3A0xd088742680081dce&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e99179244de51%3A0xd088742680081dce&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7798452,
+          "longitude": -96.8040676
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJUd5EkheZToYRzh0IgCZ0iNA",
+        "provider_id": "/g/11btvl9m83",
+        "rating": 4.6,
+        "reviews": 46,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "unclaimed_listing": true,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "901 Main St C117, Dallas, TX 75202",
+        "country": "United States",
+        "open_state": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "hours": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "operating_hours": {
+          "monday": "7 AM–3 PM",
+          "tuesday": "7 AM–3 PM",
+          "wednesday": "7 AM–3 PM",
+          "thursday": "7 AM–3 PM",
+          "friday": "7 AM–3 PM",
+          "saturday": "Closed",
+          "sunday": "Closed"
+        },
+        "phone": "(214) 741-7400",
+        "website": "http://www.theurbancoffee.com/",
+        "description": "Small counter for coffee & chocolates. Low-key, quick-serve coffee spot serving Starbucks drinks alongside tea & Godiva chocolates.",
+        "extensions": [
+          {
+            "service_options": [
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Solo dining"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Quick bite"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Dessert"
+            ]
+          },
+          {
+            "amenities": [
+              "Restroom",
+              "Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Trendy"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFidHZsOW04MxgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"Excellent coffee.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmMIoeNTYHzjQVbRANnu8U2p77RtjNrkGuFvn5qSQV-YNdyIDkelBk0xEalDF8iDRKJExoy9Um4QJ6aZ8Bq5RyRro693zDx7btF3sBtmHx0k3CrsoCXXZUtpCfQx9wFEKKPMt7a=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/mC_b53icHcTdEoFAGADQJ1otoTLjQn-iqdGSv7tkFdVutV9sXtAzeBszzsX5fnKAWswUpczVQcZ5VtJO0DblDCiDQcorJasFSgUSysIjm92hClachruT935E-wtZhKzT41GtaQQeYVssO_fJJs022qNTeO1XdkFLs8DSSUrb1e828deO5L0RV-NoPU3OutlMSE9aPjXUty21C7iqMKHyJC5UqxXcOh7PMdTWLZLGy3V8fxOAlsxfQ4wxyv-niP0AgqNE5Q"
+      },
+      {
+        "position": 14,
+        "title": "Opening Bell Coffee",
+        "place_id": "ChIJvU3NtgOZToYR8ZYThgxT_lw",
+        "data_id": "0x864e9903b6cd4dbd:0x5cfe530c861396f1",
+        "data_cid": "6700884608828020465",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9903b6cd4dbd%3A0x5cfe530c861396f1&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9903b6cd4dbd%3A0x5cfe530c861396f1&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7673584,
+          "longitude": -96.796026
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJvU3NtgOZToYR8ZYThgxT_lw",
+        "provider_id": "/m/0k2xhny",
+        "rating": 4.6,
+        "reviews": 773,
+        "price": "$10–20",
+        "extracted_price": 10,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Bar",
+          "Diner",
+          "Live music venue",
+          "Lunch restaurant",
+          "Wine bar"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop",
+          "bar",
+          "diner",
+          "live_music_venue",
+          "lunch_restaurant",
+          "wine_bar"
+        ],
+        "address": "1409 Botham Jean Blvd, Dallas, TX 75215",
+        "country": "United States",
+        "open_state": "Open · Closes 6 PM",
+        "hours": "Open · Closes 6 PM",
+        "operating_hours": {
+          "monday": "7 AM–6 PM",
+          "tuesday": "7 AM–6 PM",
+          "wednesday": "7 AM–6 PM",
+          "thursday": "7 AM–9 PM",
+          "friday": "7 AM–9 PM",
+          "saturday": "8 AM–9 PM",
+          "sunday": "9 AM–2 PM"
+        },
+        "phone": "(945) 994-4618",
+        "website": "http://www.openingbellcoffee.com/",
+        "description": "Coffee shop with food, live music & more. Breakfast tacos, sandwiches, coffee, wine & beer at hip, relaxed hangout with live music & WiFi.",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Identifies as women-owned",
+              "Small business"
+            ]
+          },
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Fast service",
+              "Great beer selection",
+              "Great coffee",
+              "Great dessert",
+              "Great tea selection",
+              "Live music",
+              "Live performances",
+              "Serves local specialty"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Alcohol",
+              "Beer",
+              "Coffee",
+              "Comfort food",
+              "Happy hour drinks",
+              "Healthy options",
+              "Late-night food",
+              "Quick bite",
+              "Small plates",
+              "Vegetarian options",
+              "Wine"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Brunch",
+              "Lunch",
+              "Dinner",
+              "Catering",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Historic",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "College students",
+              "Family-friendly",
+              "Groups",
+              "LGBTQ+ friendly",
+              "Tourists",
+              "Transgender safespace"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "Good for kids"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking lot",
+              "Free street parking",
+              "Paid parking lot"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EiQKIuICHzIdEhYiFNLX29IPDgoKL20vMGsyeGhueRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The milk was PERCECT consistency, and the coffee tasted amazing.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlVt5G_hietpgfHYQg-A0IDgjvwvhvg8ByAlM4BvZUZRzY0Lgitov3QislGcsS9A5c2nSSXOJ6zncOQkjEeWsleNwSu6sksVWj0-8iEI_5FW-ware39iG3Ssau3sOslyjIP6vuoUw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/esWy0nicHcTRrsEwGADgJ6qV2oLkXEwwE8zUDDciTbWdahd_14Y3PI9w3uYkvovv71c618IkirQkPWGt0LwD_mLWOG5cj9lnJFpADBBE6XK_O9T66OLsKhV3rbgvz6VAKc5novHBSy9G03eqN8Opv1SX_eeM10I560mpQGcM6DiN2cBQeipWycewonw0c16D5ttAuwQecKwbjEZqnl_jRY3C7cXJWGWEwq0jUIB-N_ku8Z2twk_oY4yR_M6Q-QeJZ0ca"
+      },
+      {
+        "position": 15,
+        "title": "Soirée Coffee & Cocktail Bar",
+        "place_id": "ChIJRcZ7wimZToYR0x0AZZaCV74",
+        "data_id": "0x864e9929c27bc645:0xbe57829665001dd3",
+        "data_cid": "13715574772631346643",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9929c27bc645%3A0xbe57829665001dd3&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9929c27bc645%3A0xbe57829665001dd3&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7783705,
+          "longitude": -96.82919009999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJRcZ7wimZToYR0x0AZZaCV74",
+        "provider_id": "/g/11lwsss8hg",
+        "rating": 4.6,
+        "reviews": 1005,
+        "price": "$20–30",
+        "extracted_price": 20,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Brunch restaurant",
+          "Cocktail bar",
+          "Restaurant"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop",
+          "brunch_restaurant",
+          "cocktail_bar",
+          "restaurant"
+        ],
+        "address": "320 Singleton Blvd Ste 190, Dallas, TX 75212",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "7 AM–4 PM",
+          "tuesday": "7 AM–1 PM",
+          "wednesday": "7 AM–4 PM",
+          "thursday": "7 AM–4 PM",
+          "friday": "7 AM–4 PM",
+          "saturday": "8 AM–4 PM",
+          "sunday": "8 AM–4 PM"
+        },
+        "phone": "(972) 850-9030",
+        "website": "http://soireecoffeebar.com/",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Identifies as Black-owned",
+              "Identifies as disabled-owned",
+              "Identifies as veteran-owned",
+              "Identifies as women-owned"
+            ]
+          },
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Fast service",
+              "Great coffee",
+              "Great tea selection",
+              "Live music",
+              "Live performances",
+              "Serves local specialty"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Lunch",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Alcohol",
+              "Beer",
+              "Cocktails",
+              "Coffee",
+              "Comfort food",
+              "Happy hour drinks",
+              "Happy hour food",
+              "Hard liquor",
+              "Healthy options",
+              "Late-night food",
+              "Quick bite",
+              "Small plates",
+              "Vegetarian options",
+              "Wine"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Brunch",
+              "Lunch",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Trendy",
+              "Upscale"
+            ]
+          },
+          {
+            "crowd": [
+              "Family-friendly",
+              "Groups",
+              "Tourists"
+            ]
+          },
+          {
+            "planning": [
+              "Appointment required",
+              "Accepts reservations"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking garage",
+              "Free parking lot",
+              "Free street parking",
+              "Usually plenty of parking"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed",
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": true
+        },
+        "reserve_a_table": "https://www.google.com/maps/reserve/v/dine/c/piXtMRZ7cjc?source=pa&opi=79508299&hl=en-US&gei=w_XDarrZAa2fseMP8fnKKA&ahbb=1&sourceurl=https://www.google.com/search?tbm%3Dmap%26q%3Dcoffee%2Bfood%2Bindoor%26pb%3D!4m8!1m3!1d37739.1001700498!2d-96.797!3d32.7767!3m2!1i1920!2i1080!4f13.1!7i20!10b1!12m49!1m5!18b1!30b1!31m1!1b1!34e1!2m4!5m1!6e2!20e3!39b1!6m22!49b1!63m0!66b1!74i150000!85b1!91b1!114b1!149b1!178b1!206b1!209b1!212b1!223b1!232b1!234b1!244b1!246b1!250b1!253b1!258b1!260b1!266b1!10b1!12b1!13b1!14b1!16b1!17m1!3e1!20m3!5e2!6b1!14b1!46m1!1b0!96b1!99b1!19m4!2m3!1i360!2i120!4i8!20m57!2m2!1i203!2i100!3m2!2i4!5b1!6m6!1m2!1i86!2i86!1m2!1i408!2i240!7m33!1m3!1e1!2b0!3e3!1m3!1e2!2b1!3e2!1m3!1e2!2b0!3e3!1m3!1e8!2b0!3e3!1m3!1e10!2b0!3e3!1m3!1e10!2b1!3e2!1m3!1e10!2b0!3e4!1m3!1e9!2b1!3e2!2b1!9b0!15m8!1m7!1m2!1m1!1e2!2m2!1i195!2i195!3i20!22m6!1sUKoVnfj9d5syjaH936r_ty4HH9-s9pY:2!2s1i:0,t:11886,p:UKoVnfj9d5syjaH936r_ty4HH9-s9pY:2!7e81!12e5!17sUKoVnfj9d5syjaH936r_ty4HH9-s9pY:63!18e15!24m107!1m28!13m9!2b1!3b1!4b1!6i1!8b1!9b1!14b1!20b1!25b1!18m17!3b1!4b1!5b1!6b1!13b1!14b1!17b1!21b1!22b1!27m1!1b0!28b0!32b1!33m1!1b1!34b1!36e2!10m1!8e3!11m1!3e1!14m1!3b0!17b1!20m2!1e3!1e6!24b1!25b1!26b1!27b1!29b1!30m1!2b1!36b1!37b1!39m3!2m2!2i1!3i1!43b1!52b1!54m1!1b1!55b1!56m1!1b1!61m2!1m1!1e1!65m5!3m4!1m3!1m2!1i224!2i298!72m22!1m8!2b1!5b1!7b1!12m4!1b1!2b1!4m1!1e1!4b1!8m10!1m6!4m1!1e1!4m1!1e3!4m1!1e4!3sother_user_google_review_posts__and__hotel_and_vr_partner_review_posts!6m1!1e1!9b1!89b1!98m3!1b1!2b1!3b1!103b1!113b1!114m3!1b1!2m1!1b1!117b1!122m1!1b1!126b1!127b1!26m4!2m3!1i80!2i92!4i8!30m28!1m6!1m2!1i0!2i0!2m2!1i530!2i1080!1m6!1m2!1i1870!2i0!2m2!1i1920!2i1080!1m6!1m2!1i0!2i0!2m2!1i1920!2i20!1m6!1m2!1i0!2i1060!2m2!1i1920!2i1080!34m19!2b1!3b1!4b1!6b1!8m6!1b1!3b1!4b1!5b1!6b1!7b1!9b1!12b1!14b1!20b1!23b1!25b1!26b1!31b1!37m1!1e81!42b1!49m10!3b1!6m2!1b1!2b1!7m2!1e3!2b1!8b1!9b1!10e2!50m4!2e2!3m2!1b1!3b1!61b1!67m5!7b1!10b1!14b1!15m1!1b0!69i767!77b1%26hl%3Den",
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFsd3NzczhoZxgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The food is bommmmbbb and the coffee (spiked caramel latte) hits right!\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnTgCcvDc8yZmLmvdTjGNIRkC3wnEKvjPOlfwXhhRELKIz0lsP1XBv5-XEhRpKyoXGza6Qo0kddwyn25XN0har5dDsapQ8yE6UXzloedKs3_NOR2WmWig6BU6fURibQQpnbUFCq=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/nQh8dHicHcRdCoIwAADgE01XokTQQ6n9oJgOxdFL2GZbOrfVTNELdoZuE_Q9fN8P73tt1rYtuGMxpZio36Z-ESX7WvYWUZ3NtAHEAGNvjyjNS5kznwwBWU2XLu4GmjeH5IRa3xllGA1Nehb3EXOOwjg6zVCYdIF3gwtwyJGOJoUPc-VlCraUjpNcujiBvHq5NDCVzlZT6BV4FqqmkXGuyRkty658MG9XePcCPW5ZpuWt2PvPzbiAEAL-nwD5A-ShRe4"
+      },
+      {
+        "position": 16,
+        "title": "Merit Coffee Co.",
+        "place_id": "ChIJEcbAPJyZToYR2Ui-4HsOQAE",
+        "data_id": "0x864e999c3cc0c611:0x1400e7be0be48d9",
+        "data_cid": "90087917761743065",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e999c3cc0c611%3A0x1400e7be0be48d9&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e999c3cc0c611%3A0x1400e7be0be48d9&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7839245,
+          "longitude": -96.7847895
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJEcbAPJyZToYR2Ui-4HsOQAE",
+        "provider_id": "/g/11h0jvfy5m",
+        "rating": 4.5,
+        "reviews": 717,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Cafe",
+          "Coffee store",
+          "Espresso bar"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop",
+          "cafe",
+          "coffee_store",
+          "espresso_bar"
+        ],
+        "address": "2639 Main St, Dallas, TX 75226",
+        "country": "United States",
+        "open_state": "Open · Closes 6 PM",
+        "hours": "Open · Closes 6 PM",
+        "operating_hours": {
+          "monday": "7:30 AM–6 PM",
+          "tuesday": "7:30 AM–6 PM",
+          "wednesday": "7:30 AM–6 PM",
+          "thursday": "7:30 AM–6 PM",
+          "friday": "7:30 AM–6 PM",
+          "saturday": "7:30 AM–6 PM",
+          "sunday": "7:30 AM–6 PM"
+        },
+        "phone": "(469) 248-3440",
+        "website": "https://meritcoffee.com/pages/deep-ellum",
+        "extensions": [
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection",
+              "Serves local specialty"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Organic dishes",
+              "Quick bite"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "College students",
+              "Groups",
+              "Tourists"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "Good for kids"
+            ]
+          },
+          {
+            "parking": [
+              "Paid parking lot",
+              "Paid street parking",
+              "Usually somewhat difficult to find a space"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed inside",
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFoMGp2Znk1bRgBOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&orderType=1&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"Great cold brew and their food items are really good too.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlwJr_e-fLfGtpEsUrCuW-e1vtWJYHDJlcCTtWuZIyDkMiU3hwkIgPHBzmpPJULAUpXHhAjHAEf66EUOUpqzdQ3dqn4nlk8ttfS0Qg4wCrHmKe7hNPU0DsEkxMwGnUELGFYLDeoaQ=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/GQgfQnicHcRRboIwGADgE1VqMGxZsgcGHZXhBmrD3IsxtbQbpa30Z1VvuCN4G5N9D9_tTwE4_xRFWsUzaa3UYvJi5NaAMDDjdoik84h75KOUruttq0M57gXqqq4ARzwbs6lFYv4Lbbmjeal5toV2-lpe8n71zWIV-qWs6ct1cHXJqpS5T6rSH5qSLkkI-2DudD028fFkFkb3jwDdBjdyEbKRDm_iQb3XDOee9OdVKAwjVfG6q3JhD81zmGOMkfqfI3MHbtJGaQ"
+      },
+      {
+        "position": 17,
+        "title": "The Berni Bean Coffee Company",
+        "place_id": "ChIJnfHYLZWZToYR9FWGW-bJoko",
+        "data_id": "0x864e99952dd8f19d:0x4aa2c9e65b8655f4",
+        "data_cid": "5378082896248985076",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e99952dd8f19d%3A0x4aa2c9e65b8655f4&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e99952dd8f19d%3A0x4aa2c9e65b8655f4&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7846492,
+          "longitude": -96.78273709999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJnfHYLZWZToYR9FWGW-bJoko",
+        "provider_id": "/g/11sv15_3l0",
+        "rating": 4.6,
+        "reviews": 184,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Cafe",
+          "Coffee roastery"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop",
+          "cafe",
+          "coffee_roasters"
+        ],
+        "address": "2820 Elm St, Dallas, TX 75226",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "8 AM–4 PM",
+          "tuesday": "8 AM–4 PM",
+          "wednesday": "8 AM–4 PM",
+          "thursday": "8 AM–4 PM",
+          "friday": "8 AM–4 PM",
+          "saturday": "8:30 AM–4 PM",
+          "sunday": "8:30 AM–4 PM"
+        },
+        "phone": "(214) 238-6653",
+        "website": "http://www.thebernibean.com/",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Identifies as Latino-owned",
+              "Identifies as women-owned",
+              "Small business"
+            ]
+          },
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Curbside pickup",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Comfort food",
+              "Happy hour food",
+              "Organic dishes",
+              "Prepared foods",
+              "Quick bite",
+              "Small plates"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Brunch",
+              "Lunch",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Tourists"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free street parking",
+              "Paid parking lot",
+              "Paid street parking",
+              "Usually plenty of parking"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed",
+              "Dogs allowed inside",
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "curbside_pickup": true,
+          "delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFzdjE1XzNsMBgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"The latte was delicious and the food was scrumptious!!!\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlTq_C8nR64efYbGv6EG1GL5YryUcSaBTpCXrLgOZapuIylN9hw7E17YuEVhzK2A0ndbhP4_9nihbzfBr35IysiwrOZZMCFe6lsH5lSzK3ey00aAa9vGUM79aLQNrKloW7LgrdzxVYATNrr=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/B9BfvHicHcTBboIwGADgJ0LKEJAlHpAwNCAwRR1cTKm1Nakt-wsivKRn32bJvsP3fvGua_WnaQpuz5hSTNBeUyBKdlR2M6LuJmu1QbShzWC9K8qTKH_P4ULu3Dm9Vk38cKPYilOngvFA9nhVtuEPpCyvcdtvRpH5fPAiy6v66Min5CNA8tLwYn725Y0303UFtrMZ9W2AvK634Rd1hV47Yj8lNh0RwgH2H_Fh6_k4_c4gEerkpQwu0_NYBWUGsBwshJDB_yeG_AOm90e8"
+      },
+      {
+        "position": 18,
+        "title": "Canela Café",
+        "place_id": "ChIJX8QT6tGbToYRAKGyfTrTaFw",
+        "data_id": "0x864e9bd1ea13c45f:0x5c68d33a7db2a100",
+        "data_cid": "6658804297237700864",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9bd1ea13c45f%3A0x5c68d33a7db2a100&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9bd1ea13c45f%3A0x5c68d33a7db2a100&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7509277,
+          "longitude": -96.8392705
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJX8QT6tGbToYRAKGyfTrTaFw",
+        "provider_id": "/g/11ltw7y0m0",
+        "rating": 5,
+        "reviews": 10,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "627 Turner Ave, Dallas, TX 75208",
+        "country": "United States",
+        "open_state": "Closed · Opens 8 AM Tue",
+        "hours": "Closed · Opens 8 AM Tue",
+        "operating_hours": {
+          "monday": "Closed",
+          "tuesday": "8 AM–5 PM",
+          "wednesday": "8 AM–5 PM",
+          "thursday": "8 AM–5 PM",
+          "friday": "8 AM–5 PM",
+          "saturday": "8 AM–5 PM",
+          "sunday": "8 AM–4 PM"
+        },
+        "phone": "(214) 769-2349",
+        "website": "https://canelacafe24.square.site/",
+        "extensions": [
+          {
+            "service_options": [
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee"
+            ]
+          },
+          {
+            "dining_options": [
+              "Dessert"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "parking": [
+              "Free street parking"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true
+        },
+        "user_review": "\"I tried the hot Sweetwood Latte and the flavor was wonderful!!!\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk7JIiwb-PPOZpx2SlwsiY56jyaTD8zGMa5okTo6GIz_wjH24Wejg5U5S67j2oV83Oxp2I_2GW2R8hCzCoBVBPHMpUx3SD5_KGGpJeCbRp1LLUwEatkQost8ed03Shy3zREzALB=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/RAv9-nicHcTdboIwGADQJ6pga5Es2YWgKShGxo9EbwhiQwXG16xdin3BPcPexsRzcf7_hNZSfTjOKMiiA-hG_qv4TwuT5pNetPDtdFKhViHlbKIsLaphvY8f5obS9HSVM85Hox4X6vXPptj6lh0bCkMBHottbfoIryred7SkubfuMZx9cpoljmvMKpz5IrQhBOcgjY6ynEm-pfWBMbnn4S2TyyQpza7Rwxco7fO7S3LxJDbb2U0SfJql67pIvG_R9AIYd0On"
+      },
+      {
+        "position": 19,
+        "title": "Magnolias Sous Le Pont",
+        "place_id": "ChIJiWgErzCZToYRHTH2Is7OA50",
+        "data_id": "0x864e9930af046889:0x9d03cece22f6311d",
+        "data_cid": "11314114073629962525",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9930af046889%3A0x9d03cece22f6311d&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9930af046889%3A0x9d03cece22f6311d&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7931508,
+          "longitude": -96.80805529999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJiWgErzCZToYRHTH2Is7OA50",
+        "provider_id": "/g/1v46_s2g",
+        "rating": 4.6,
+        "reviews": 841,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop"
+        ],
+        "address": "2727 N Harwood St, Dallas, TX 75201",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "7 AM–5 PM",
+          "tuesday": "7 AM–5 PM",
+          "wednesday": "7 AM–5 PM",
+          "thursday": "7 AM–5 PM",
+          "friday": "7 AM–5 PM",
+          "saturday": "7 AM–5 PM",
+          "sunday": "7 AM–5 PM"
+        },
+        "phone": "(469) 249-9222",
+        "website": "https://www.magnoliasdallas.com/",
+        "description": "Stylish coffee shop with light fare. Espresso drinks & take-away bites offered in a stylish, low-key space with patio seating.",
+        "extensions": [
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Great coffee",
+              "Great tea selection"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining",
+              "Good for working on laptop"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Happy hour drinks",
+              "Prepared foods",
+              "Quick bite",
+              "Small plates"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Lunch",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Gender-neutral restroom",
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Casual",
+              "Cozy",
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Family-friendly"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "Good for kids"
+            ]
+          },
+          {
+            "parking": [
+              "Free street parking",
+              "Paid parking lot",
+              "Paid street parking",
+              "Usually somewhat difficult to find a space"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed inside",
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "service_options": [
+              "Delivery"
+            ]
+          },
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": false
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EiUKI-ICIDIeEhciFdLX29IPDwoLL2cvMXY0Nl9zMmcYAjoDCPAN&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&orderType=2&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"There frozen latte with caramel is the best and the staff is amazing.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWltEgCyzj26zGUE2fAeUKzc1Z22699BpObMKwVEAqtYsUuKZlnj7AxhA2cfCkLF37AMI7mRGHSaBHOMdRl2myzYwTVQzN4vSBkpRwN7mvhCWlwaj907jnXw2ROq4sgWe7t2XVUt=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/CHTjSXicHcRRDoIgAADQE5lKLWZbH-gsm5lFqdVfEcEU0YKiuGBn6DZtvY_3_XCtezVxXcGHA9Z1TNCHonfSSU2lHpCudVmvHKIc5aIEr3eV0DGL3rYGYzsvYnBFtEgt8Y8AjIMg7PNzlpoyRjd9UMUjPQpZQ_TiCJBr1CxnQ4iyBWzxPNmewiTPLliA9m0PZldu7Gr03IZNj80Ktk8eVcKc6sCDtdwbgPPbSLGKQg32ZaGnxvc8z-H_iSN_QFJErg"
+      },
+      {
+        "position": 20,
+        "title": "Union",
+        "place_id": "ChIJA7_tfgmfToYRrwi1YiP-2nU",
+        "data_id": "0x864e9f097eedbf03:0x75dafe2362b508af",
+        "data_cid": "8492379475293833391",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9f097eedbf03%3A0x75dafe2362b508af&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9f097eedbf03%3A0x75dafe2362b508af&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8084572,
+          "longitude": -96.8082635
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJA7_tfgmfToYRrwi1YiP-2nU",
+        "provider_id": "/g/1pzwbb0fh",
+        "rating": 4.6,
+        "reviews": 712,
+        "price": "$1–10",
+        "extracted_price": 1,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Espresso bar",
+          "Non-profit organization"
+        ],
+        "type_id": "coffee_shop",
+        "type_ids": [
+          "coffee_shop",
+          "espresso_bar",
+          "non_profit_organization"
+        ],
+        "address": "3705 Cedar Springs Rd, Dallas, TX 75219",
+        "country": "United States",
+        "open_state": "Open · Closes 8 PM",
+        "hours": "Open · Closes 8 PM",
+        "operating_hours": {
+          "monday": "7 AM–8 PM",
+          "tuesday": "7 AM–8 PM",
+          "wednesday": "7 AM–8 PM",
+          "thursday": "7 AM–8 PM",
+          "friday": "7 AM–8 PM",
+          "saturday": "8 AM–6 PM",
+          "sunday": "8 AM–6 PM"
+        },
+        "phone": "(469) 501-5440",
+        "website": "http://uniondallas.org/",
+        "description": "Mellow coffeehouse with community focus. Community-oriented coffeehouse with spoken-word nights & a portion of sales going to nonprofits.",
+        "extensions": [
+          {
+            "from_the_business": [
+              "Identifies as women-owned"
+            ]
+          },
+          {
+            "service_options": [
+              "Outdoor seating",
+              "Delivery",
+              "Onsite services",
+              "Takeout",
+              "Dine-in"
+            ]
+          },
+          {
+            "highlights": [
+              "Live music",
+              "Live performances",
+              "Serves local specialty"
+            ]
+          },
+          {
+            "popular_for": [
+              "Breakfast",
+              "Solo dining"
+            ]
+          },
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          },
+          {
+            "offerings": [
+              "Coffee",
+              "Happy hour drinks",
+              "Organic dishes",
+              "Prepared foods",
+              "Quick bite",
+              "Vegan options"
+            ]
+          },
+          {
+            "dining_options": [
+              "Breakfast",
+              "Dessert",
+              "Seating"
+            ]
+          },
+          {
+            "amenities": [
+              "Bar onsite",
+              "Gender-neutral restroom",
+              "Restroom",
+              "Wi-Fi",
+              "Free Wi-Fi"
+            ]
+          },
+          {
+            "atmosphere": [
+              "Quiet",
+              "Trendy"
+            ]
+          },
+          {
+            "crowd": [
+              "Family-friendly",
+              "Groups",
+              "LGBTQ+ friendly",
+              "Transgender safespace"
+            ]
+          },
+          {
+            "payments": [
+              "Credit cards",
+              "Debit cards",
+              "NFC mobile payments"
+            ]
+          },
+          {
+            "children": [
+              "Good for kids"
+            ]
+          },
+          {
+            "parking": [
+              "Free parking lot",
+              "Free street parking",
+              "Paid parking lot",
+              "Usually plenty of parking"
+            ]
+          },
+          {
+            "pets": [
+              "Dogs allowed outside"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "dining_options": [
+              "Table service"
+            ]
+          },
+          {
+            "planning": [
+              "Accepts reservations"
+            ]
+          }
+        ],
+        "service_options": {
+          "dine_in": true,
+          "takeout": true,
+          "delivery": true
+        },
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EiYKJOICITIfEhgiFtLX29IPEAoML2cvMXB6d2JiMGZoGAA6AwjwDQ%3D%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=w_XDarrZAa2fseMP8fnKKA&ei=w_XDarrZAa2fseMP8fnKKA&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "user_review": "\"Cute atmosphere with fun coffee flavors a great pastries.\"",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmqdzhjynXM8nOLol0PI0DtLpotnRhCUQ1halerU2kZqRgqHbob7qzdKeun2-u-9ntGDiI_6itruXq2rT7xjDssE5iJnTPj6Z4-5VoROqm44d6MlN8DVvt3ZpEnN60URqfKZpTqjw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/wPsXYHicHcRbjoIwFADQFRUqIj4SPyZiRgcf2IASfoxCh8KU25ZexscOXcLsxmTOx_l7CURtZ64rxdCplKok7y3vCgXIAZ1CtW6lLSksse7HisXJqTXlUzQPyLYT2G-UpPGahrjRCoGJRXoYiIvkXer95IZVZnVV17F5lhHvwSM9mQJ-hvX6HNTY9ZnxumR8b0Jrl6P6C5K4CXKfjI6K7U3r-2WwlbtJePzFYa6XsAtoysx3lOvENLf5bUApJeL_gsAbqKhG2A"
+      }
+    ],
+    "serpapi_pagination": {
+      "next": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&ll=%4032.7767%2C-96.7970%2C14z&q=coffee+food+indoor&start=20&type=search"
+    }
+  }
+}

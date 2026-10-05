@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "success": true,
+  "data": [
+    {
+      "name": "Dallas",
+      "local_names": {
+        "fr": "Dallas",
+        "ja": "ダラス",
+        "uk": "Даллас",
+        "pt": "Dallas",
+        "ru": "Даллас",
+        "ko": "댈러스",
+        "oc": "Dallas",
+        "kn": "ಡಲ್ಲಾಸ್",
+        "ar": "دالاس",
+        "el": "Ντάλας",
+        "en": "Dallas",
+        "tt": "Дәлас",
+        "zh": "达拉斯",
+        "sr": "Далас"
+      },
+      "lat": 32.7762719,
+      "lon": -96.7968559,
+      "country": "US",
+      "state": "Texas"
+    }
+  ]
+}

@@ -1,0 +1,1016 @@
+{
+  "ok": true,
+  "success": true,
+  "data": {
+    "search_metadata": {
+      "id": "6ac3f5be932b0e6f578d326d",
+      "status": "Success",
+      "json_endpoint": "[redacted]",
+      "markdown_endpoint": "[redacted]",
+      "created_at": "2026-10-05 19:08:46 UTC",
+      "processed_at": "2026-10-05 19:08:46 UTC",
+      "google_maps_url": "https://www.google.com/maps/search/coffee+food+indoor+Dallas%2C+TX%2C+US//data=!3m1!4b1!4m2!2m1!6e5?hl=en",
+      "raw_html_file": "[redacted]",
+      "prettify_html_file": "[redacted]",
+      "total_time_taken": 1.24
+    },
+    "search_parameters": {
+      "engine": "google_maps",
+      "type": "search",
+      "q": "coffee food indoor Dallas, TX, US",
+      "google_domain": "google.com",
+      "hl": "en"
+    },
+    "search_information": {
+      "local_results_state": "Results for exact spelling",
+      "query_displayed": "coffee food indoor Dallas, TX, US"
+    },
+    "local_results": [
+      {
+        "position": 1,
+        "title": "Inclusion Coffee",
+        "place_id": "ChIJIRwfCwiZToYR-N7KIHYZR7s",
+        "data_id": "0x864e99080b1f1c21:0xbb47197620cadef8",
+        "data_cid": "13494782803585982200",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e99080b1f1c21%3A0xbb47197620cadef8&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e99080b1f1c21%3A0xbb47197620cadef8&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7734841,
+          "longitude": -96.8224788
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJIRwfCwiZToYR-N7KIHYZR7s",
+        "provider_id": "/g/11zkq0xchn",
+        "rating": 4.8,
+        "reviews": 87,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "2350 N Beckley Ave, Dallas, TX 75208",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "7 AM–4 PM",
+          "tuesday": "7 AM–4 PM",
+          "wednesday": "7 AM–4 PM",
+          "thursday": "7 AM–4 PM",
+          "friday": "7 AM–4 PM",
+          "saturday": "8 AM–4 PM",
+          "sunday": "8 AM–4 PM"
+        },
+        "phone": "(682) 230-7496",
+        "website": "http://www.inclusionexpress.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF6a3EweGNobhgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlADs_W4n8P4_G1jw5nUz0LoZKEHFvOBFQkRigZ2l_97zh3KoToqz0hsPwTLp1rrvbe9v6dbNU3MVaTesMCQj3TGhE_ABpjT4qdH0SIosRdoRij-RLmDs2PrXvqovtqWsw9VTDYz-bziyQ=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/XPSwd3icHcTdboIwGADQJ6oUYT8s2QWKyiJu0FVx3pABDYVhP-DrSuxD7n5vs2Tn4vz-SK0HfHKcXnqLBqDpxTeKqQKlhdKLCq5OMyCpkKATxizleR9GWOS-ekz9Yud28506WprAZb-Jt-Zttc2-WNtcln0RPFjp7YHDaKnEdObJ4E6TKUVg7uvy9egdTp9c4GGddR7fyU0RroaO-2Md0_cXQFYDazvCkmuEy3Q6mxGMHnOcgxOPPiwpbXvLnmeXUkrk_xVRf3c_SD4"
+      },
+      {
+        "position": 2,
+        "title": "CoffeEmos",
+        "place_id": "ChIJP9x77iuZToYRYDZMWwtn5tg",
+        "data_id": "0x864e992bee7bdc3f:0xd8e6670b5b4c3660",
+        "data_cid": "15629292855309907552",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e992bee7bdc3f%3A0xd8e6670b5b4c3660&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e992bee7bdc3f%3A0xd8e6670b5b4c3660&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7898113,
+          "longitude": -96.7838072
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJP9x77iuZToYRYDZMWwtn5tg",
+        "provider_id": "/g/11z4_9krzq",
+        "rating": 4.7,
+        "reviews": 96,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "3114 Swiss Ave, Dallas, TX 75204",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "7 AM–4 PM",
+          "tuesday": "7 AM–4 PM",
+          "wednesday": "7 AM–4 PM",
+          "thursday": "7 AM–4 PM",
+          "friday": "7 AM–7 PM",
+          "saturday": "7 AM–7 PM",
+          "sunday": "10 AM–4 PM"
+        },
+        "phone": "(214) 238-6380",
+        "website": "https://www.coffeemoshq.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom"
+            ]
+          }
+        ],
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlOeidQUYmnclI6MChZiKnuwzO5l_c9i6TE59GpW2ArkntQbtW6zzTiSkGek8bUnhLEWYTAWS8uQMa6s5Cy-zNkGcdxZqLlljaqGlnLa6rNJLpjqTcjCfBjw82e5gHwRyprqngy792UCPAs=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/wcSrdnicHcTdboIwGADQJ6owFios2QUSgzr8QUsavTFYawvUj0JLGLzkrvc2Jp6L8_8nrdXmy3GU_JyJphGK94Z3rAHLwc5Y83SENogZZJxodTwQqva8vGf5-QlMrfE2lpfyB_ph2vvqysISk6UfJpp6UVeDzW6W4mki5alOeB3ccpDpkp5JRE9Bn20LbPx4RNOuTtj999KmSlVFmyhIC9ztNqmuWsKq-LGohsDjvlgNx1F3LYhxHnp5fIjM9_Dhui6S7xmCF1b1SWA"
+      },
+      {
+        "position": 3,
+        "title": "Daily Coffee",
+        "place_id": "ChIJfUwD0RaZToYR6Xa2X3g3PBo",
+        "data_id": "0x864e9916d1034c7d:0x1a3c37785fb676e9",
+        "data_cid": "1890446933730162409",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9916d1034c7d%3A0x1a3c37785fb676e9&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9916d1034c7d%3A0x1a3c37785fb676e9&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7883807,
+          "longitude": -96.8044682
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJfUwD0RaZToYR6Xa2X3g3PBo",
+        "provider_id": "/g/11y_h6cm36",
+        "rating": 5,
+        "reviews": 35,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "1717 McKinney Ave, Dallas, TX 75201",
+        "country": "United States",
+        "open_state": "Closes soon · 3 PM · Opens 7:30 AM Tue",
+        "hours": "Closes soon · 3 PM · Opens 7:30 AM Tue",
+        "operating_hours": {
+          "monday": "7:30 AM–3 PM",
+          "tuesday": "7:30 AM–3 PM",
+          "wednesday": "7:30 AM–3 PM",
+          "thursday": "7:30 AM–3 PM",
+          "friday": "7:30 AM–3 PM",
+          "saturday": "Closed",
+          "sunday": "Closed"
+        },
+        "website": "http://orders.dailycoffeedallas.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF5X2g2Y20zNhgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhG-YDXW2H1xUIQtfvj7T-LS-RGuigSWUUxueh1KjM_Y4ndqLy0wQcrWrB_nRRXCBBsOHt_pUHWdZNVfcTA3pGsjMZLylTRaK8id8-4cabvO86mzUTneXQAtdhTdFrn9phBX031OsZf7pk2nPlJx9Ub4bENCkPZTX4spGc3K-EXKwTlPd1g0ghRg=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/s2SYLnicHcRLcoIwAADQE0WCMBU704WohRaUj6EgG0YSSEQMKQkC3rQ36bIzfYv388uUEvJV01pmLGjX0bYaZNXjjquKqwXu7hoVEoi-m2Zt4xNzxxxw3mXp0tWn5CNS9aNZIeCfQOwMV3pKk2QaKqZ7zaE4m5x8-zMcI9ynvV3wOM62ti0DVxUicVOSH79qjDaGcGRzyP25RfHFs67EAia-lI_Aerk_E8SrLNoowhB57_laMDuDhh7IvF6J25KH7ee0Tkqz3B-3tzBHmSmFgw0P7DNvRG1IdAopi-nbqEMIAfsfA_4H-kdV0A"
+      },
+      {
+        "position": 4,
+        "title": "Slow and Steady Coffee",
+        "place_id": "ChIJl6jCu6WQToYRMdxsUHSeiSI",
+        "data_id": "0x864e90a5bbc2a897:0x22899e74506cdc31",
+        "data_cid": "2488694491501616177",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e90a5bbc2a897%3A0x22899e74506cdc31&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e90a5bbc2a897%3A0x22899e74506cdc31&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.727973299999995,
+          "longitude": -96.8447106
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJl6jCu6WQToYRMdxsUHSeiSI",
+        "provider_id": "/g/11d_71z2tz",
+        "rating": 4.7,
+        "reviews": 269,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "1805 S Edgefield Ave, Dallas, TX 75224",
+        "country": "United States",
+        "open_state": "Closes soon · 3 PM · Opens 6:30 AM Tue",
+        "hours": "Closes soon · 3 PM · Opens 6:30 AM Tue",
+        "operating_hours": {
+          "monday": "6:30 AM–3 PM",
+          "tuesday": "6:30 AM–3 PM",
+          "wednesday": "6:30 AM–3 PM",
+          "thursday": "6:30 AM–3 PM",
+          "friday": "6:30 AM–3 PM",
+          "saturday": "7 AM–3 PM",
+          "sunday": "8 AM–1 PM"
+        },
+        "phone": "(972) 885-7343",
+        "website": "http://www.slowandsteady.coffee/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFkXzcxejJ0ehgCOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&orderType=2&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmuKnmaNAFynppKxQBOZ68_6qoSk_Fh7vMWZXCPZ28xW-MMadzqbHITTETBDgQeZ-sir1vlts_d7UF3sChfPu_MjGhqVLYqpchVtcfp1PzWJTmgoBd5CllGLgNXh6696h2apujs=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/6m_1QnicHcRbcoIwFADQFUVAx_iY8UNo0VZR1FQsPwwNmKuGJHiDrw26BnfjTM_HeT3BWoNDx5HQaQmthSwbLM9cK1sq2-K6coRBwpGgM56uY5ZUzUxV-WIc3pUxs9vKX6a0n9Fab05ZCL1LlKS7IE7b_VtCoigvHvXf9IuxT-Z_iFWZEjycvYu0mBW9n7CDAezjJouOE6i389_acNhavjde_Ei-WSW0X3QDKSdzsdgBpQMK7dw0RxxdPdd1CfzPiXoD1FBGDg"
+      },
+      {
+        "position": 5,
+        "title": "Coffee Cove Dallas",
+        "place_id": "ChIJ6XQvq9-DToYRTDZP5fKqgnk",
+        "data_id": "0x864e83dfab2f74e9:0x7982aaf2e54f364c",
+        "data_cid": "8755748585767646796",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e83dfab2f74e9%3A0x7982aaf2e54f364c&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e83dfab2f74e9%3A0x7982aaf2e54f364c&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8636901,
+          "longitude": -96.9353683
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJ6XQvq9-DToYRTDZP5fKqgnk",
+        "provider_id": "/g/11n567px_7",
+        "rating": 4.6,
+        "reviews": 247,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "397 Las Colinas Blvd E #170, Irving, TX 75039",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "7 AM–5 PM",
+          "tuesday": "7 AM–5 PM",
+          "wednesday": "7 AM–5 PM",
+          "thursday": "7 AM–5 PM",
+          "friday": "7 AM–6 PM",
+          "saturday": "8 AM–6 PM",
+          "sunday": "8 AM–6 PM"
+        },
+        "phone": "(858) 775-3327",
+        "website": "https://coffeecovedallas.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "unsupported_extensions": [
+          {
+            "accessibility": [
+              "Assistive hearing loop"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFuNTY3cHhfNxgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnsAXJ1j55K-Zz5et6q7CBGuzYVdxlYeYMGuOX3OlL0VWcLr92NmT7zGeiIqFzZeQvb_AJsrCnIb0i1z6PPqZ5PqzcDMhzCaSo5rSL1eAX5ysb6X2Rgpi2q958JVtfVVIKJHQqkNYu-WZbh=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/OUrQtHicHcTbboIwAADQLyoUTGGa-MAwIoiKl5TLixldR5nYUlq89Cf37N8s8Tyc1x_Tulcz2-7YxGqEaDo6KjoQwTXl2iLiaje9AkQBZQerQ3bKuQqKxPlFaA0qg6j2pB9-RqMp8fejK2m5icZdMdl1KcQ5SYepu72efBPRNpZLU9H9rT4HiRpCHtewdYyXZbJCmTRksWEm_DoKNBxThwYFeqraK9xD07eunKKPBOsfjON1strLy7YcQV7VbH53IISAvSeA_wOQi0dE"
+      },
+      {
+        "position": 6,
+        "title": "Cafe Duro",
+        "place_id": "ChIJ2bPBgZufToYR3SpM2wPl6lM",
+        "data_id": "0x864e9f9b81c1b3d9:0x53eae503db4c2add",
+        "data_cid": "6046897254425176797",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9f9b81c1b3d9%3A0x53eae503db4c2add&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9f9b81c1b3d9%3A0x53eae503db4c2add&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8232311,
+          "longitude": -96.770034
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJ2bPBgZufToYR3SpM2wPl6lM",
+        "provider_id": "/g/11swl_pv89",
+        "rating": 4.5,
+        "reviews": 285,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "2804 Greenville Ave, Dallas, TX 75206",
+        "country": "United States",
+        "open_state": "Open · Closes 9 PM",
+        "hours": "Open · Closes 9 PM",
+        "operating_hours": {
+          "monday": "7 AM–9 PM",
+          "tuesday": "7 AM–9 PM",
+          "wednesday": "7 AM–9 PM",
+          "thursday": "7 AM–9 PM",
+          "friday": "7 AM–9 PM",
+          "saturday": "7 AM–9 PM",
+          "sunday": "7 AM–9 PM"
+        },
+        "phone": "(214) 888-8485",
+        "website": "https://cafe-duro.com/?utm_source=gmb_site&utm_medium=organic",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFzd2xfcHY4ORgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlguK-frARspUVKV_UtlE1TDbfe8IR9HxsMG-vXDI4xpFOVkIr0UNo5G_KA6I2_YcK27rUzGbR2_5fcm98RJfYTC-_r4pS4-YxlPMO_N393TAFOz9sExhZo74i-gtgM2qVNfr8=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/fMkP2nicHcRRCoIwGADgE_1paqVBD5JlJmostexl0HAzWm5tq6QDdoduE_Q9fN9PZ4zUc8vinTtiQjDePnSriOhN25sRETeLSQ1Eg7bCDdqVB84eKVAVIi2rOq1xZfhqXEZn2voJCjaDzmJ4HqPEG-S6qK-JsqtcTGKchtPEwQ1JnZmq3vEZOXhCyS3w0ZY25RKw8uTeg2bgu6zAuRu4Zbgu3oFeDd1JzLwLMMMy517nVPmL19i2bej-E-h_s3ZCwA"
+      },
+      {
+        "position": 7,
+        "title": "Go Culture Cafe",
+        "place_id": "ChIJTarzOC2dToYRCEqcwjwqIVw",
+        "data_id": "0x864e9d2d38f3aa4d:0x5c212a3cc29c4a08",
+        "data_cid": "6638633766172248584",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9d2d38f3aa4d%3A0x5c212a3cc29c4a08&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9d2d38f3aa4d%3A0x5c212a3cc29c4a08&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.821106,
+          "longitude": -96.835275
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJTarzOC2dToYRCEqcwjwqIVw",
+        "provider_id": "/g/11m_6k8md8",
+        "rating": 4.7,
+        "reviews": 217,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "5626 Maple Ave Ste 110, Dallas, TX 75235",
+        "country": "United States",
+        "open_state": "Open · Closes 7 PM",
+        "hours": "Open · Closes 7 PM",
+        "operating_hours": {
+          "monday": "7 AM–7 PM",
+          "tuesday": "7 AM–7 PM",
+          "wednesday": "7 AM–7 PM",
+          "thursday": "7 AM–7 PM",
+          "friday": "7 AM–7 PM",
+          "saturday": "7 AM–7 PM",
+          "sunday": "9 AM–5 PM"
+        },
+        "phone": "(214) 484-3634",
+        "website": "https://goculturecafe.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFtXzZrOG1kOBgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWml_w2vLdeBS9yEc7MZR7FlbHqyFqEr1IKRzHHTFeiqDyLdxqgITMzBrjxJGUlx5qvBWK7azKigW_1-cYn0Ux-zSV34PozryZcmj5_RjQhkeFRtlr6X_EauZ19_43XDkCPzZ9sIn__mG5yE=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/j2BWPHicHcTNboIwAADgJ6rAkBGW7DAUhKEJqziUS-NqU8TS2h-V9iU9722W7Dt8v8_emKt-8zzWhzMqBGXkponCghvCzQyL0aNXDbAG2vsoYN20I0OPl_v6RNJtYjMcbzoY5-ynkDaXmQrKCrqiaHJylku7Pk2Sls3GpWqYPlc7NkXynrZVfHTVmbYoAPjA_d0E3PY7nNfCKdvhcYgQHL76C8mhYep1j7LjrQsSNA_3y8uidl2iS47QuIps9v4IfN8H_f8Y8D8rIki3"
+      },
+      {
+        "position": 8,
+        "title": "Westside Coffee",
+        "place_id": "ChIJAynnWA-fToYRkV19ZSZ097c",
+        "data_id": "0x864e9f0f58e72903:0xb7f77426657d5d91",
+        "data_cid": "13256191736448638353",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9f0f58e72903%3A0xb7f77426657d5d91&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9f0f58e72903%3A0xb7f77426657d5d91&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8296645,
+          "longitude": -96.8198213
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJAynnWA-fToYRkV19ZSZ097c",
+        "provider_id": "/g/11t6jjxzv1",
+        "rating": 4.8,
+        "reviews": 119,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Community center"
+        ],
+        "address": "4711 Westside Dr, Dallas, TX 75209",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "7 AM–5 PM",
+          "tuesday": "7 AM–5 PM",
+          "wednesday": "7 AM–5 PM",
+          "thursday": "7 AM–5 PM",
+          "friday": "7 AM–5 PM",
+          "saturday": "8 AM–2 PM",
+          "sunday": "Closed"
+        },
+        "phone": "(469) 753-9007",
+        "website": "http://www.orderwestsidecoffee.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF0NmpqeHp2MRgCOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&orderType=2&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk-hF0t8VGK5Av_eVHsZO_DjV43H29yXUDwSd5VvqiMMtN3VJxYhb9civ7E6X_KawHlnBGouTtskXvCGjFqQObdYxXiMjD5d3W6vJI5aAoFPPxEvBN0VbZKDX7vAUkYwF0HTHROOA=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/FKXKj3icHcRLjoIwAADQE1U6Iioms6gidCAIo1iLGyKFUD5StbXgET2Ct5lk3uJ93lypm1wZRsfNSSVE1ZVPWT6Y6FXZqwkTV6O6ScAkkAbC-zg5tYC7UC2JF1hIZyXB8hxlTkNmJp7aL3p0hkNhEX2vw1DtTOKPKc9tVuvFdk6z4DLgrl974pko2VK98Rr3_hvlRTrSOmwcqzBPc-3_WBck3Dget3q9gyQ_Bw5daHRs08GFOMH7KELfwxeEEPD_Gej_AMOZRLc"
+      },
+      {
+        "position": 9,
+        "title": "Deep Cuts Coffee",
+        "place_id": "ChIJD9-E2ZOZToYRM4mZsrzk_Zw",
+        "data_id": "0x864e9993d984df0f:0x9cfde4bcb2998933",
+        "data_cid": "11312449338125945139",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9993d984df0f%3A0x9cfde4bcb2998933&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9993d984df0f%3A0x9cfde4bcb2998933&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7826453,
+          "longitude": -96.7954613
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJD9-E2ZOZToYRM4mZsrzk_Zw",
+        "provider_id": "/g/11w1wf8vhf",
+        "rating": 4.9,
+        "reviews": 88,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "in Skybridge, 1910 Pacific Ave 2060 2nd Floor, Dallas, TX 75201",
+        "country": "United States",
+        "open_state": "Open · Closes 3:30 PM",
+        "hours": "Open · Closes 3:30 PM",
+        "operating_hours": {
+          "monday": "7:30 AM–3:30 PM",
+          "tuesday": "7:30 AM–3:30 PM",
+          "wednesday": "7:30 AM–3:30 PM",
+          "thursday": "7:30 AM–3:30 PM",
+          "friday": "7:30 AM–3:30 PM",
+          "saturday": "Closed",
+          "sunday": "Closed"
+        },
+        "phone": "(214) 484-6098",
+        "website": "http://www.deepcutscoffee.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF3MXdmOHZoZhgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmBQ2C6voBoM25dapmcs_Nq6ArJpPMlbVWESv4Z8TYeRb1hVAEZfyHJJ20R82vmNkoQSJTrZVteEIU-zYMrwCxir2juiWdxFA_0Cbi4y8f4qZ8SRvYGmcTbAOGCdBoUnRPNGzVvgH53OGTU=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/pIuqg3icHcTNboIwAADgJ6rUioYs2QEIA0lALAUCFzNKBRyl2Nb685I7-zZL9h2-9--g9aI-LGsaNqteiH5iN8UkFbNms15Rwa1-UYAqoCw3whmpuHdE_s4ITyRo230vnKpTet25Ml6yZGrLKsiN3TikZrhdD6UbNOdnFMcIYgcZnv6IYx4T2ZSaBfsCvOpE3v3HKNHlNlbd48s9Qb8d7adztq-Nk2NTh5yS1j2EfueJYsZZGr5K00fbzSEkxed9DSEEw_8UzH-WSEc8"
+      },
+      {
+        "position": 10,
+        "title": "Otto's Coffee & Fine Foods",
+        "place_id": "ChIJb1aU8BiZToYRtIp3Wyo3OGA",
+        "data_id": "0x864e9918f094566f:0x6038372a5b778ab4",
+        "data_cid": "6933352281399593652",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9918f094566f%3A0x6038372a5b778ab4&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9918f094566f%3A0x6038372a5b778ab4&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7798765,
+          "longitude": -96.7999844
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJb1aU8BiZToYRtIp3Wyo3OGA",
+        "provider_id": "/g/11gh2sx9qn",
+        "rating": 4.6,
+        "reviews": 756,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "1321 Commerce St, Dallas, TX 75202",
+        "country": "United States",
+        "open_state": "Open · Closes 10 PM",
+        "hours": "Open · Closes 10 PM",
+        "operating_hours": {
+          "monday": "6 AM–10 PM",
+          "tuesday": "6 AM–10 PM",
+          "wednesday": "6 AM–10 PM",
+          "thursday": "6 AM–10 PM",
+          "friday": "6 AM–10 PM",
+          "saturday": "6 AM–10 PM",
+          "sunday": "6 AM–10 PM"
+        },
+        "phone": "(214) 651-3685",
+        "website": "https://www.adolphus.com/restaurants-bars/ottos-coffee-and-fine-foods?utm_source=google-gbp&utm_medium=organic&utm_campaign=gbp",
+        "description": "Refined cafe with sidewalk seats. Single-origin brews & liege waffles offered in a sophisticated environment with outdoor tables.",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmHrk2tTKs9K0y0yNGUH1H7G9RcFiIPma1d6ytZHVNdCw-Zn3bKyJV2STPWjplmXW5YvC1ZJ7Yi9exv4d3Tr3BNjlIKW7JdTQMk-JCEePLcUOSjHInRIiwotVNWCUddjtOoDvxv=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/M0FerHicHcRdToMwAADgExUKqIQlPihOCjhAKHTjTduG_5bQDsYJd4bdxsTv4XvcW61ndTDNsXWMRspm5FfFFyqF5kIbVE5mMytAFVDmG8ozTCa0DLbGsfJiuMM9CUpkITfwcvrZhdn0Y7GXXdeoSpi_gVo4v_EeVXaBM9LP43Qmz5fVt-rIvXQev61PzMGL8570YxgTN2L4-zSAyD_y7IuWadGjUORht0ldJcQvGet1Kj_W2_q6WRBC0P5PgfgDBDtETQ"
+      },
+      {
+        "position": 11,
+        "title": "Flying Horse Cafe",
+        "place_id": "ChIJEceT6RiZToYRMrByntNyrQU",
+        "data_id": "0x864e9918e993c711:0x5ad72d39e72b032",
+        "data_cid": "409109394382565426",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9918e993c711%3A0x5ad72d39e72b032&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9918e993c711%3A0x5ad72d39e72b032&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.779978799999995,
+          "longitude": -96.7992266
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJEceT6RiZToYRMrByntNyrQU",
+        "provider_id": "/g/11b6b8ddkm",
+        "rating": 4.6,
+        "reviews": 711,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "1401 Commerce St, Dallas, TX 75201",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "6:30 AM–4 PM",
+          "tuesday": "6:30 AM–4 PM",
+          "wednesday": "6:30 AM–4 PM",
+          "thursday": "6:30 AM–4 PM",
+          "friday": "6:30 AM–4 PM",
+          "saturday": "7 AM–4 PM",
+          "sunday": "7 AM–2 PM"
+        },
+        "phone": "(214) 741-1731",
+        "website": "https://flyinghorsecafe.shop/",
+        "description": "Espresso & cafe meals in historic hotel. Historic hotel venue featuring espresso, pastries & cafe fare in a comfy setting with local artwork.",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlvNLbBu__GuXx8KktH6v-uwPY7ZdGY4g-2ZsP1nSEdfKfdbQauwLdpB79aRSJBGIqKv5Vo01sZ32so85bnzXDtQunObZeapPl-sJfOe9hpFnMoweXNGpAPCvBhrEp3piqbZkfUqg=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/cQO2Y3icHcRNcoIwGADQE0VAVLQzXUhVUCzGn7aYjUMgJB1pEvgScLyhR-htnPEt3v9DGKPhzXFq4Q-4UrxmFlhbKGmYNINC_TlcAyoAgTOPD_j0U3fplob2colsdpsmVxNPOmR7fA5IGZ1HHA0JYE8el2WVVCXd57bfljoMZvnhuAmjdZN042_lekD8IajpmMp7tjB7K3eUsFzjGsGm2rGZ0Cv5qXqWpZGe448uFO1S-_q3oeRafTX8vfdc10XidYHkEzZLRrQ"
+      },
+      {
+        "position": 12,
+        "title": "JuJu's Coffee",
+        "place_id": "ChIJgx8kXZ-fToYR22t4xhMnLyk",
+        "data_id": "0x864e9f9f5d241f83:0x292f2713c6786bdb",
+        "data_cid": "2967633645348088795",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9f9f5d241f83%3A0x292f2713c6786bdb&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9f9f5d241f83%3A0x292f2713c6786bdb&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.812593299999996,
+          "longitude": -96.76218709999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJgx8kXZ-fToYR22t4xhMnLyk",
+        "provider_id": "/g/11txzm5k71",
+        "rating": 4.8,
+        "reviews": 264,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Coffee roastery",
+          "Coffee store",
+          "Coffee wholesaler"
+        ],
+        "address": "6038 La Vista Dr, Dallas, TX 75206",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "6 AM–5 PM",
+          "tuesday": "Closed",
+          "wednesday": "6 AM–5 PM",
+          "thursday": "6 AM–5 PM",
+          "friday": "6 AM–5 PM",
+          "saturday": "6 AM–5 PM",
+          "sunday": "7 AM–2 PM"
+        },
+        "phone": "(214) 882-1834",
+        "website": "http://jujuscoffee.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF0eHptNWs3MRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk45UR-5MCusmbOV3e3GK0GhgQPURQg2PWMIRzz9CXIh3Sp2p3RzfEN9JNcnajFiaNq5SCJHnRv-hWmBWuLLLRA-jl1z5xTX7mIiet737BYDRWxwfruETTK_sopIs7d5dRqi22Ogw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/btln5nicHcTdboIwGADQJ6ogtSEu2YXiH4qIn7jqldFaWxy0hZZheEMfYW-zZOfi_L6lc8Z-eF4p8UBoLUreWt4wrRxXbsB05QljEbPIepMVZDn9HpEjILKNWlvddl-Y4-XGX0qxz46wF0FGtzH0_Tg6xRIfTGAw9I95Ol6nTF2fi-Ka1uQQrVcKfpCk1ZS2SZLABD3LYU9e-Sms4oK7EIfT8wzoq3s07TzPNxerTWzDO7lDXQTBTnSf3dD3fST_Z0j9AWBaRHI"
+      },
+      {
+        "position": 13,
+        "title": "Pax & Beneficia Coffee - Deep Ellum",
+        "place_id": "ChIJJfyp-3iZToYRKYlxu3FyS28",
+        "data_id": "0x864e9978fba9fc25:0x6f4b7271bb718929",
+        "data_cid": "8019629394264951081",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9978fba9fc25%3A0x6f4b7271bb718929&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9978fba9fc25%3A0x6f4b7271bb718929&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.782289899999995,
+          "longitude": -96.78141049999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJJfyp-3iZToYRKYlxu3FyS28",
+        "provider_id": "/g/11xddx_8xq",
+        "rating": 4.7,
+        "reviews": 87,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "2900 Canton St Ste 130, Dallas, TX 75226",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "8 AM–5 PM",
+          "tuesday": "8 AM–5 PM",
+          "wednesday": "8 AM–5 PM",
+          "thursday": "8 AM–5 PM",
+          "friday": "8 AM–5 PM",
+          "saturday": "8 AM–5 PM",
+          "sunday": "8 AM–5 PM"
+        },
+        "phone": "(972) 803-3715",
+        "website": "https://paxandbeneficia.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF4ZGR4Xzh4cRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFFRnoCQa0SU_m5GHvfrqBGnrZWfM2eSDCU56uUBy3PNAtsasnTSfbz0pxB2ZMY8Vy1eEMy4Kibb0JbQ36m2Z_Ik_8x_fGTyh0Gt_MWopC5s_Gr7AaaljMEJfspfeubQDXGaOfYxaGEKDOE5koBJVh0eA6nBIdmubpmLOumnXvqPT6t2YXQewbw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/Osn5cHicHcRLcoIwAADQEyERhDqd6YKfqShFBBTYMAQTaIUkkiDQm_YmXXamb_F-flspuXhV1a7VVw1jTYdHgYeaUYmpXNWsVxsuFD6weVGt423jtrvdmTInqkCclr0B359keNiQDsWVBBqOXSc1zDG1F_30YUlRCZrEBH0DPttaEeTby7LGXrBsDp8IAR9FutlrRbm_l9u5JDBZWgBlGVwZdwxRwuHFqqruK_B8IjjBI4rcDFYhyecKegc39Iw7s_1LC7BlUnt_60fE-2M49jR7Pk6JKbU8i_CEprdpDQBQ2v9rhf4BBuhWug"
+      },
+      {
+        "position": 14,
+        "title": "Wayward Coffee Co",
+        "place_id": "ChIJXzuaIneZToYRPhzUg4oksRM",
+        "data_id": "0x864e9977229a3b5f:0x13b1248a83d41c3e",
+        "data_cid": "1418955534934219838",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9977229a3b5f%3A0x13b1248a83d41c3e&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9977229a3b5f%3A0x13b1248a83d41c3e&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7948399,
+          "longitude": -96.82943829999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJXzuaIneZToYRPhzUg4oksRM",
+        "provider_id": "/g/11kjpflwx6",
+        "rating": 4.5,
+        "reviews": 381,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "2025 E Irving Blvd #102, Dallas, TX 75207",
+        "country": "United States",
+        "open_state": "Open · Closes 7 PM",
+        "hours": "Open · Closes 7 PM",
+        "operating_hours": {
+          "monday": "7 AM–7 PM",
+          "tuesday": "7 AM–7 PM",
+          "wednesday": "7 AM–7 PM",
+          "thursday": "7 AM–7 PM",
+          "friday": "7 AM–7 PM",
+          "saturday": "7 AM–7 PM",
+          "sunday": "7 AM–7 PM"
+        },
+        "website": "http://waywardcoffee.co/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFranBmbHd4NhgCOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&orderType=2&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmYfj6-qE8fuXYVAqgi-EM36nHaXaAAzrx-2BHxR9OqDNan_yVhfqS0WtsgifDnWXlTwqE-uYdYmRA8Yrg-3FhF9UQm5E4cFscbf4NQfL7XCFyWTj_ciLYfYu7fbptDTBWDLjHEUjy7gSzh=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/jG9ULHicHcTBboIwGADgJ_oFh4Iu2aFKCQfUiWjpyUClLQQKpSWKL7nz3mbJvsP3-yOtHcyn47TSW4i-F201mWpkvbKVsgvWd44YDDADxkFx-p2RjvLGB403fMrpDWlRAz54voqLvEDoPb7gYxe_0u1Jh8dC3eeb5PriEmtEzUNF8jZ7agwTfdAuRRs6CvAiGW2v526NVywyrOSr45knQb6PZpI1d1YnlNMp4OVgw2xHwqSJ8bWZA3F5y6_n0nVdkP8zUH-4HEfY"
+      },
+      {
+        "position": 15,
+        "title": "Buzz and Bustle Coffee & Bodega - The Village Dallas",
+        "place_id": "ChIJ3cbvSx2fToYRBZcBozYwVM4",
+        "data_id": "0x864e9f1d4befc6dd:0xce543036a3019705",
+        "data_cid": "14867561281078007557",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9f1d4befc6dd%3A0xce543036a3019705&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9f1d4befc6dd%3A0xce543036a3019705&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8593228,
+          "longitude": -96.7639186
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJ3cbvSx2fToYRBZcBozYwVM4",
+        "provider_id": "/g/11ngs_1bb3",
+        "rating": 4.3,
+        "reviews": 380,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Breakfast restaurant",
+          "Cafe"
+        ],
+        "address": "5610 Village Glen Dr, Dallas, TX 75206",
+        "country": "United States",
+        "open_state": "Open · Closes 7 PM",
+        "hours": "Open · Closes 7 PM",
+        "operating_hours": {
+          "monday": "7 AM–7 PM",
+          "tuesday": "7 AM–7 PM",
+          "wednesday": "7 AM–7 PM",
+          "thursday": "7 AM–7 PM",
+          "friday": "7 AM–7 PM",
+          "saturday": "7 AM–7 PM",
+          "sunday": "7 AM–7 PM"
+        },
+        "phone": "(469) 659-6379",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFuZ3NfMWJiMxgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmhbaCeMPu1Gwe4zYKaBGYD1APpOOA8ibuQcVRKZStH4IgCtbjFIEUQ63NGfeqrAVnmO31KF09JZ_k_-pCdenVRxCdScRvB0QrC5AP4xhSS2XPoQSqaQusVDYDr2e6zcJZ9HbgK=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/U4gL-3icHcRRboIwAADQE1WKMDOX-FHLBCUbLVUc_BioXTsnLdKihgt6Bm-zZO_jPR_Kuc6-ed5ZBRNpjDyLwYqeG-2EdhNuWk92FnALrIeSnGz3rWpqLD7I4Mc3EY5lWi_jMvIR6bIMvf40A-VFnlbMJeFaYtecVuv3HZ0Fn_G3uPSo0G0W-OkKzjfV4fcAOnwUusjv-Mh4fl1C2uMXRMK7Ymz6RQxll5oOtojKqJ-K2cg31TxpZLq4-RBCoP7nQP8BFMlDxQ"
+      },
+      {
+        "position": 16,
+        "title": "La Casita Coffee",
+        "place_id": "ChIJ25CJs9afToYRIZvjUTtbUzo",
+        "data_id": "0x864e9fd6b38990db:0x3a535b3b51e39b21",
+        "data_cid": "4202803187601873697",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9fd6b38990db%3A0x3a535b3b51e39b21&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9fd6b38990db%3A0x3a535b3b51e39b21&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.8659767,
+          "longitude": -96.76461599999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJ25CJs9afToYRIZvjUTtbUzo",
+        "provider_id": "/g/11y7f3hlk0",
+        "rating": 4.4,
+        "reviews": 765,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "5801 E NW Hwy, Dallas, TX 75231",
+        "country": "United States",
+        "open_state": "Open · Closes 8 PM",
+        "hours": "Open · Closes 8 PM",
+        "operating_hours": {
+          "monday": "7 AM–8 PM",
+          "tuesday": "7 AM–8 PM",
+          "wednesday": "7 AM–8 PM",
+          "thursday": "7 AM–8 PM",
+          "friday": "7 AM–8 PM",
+          "saturday": "8 AM–8 PM",
+          "sunday": "8 AM–8 PM"
+        },
+        "phone": "(214) 377-9116",
+        "website": "https://lacasita.coffee/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "reserve_a_table": "https://www.google.com/maps/reserve/v/dine/c/TTDE9zXfJ9Q?source=pa&opi=79508299&hl=en-US&gei=v_XDavfqAY3WhbIP8p_KcQ&ahbb=1&sourceurl=https://www.google.com/search?pb%3D!4m8!1m3!1d0!2d0!3d0!3m2!1i1920!2i1080!4f13.1!7i20!10b1!12m49!1m5!18b1!30b1!31m1!1b1!34e1!2m4!5m1!6e2!20e3!39b1!6m22!49b1!63m0!66b1!74i150000!85b1!91b1!114b1!149b1!178b1!206b1!209b1!212b1!223b1!232b1!234b1!244b1!246b1!250b1!253b1!258b1!260b1!266b1!10b1!12b1!13b1!14b1!16b1!17m1!3e1!20m3!5e2!6b1!14b1!46m1!1b0!96b1!99b1!19m4!2m3!1i360!2i120!4i8!20m57!2m2!1i203!2i100!3m2!2i4!5b1!6m6!1m2!1i86!2i86!1m2!1i408!2i240!7m33!1m3!1e1!2b0!3e3!1m3!1e2!2b1!3e2!1m3!1e2!2b0!3e3!1m3!1e8!2b0!3e3!1m3!1e10!2b0!3e3!1m3!1e10!2b1!3e2!1m3!1e10!2b0!3e4!1m3!1e9!2b1!3e2!2b1!9b0!15m8!1m7!1m2!1m1!1e2!2m2!1i195!2i195!3i20!22m6!1sUEtJiFakgfKHfF8box6RFk4xwnvRu8s:2!2s1i:0,t:11886,p:UEtJiFakgfKHfF8box6RFk4xwnvRu8s:2!7e81!12e5!17sUEtJiFakgfKHfF8box6RFk4xwnvRu8s:33!18e15!24m107!1m28!13m9!2b1!3b1!4b1!6i1!8b1!9b1!14b1!20b1!25b1!18m17!3b1!4b1!5b1!6b1!13b1!14b1!17b1!21b1!22b1!27m1!1b0!28b0!32b1!33m1!1b1!34b1!36e2!10m1!8e3!11m1!3e1!14m1!3b0!17b1!20m2!1e3!1e6!24b1!25b1!26b1!27b1!29b1!30m1!2b1!36b1!37b1!39m3!2m2!2i1!3i1!43b1!52b1!54m1!1b1!55b1!56m1!1b1!61m2!1m1!1e1!65m5!3m4!1m3!1m2!1i224!2i298!72m22!1m8!2b1!5b1!7b1!12m4!1b1!2b1!4m1!1e1!4b1!8m10!1m6!4m1!1e1!4m1!1e3!4m1!1e4!3sother_user_google_review_posts__and__hotel_and_vr_partner_review_posts!6m1!1e1!9b1!89b1!98m3!1b1!2b1!3b1!103b1!113b1!114m3!1b1!2m1!1b1!117b1!122m1!1b1!126b1!127b1!26m4!2m3!1i80!2i92!4i8!30m28!1m6!1m2!1i0!2i0!2m2!1i530!2i1080!1m6!1m2!1i1870!2i0!2m2!1i1920!2i1080!1m6!1m2!1i0!2i0!2m2!1i1920!2i20!1m6!1m2!1i0!2i1060!2m2!1i1920!2i1080!34m19!2b1!3b1!4b1!6b1!8m6!1b1!3b1!4b1!5b1!6b1!7b1!9b1!12b1!14b1!20b1!23b1!25b1!26b1!31b1!37m1!1e81!42b1!49m10!3b1!6m2!1b1!2b1!7m2!1e3!2b1!8b1!9b1!10e2!50m4!2e2!3m2!1b1!3b1!61b1!67m5!7b1!10b1!14b1!15m1!1b0!69i767!77b1%26tbm%3Dmap%26q%3Dcoffee%2Bfood%2Bindoor%2BDallas,%2BTX,%2BUS%26hl%3Den",
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTF5N2YzaGxrMBgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmO0bo699BtMx6c6dlM89CpyYPTwgpQ34cRcMXghNVwH1WZKeC9y5_sWkBjJI6mJLXAtDKjsyw6mnhNY0c_cueagtnHZ3VOzgfB0v7zriI0fLUtw47zWlp6wTecEghMWJBLJ5syknuFBlU6=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/yVd63HicHcTfrsEwHADgJ5pVRpnEhTpHZjb_MoobOX6qRdc22qntJV17G8n5Lr7PWzhn7CAMpYhaXGsuWWXZA7RyTLkW6DLkxgZgAxuOkvWyoOUCnTSOY-LyFwZ8lnk_Hpt6vyw8N6uoA2vId1zMtz5p08OMjeO6e7T0Tm7pFJdpthu5n9nN1h6XSsz3CI5QsT_uVHKItouGXwh69prHdYou2cb5Tq-h0mBfMPjlIqcpydKure-qmhC5wUPfRggF4n8I1Be5vkgy"
+      },
+      {
+        "position": 17,
+        "title": "Inspired Brew",
+        "place_id": "ChIJ8du4tqEjTIYRhqQWRfsmlRs",
+        "data_id": "0x864c23a1b6b8dbf1:0x1b9526fb4516a486",
+        "data_cid": "1987537671191700614",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864c23a1b6b8dbf1%3A0x1b9526fb4516a486&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864c23a1b6b8dbf1%3A0x1b9526fb4516a486&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 33.0073086,
+          "longitude": -96.7961017
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJ8du4tqEjTIYRhqQWRfsmlRs",
+        "provider_id": "/g/11sthj6311",
+        "rating": 4.8,
+        "reviews": 488,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop"
+        ],
+        "address": "19009 Preston Rd Ste. 209B, Dallas, TX 75252",
+        "country": "United States",
+        "open_state": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "hours": "Closes soon · 3 PM · Opens 7 AM Tue",
+        "operating_hours": {
+          "monday": "7 AM–3 PM",
+          "tuesday": "7 AM–5 PM",
+          "wednesday": "7 AM–5 PM",
+          "thursday": "7 AM–5 PM",
+          "friday": "7 AM–5 PM",
+          "saturday": "8 AM–5 PM",
+          "sunday": "8 AM–4 PM"
+        },
+        "phone": "(214) 200-3973",
+        "website": "https://inspiredbrewdallas.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFzdGhqNjMxMRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnfzIWAyzPtB-R8NFCRDY6ovECxDrYqGj1EHeykG-3OD960EDXJNs0rr3mQDKGk4ibbkeu7SVgwwxgKXoXfjjMeGQ84h9G343TOH36lORwN8cGLhkGBjT_3AeZPquUmzIZOnHoBjw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/1oZ2BHicHcRRboIwAADQE1VqShgu8QMsFucGiEzRnyU2tV2BVmmxyg13BG9jsvfxnn_C2ot597xWoAnXmrdsMKynWlmm7ITqzuMXA6gBxovSsqj26jyu9tFjLGwMyjBbLkp8CPQtWdxxf7gSOU1S9mgIQDmeBTDB9UdmYN-jboPXpPF_T6eGDW_bHXfuzte1rs9SfjGyCX0xI8hHVZ6ioM1Ll4WUfIqGxLL6QRE7FtfhuxtXx1ylOpZu7qYQQiD-p0C9AJrjRKM"
+      },
+      {
+        "position": 18,
+        "title": "The Berni Bean Coffee Company",
+        "place_id": "ChIJnfHYLZWZToYR9FWGW-bJoko",
+        "data_id": "0x864e99952dd8f19d:0x4aa2c9e65b8655f4",
+        "data_cid": "5378082896248985076",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e99952dd8f19d%3A0x4aa2c9e65b8655f4&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e99952dd8f19d%3A0x4aa2c9e65b8655f4&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7846492,
+          "longitude": -96.78273709999999
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJnfHYLZWZToYR9FWGW-bJoko",
+        "provider_id": "/g/11sv15_3l0",
+        "rating": 4.6,
+        "reviews": 184,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Cafe",
+          "Coffee roastery"
+        ],
+        "address": "2820 Elm St, Dallas, TX 75226",
+        "country": "United States",
+        "open_state": "Open · Closes 4 PM",
+        "hours": "Open · Closes 4 PM",
+        "operating_hours": {
+          "monday": "8 AM–4 PM",
+          "tuesday": "8 AM–4 PM",
+          "wednesday": "8 AM–4 PM",
+          "thursday": "8 AM–4 PM",
+          "friday": "8 AM–4 PM",
+          "saturday": "8:30 AM–4 PM",
+          "sunday": "8:30 AM–4 PM"
+        },
+        "phone": "(214) 238-6653",
+        "website": "http://www.thebernibean.com/",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFzdjE1XzNsMBgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhHhowmUxjYbBuqlO_Ag2wk9ZNuxqM4-_ENQo-JkiS-D3CVg5uETHI2k60hv4mZx50L-hD7wyuUYU7sWOkQdSR1myYYHkcY_PiKhoJ79OrQiBj2m6YkcECzU0K7ofGzZrnK_mEYP7jkdqf3-SXb54JoiQ1ejrEupFelzan_5YUYQy9eZsYyhdZg=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/JvEy4HicHcRLUoMwAADQE6WEXxmccdEWFKGWUsQ2bBgLaQIhhF_kc1NP4tYZ3-L9_NJxbIcnRampviFCkBrLAfe5aEbcjJtccIW0A2h7MS_K7lgYDvWomHgyV-i-l10dZjuiTcxOT3Lu3g2QuadIAJ-VMXD0wycxpfvhvWlsC-m3wdPZhEdAHWtaZIISa7iGLCrii8oXhDyWo-xcBlT4lh32UbmvNL5FLHcPawIDSzxe17Rvgoy76GxVrOgeOohvd9PwRRmpuOpd2b7gev1qMhMlKFpsnA5ooUVKnicVQgjo_zlo_gDNalZ1"
+      },
+      {
+        "position": 19,
+        "title": "Funny Library Coffee Shop",
+        "place_id": "ChIJW9-JQNiZToYRZsNPhrQeJPM",
+        "data_id": "0x864e99d84089df5b:0xf3241eb4864fc366",
+        "data_cid": "17520162211074392934",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e99d84089df5b%3A0xf3241eb4864fc366&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e99d84089df5b%3A0xf3241eb4864fc366&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7969467,
+          "longitude": -96.8218754
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJW9-JQNiZToYRZsNPhrQeJPM",
+        "provider_id": "/g/11j3yf28bt",
+        "rating": 4.1,
+        "reviews": 218,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Coworking space",
+          "Pastry shop"
+        ],
+        "address": "1445 Turtle Creek Blvd, Dallas, TX 75207",
+        "country": "United States",
+        "open_state": "Open · Closes 5 PM",
+        "hours": "Open · Closes 5 PM",
+        "operating_hours": {
+          "monday": "7 AM–5 PM",
+          "tuesday": "7 AM–5 PM",
+          "wednesday": "7 AM–5 PM",
+          "thursday": "7 AM–5 PM",
+          "friday": "7 AM–5 PM",
+          "saturday": "7 AM–5 PM",
+          "sunday": "7 AM–5 PM"
+        },
+        "phone": "(469) 359-7700",
+        "website": "https://virginhotels.com/dallas/eat-drink/funny-library/?utm_source=google&utm_medium=organic&utm_campaign=google_local_dallas_funny_library_coffee_shop",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible parking lot",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmE6vgvQmR1ZaR3VH9JcHn6dJV8IPpD74T6tsGPEFyAN9ku_KwP9CGDxpVRbv1T58J4n1v6kvM5Njo_-g_g9XLe4FSdj8zSZOaah0PUuRpXL5OBFqL6hxYWWkmf_ryNxH-5DPMt=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/I-ubOnicHcRRboIwAADQE1UgQgWTfaiIjCF2FUH9IVhZG5G22lLRC3qG3WbJ3sf7fTOtpZpa1pWNR1QIem161dyJ4LrhekREZ1GpAFFAWbMYo7zsltBQ891h51jjcREHCYk5PCeF_4lkOHFzqNUKLaPnLAvavvp6oGCxCgdZ4JNxcs9PXO4Y2Jq1l11EBWhFg33auNH2fPFf2-OmrpmNdj2W-9TbzKNbCtlwKMu2-6nuz2yIgReitf54OLZtA_Y_AfwP5eJDpg"
+      },
+      {
+        "position": 20,
+        "title": "Opening Bell Coffee",
+        "place_id": "ChIJvU3NtgOZToYR8ZYThgxT_lw",
+        "data_id": "0x864e9903b6cd4dbd:0x5cfe530c861396f1",
+        "data_cid": "6700884608828020465",
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x864e9903b6cd4dbd%3A0x5cfe530c861396f1&engine=google_maps_reviews&hl=en",
+        "photos_link": "https://serpapi.com/search.json?data_id=0x864e9903b6cd4dbd%3A0x5cfe530c861396f1&engine=google_maps_photos&hl=en",
+        "gps_coordinates": {
+          "latitude": 32.7673584,
+          "longitude": -96.796026
+        },
+        "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJvU3NtgOZToYR8ZYThgxT_lw",
+        "provider_id": "/m/0k2xhny",
+        "rating": 4.6,
+        "reviews": 773,
+        "type": "Coffee shop",
+        "types": [
+          "Coffee shop",
+          "Bar",
+          "Diner",
+          "Live music venue",
+          "Lunch restaurant",
+          "Wine bar"
+        ],
+        "address": "1409 Botham Jean Blvd, Dallas, TX 75215",
+        "country": "United States",
+        "open_state": "Open · Closes 6 PM",
+        "hours": "Open · Closes 6 PM",
+        "operating_hours": {
+          "monday": "7 AM–6 PM",
+          "tuesday": "7 AM–6 PM",
+          "wednesday": "7 AM–6 PM",
+          "thursday": "7 AM–9 PM",
+          "friday": "7 AM–9 PM",
+          "saturday": "8 AM–9 PM",
+          "sunday": "9 AM–2 PM"
+        },
+        "phone": "(945) 994-4618",
+        "website": "http://www.openingbellcoffee.com/",
+        "description": "Coffee shop with food, live music & more. Breakfast tacos, sandwiches, coffee, wine & beer at hip, relaxed hangout with live music & WiFi.",
+        "extensions": [
+          {
+            "accessibility": [
+              "Wheelchair accessible entrance",
+              "Wheelchair accessible restroom",
+              "Wheelchair accessible seating"
+            ]
+          }
+        ],
+        "order_online": "https://www.google.com/searchviewer/42?cvd=CLw_EiQKIuICHzIdEhYiFNLX29IPDgoKL20vMGsyeGhueRgAOgMI8A0%3D&hl=en-US&gl=us&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=v_XDavfqAY3WhbIP8p_KcQ&ei=v_XDavfqAY3WhbIP8p_KcQ&fo_s=OA,SOE&opi=79508299&ebb=1&cs=0&foub=mcpp",
+        "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlVt5G_hietpgfHYQg-A0IDgjvwvhvg8ByAlM4BvZUZRzY0Lgitov3QislGcsS9A5c2nSSXOJ6zncOQkjEeWsleNwSu6sksVWj0-8iEI_5FW-ware39iG3Ssau3sOslyjIP6vuoUw=w1000-h1000-c-n",
+        "serpapi_thumbnail": "https://serpapi.com/images/url/esWy0nicHcTRrsEwGADgJ6qV2oLkXEwwE8zUDDciTbWdahd_14Y3PI9w3uYkvovv71c618IkirQkPWGt0LwD_mLWOG5cj9lnJFpADBBE6XK_O9T66OLsKhV3rbgvz6VAKc5novHBSy9G03eqN8Opv1SX_eeM10I560mpQGcM6DiN2cBQeipWycewonw0c16D5ttAuwQecKwbjEZqnl_jRY3C7cXJWGWEwq0jUIB-N_ku8Z2twk_oY4yR_M6Q-QeJZ0ca"
+      }
+    ],
+    "serpapi_pagination": {
+      "next": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&q=coffee+food+indoor+Dallas%2C+TX%2C+US&start=20&type=search"
+    }
+  }
+}

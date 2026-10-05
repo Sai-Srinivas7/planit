@@ -1,0 +1,83 @@
+{
+  "ok": true,
+  "success": true,
+  "data": [
+    {
+      "name": "Dallas",
+      "local_names": {
+        "oc": "Dallas",
+        "pt": "Dallas",
+        "ru": "Даллас",
+        "tt": "Дәлас",
+        "kn": "ಡಲ್ಲಾಸ್",
+        "sr": "Далас",
+        "en": "Dallas",
+        "ja": "ダラス",
+        "uk": "Даллас",
+        "zh": "达拉斯",
+        "el": "Ντάλας",
+        "fr": "Dallas",
+        "ar": "دالاس",
+        "ko": "댈러스"
+      },
+      "lat": 32.7762719,
+      "lon": -96.7968559,
+      "country": "US",
+      "state": "Texas"
+    },
+    {
+      "name": "Dallas",
+      "lat": 33.9237141,
+      "lon": -84.8407732,
+      "country": "US",
+      "state": "Georgia"
+    },
+    {
+      "name": "Dallas",
+      "local_names": {
+        "en": "Dallas",
+        "fa": "دالاس"
+      },
+      "lat": 44.9189206,
+      "lon": -123.315869,
+      "country": "US",
+      "state": "Oregon"
+    },
+    {
+      "name": "Đà Lạt",
+      "local_names": {
+        "lv": "Dalata",
+        "no": "Dalat",
+        "mr": "दा लात",
+        "en": "Đà Lạt",
+        "el": "Νταλάτ",
+        "lt": "Dalatas",
+        "id": "Dalat",
+        "th": "ด่าหลัต",
+        "sr": "Да Лат",
+        "ko": "달랏현",
+        "zh": "大叻市",
+        "be": "Горад Далат",
+        "he": "דה לאט",
+        "vi": "Thành phố Đà Lạt",
+        "ur": "دا لات",
+        "fa": "دا لات",
+        "de": "Dalat",
+        "ja": "ダラット",
+        "uk": "Далат",
+        "ru": "Далат"
+      },
+      "lat": 11.9402416,
+      "lon": 108.4375758,
+      "country": "VN",
+      "state": "Lâm Đồng Province"
+    },
+    {
+      "name": "Dallas",
+      "lat": 35.3160401,
+      "lon": -81.1764865,
+      "country": "US",
+      "state": "North Carolina"
+    }
+  ]
+}
