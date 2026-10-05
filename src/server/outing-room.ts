@@ -5,33 +5,63 @@
  * the `outings` schema denies every client write.
  */
 
-import { applyCommand } from '../domain/commands.js'
+import { applyCommand, type CommandContext } from '../domain/commands.js'
 import { isCommandError } from '../domain/errors.js'
+import type { Outing } from '../domain/types.js'
 
-type ToolResult = { success: boolean; data?: unknown; error?: string }
+type ToolResult = { success: boolean; data?: any; error?: string }
 export type ExecuteTool = (tool: string, params: Record<string, unknown>) => Promise<ToolResult>
 
 export type RoomCommand = { command: string; id?: unknown; input: Record<string, unknown> }
+
+type StoredRecord = { recordId: string; data: { payload: Outing | string } }
+
+const parsePayload = (r: StoredRecord): Outing =>
+  typeof r.data.payload === 'string' ? JSON.parse(r.data.payload) : r.data.payload
+
+async function load(exec: ExecuteTool, body: RoomCommand): Promise<{ recordId: string | null; outing: Outing | null }> {
+  if (body.command === 'createOuting') return { recordId: null, outing: null }
+  if (body.command === 'joinOuting') {
+    const token = body.input.token
+    if (typeof token !== 'string' || !token) return { recordId: null, outing: null }
+    const found = await exec('records.query', { collection: 'outings', where: { inviteToken: token }, limit: 1 })
+    const record = found.success ? (found.data?.records?.[0] as StoredRecord | undefined) : undefined
+    return record ? { recordId: record.recordId, outing: parsePayload(record) } : { recordId: null, outing: null }
+  }
+  if (typeof body.id !== 'string' || !body.id) return { recordId: null, outing: null }
+  const got = await exec('records.get', { collection: 'outings', recordId: body.id })
+  const record = got.success ? (got.data?.record as StoredRecord | undefined) : undefined
+  return record ? { recordId: record.recordId, outing: parsePayload(record) } : { recordId: null, outing: null }
+}
+
+const columns = (o: Outing) => ({ hostId: o.hostId, members: o.members, inviteToken: o.inviteToken, payload: o })
+
+function must(result: ToolResult, what: string) {
+  if (!result.success) throw new Error(`${what} failed: ${result.error}`)
+}
 
 export async function runOutingCommand(
   exec: ExecuteTool,
   userId: string,
   body: RoomCommand,
   now: Date,
+  ctx: CommandContext = {},
 ): Promise<Response> {
-  // ponytail: only createOuting so far; record lookup by id / invite token arrives with T1.7–T1.8.
-  const result = applyCommand(null, userId, body.command, body.input, now)
+  const { recordId, outing } = await load(exec, body)
+  const result = applyCommand(outing, userId, body.command, body.input, now, ctx)
   if (isCommandError(result)) {
     return Response.json({ success: false, error: result.code, message: result.message }, { status: 400 })
   }
-  const { outing, data } = result
-  if (outing) {
-    const saved = await exec('records.create', {
-      collection: 'outings',
-      recordId: data.id,
-      data: { hostId: outing.hostId, members: outing.members, inviteToken: outing.inviteToken, payload: outing },
-    })
-    if (!saved.success) throw new Error(`records.create failed: ${saved.error}`)
+
+  const { outing: next, data } = result
+  if (!recordId) {
+    if (next) must(await exec('records.create', { collection: 'outings', recordId: data.id, data: columns(next) }), 'records.create')
+    return Response.json({ success: true, data })
   }
-  return Response.json({ success: true, data })
+  if (next === null) {
+    must(await exec('records.delete', { collection: 'outings', recordId }), 'records.delete')
+  } else if (next !== outing) {
+    must(await exec('records.update', { collection: 'outings', recordId, data: columns(next) }), 'records.update')
+  }
+  return Response.json({ success: true, data: body.command === 'joinOuting' ? { id: recordId, ...data } : data })
 }

@@ -16,7 +16,7 @@
  * cleanup. No need to manage browser contexts manually.
  */
 import { test, expect, loadAllTestAccounts } from 'deepspace/testing'
-import { command, readOutings, testTitle } from './helpers/outing'
+import { command, deleteOuting, readOutings, testTitle } from './helpers/outing'
 
 // A machine that has never created test accounts is the normal state of a
 // fresh checkout, and there `users()` throws — turning "you have no pool yet"
@@ -98,4 +98,5 @@ test('BASE-03: the outsider receives no outing records, including after new writ
   const outsiderView = await readOutings(outsider.page)
   expect(outsiderView.filter((r) => ids.includes(r.recordId))).toEqual([])
   expect(outsiderView).toEqual([])
+  for (const id of ids) await deleteOuting(host.page, id)
 })

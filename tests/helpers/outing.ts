@@ -78,3 +78,21 @@ export async function readOutings(page: Page): Promise<OutingRecord[]> {
     data: { ...r.data, members: parse(r.data.members), payload: parse(r.data.payload) },
   }))
 }
+
+/** A valid createOuting input a week ahead, titled per plan §3. */
+export function outingInput(label: string, over: Record<string, unknown> = {}) {
+  const date = new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10)
+  return { title: testTitle(label), location: 'Dallas, TX', date, time: '18:00', timezone: 'America/Chicago', ...over }
+}
+
+/** Creates an outing as the page's user; returns { id, inviteToken }. */
+export async function createOuting(page: Page, label: string, over: Record<string, unknown> = {}) {
+  const res = await command(page, 'createOuting', { input: outingInput(label, over) })
+  if (res.body?.success !== true) throw new Error(`createOuting failed: ${JSON.stringify(res.body)}`)
+  return res.body.data as { id: string; inviteToken: string }
+}
+
+/** Best-effort cleanup for `finally` blocks. */
+export async function deleteOuting(page: Page, id: string | undefined) {
+  if (id) await command(page, 'deleteOuting', { id, input: {} }).catch(() => undefined)
+}

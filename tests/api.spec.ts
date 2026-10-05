@@ -1,5 +1,5 @@
 import { test, expect } from 'deepspace/testing'
-import { command, readOutings, testTitle } from './helpers/outing'
+import { command, createOuting, deleteOuting, outingInput, readOutings, testTitle } from './helpers/outing'
 
 test.describe('API tests', () => {
   test('auth proxy forwards to auth worker', async ({ request }) => {
@@ -98,6 +98,7 @@ test('BASE-06: /internal/outing is not publicly reachable and a client X-User-Id
   expect(memberView.some((r) => r.recordId === created.body.data.id)).toBe(false)
   expect(memberView.some((r) => r.data.payload.title === `${title} direct`)).toBe(false)
   expect(hostView.some((r) => r.data.payload.title === `${title} direct`)).toBe(false)
+  await deleteOuting(host.page, created.body.data.id)
 })
 
 // Spec §7 / D-01 provider endpoints. These must never be reachable from a browser.
@@ -129,5 +130,101 @@ test('SEC-02: browser calls to /api/integrations/* return 403, signed in or not'
         expect(await res.json(), where).toEqual({ error: expect.any(String) })
       }
     }
+  }
+})
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+
+test('OUT-01: createOuting stores one record: caller is host and only member, open, fresh invite token, computed startAt', async ({ users }) => {
+  const [host] = await users(['Host'])
+  const input = outingInput('out01', { time: '19:30' })
+  let a: string | undefined
+  let b: string | undefined
+  try {
+    const res = await command(host.page, 'createOuting', { input: { ...input, userId: 'someone-else' } })
+    expect(res.status).toBe(200)
+    expect(res.body).toMatchObject({ success: true, data: { id: expect.any(String), inviteToken: expect.stringMatching(UUID) } })
+    a = res.body.data.id
+    b = (await createOuting(host.page, 'out01 second')).id
+
+    const view = await readOutings(host.page)
+    const mine = view.filter((r) => r.recordId === a)
+    expect(mine).toHaveLength(1)
+    const { data } = mine[0]
+    expect(data.hostId).toBe(host.userId)
+    expect(data.members).toEqual([host.userId])
+    expect(data.inviteToken).toBe(res.body.data.inviteToken)
+    expect(data.payload).toMatchObject({
+      title: input.title,
+      hostId: host.userId,
+      members: [host.userId],
+      state: 'open',
+      selectedOptionId: null,
+      finalizedAt: null,
+      inviteToken: res.body.data.inviteToken,
+      people: [{ userId: host.userId, joinedAt: expect.any(String) }],
+      // 19:30 in Chicago is 00:30 or 01:30 UTC the next day, depending on DST.
+      startAt: expect.stringMatching(/T0[01]:30:00\.000Z$/),
+    })
+    const second = view.find((r) => r.recordId === b)!
+    expect(second.data.inviteToken).not.toBe(data.inviteToken)
+  } finally {
+    await deleteOuting(host.page, a)
+    await deleteOuting(host.page, b)
+  }
+})
+
+test('INV-01: a signed-in non-member with a valid token joins and can then read the outing', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id, inviteToken } = await createOuting(host.page, 'inv01')
+  try {
+    expect((await readOutings(member.page)).some((r) => r.recordId === id)).toBe(false)
+    const res = await command(member.page, 'joinOuting', { input: { token: inviteToken } })
+    expect(res.status).toBe(200)
+    expect(res.body).toEqual({ success: true, data: { id, alreadyMember: false } })
+
+    const record = (await readOutings(member.page)).find((r) => r.recordId === id)
+    expect(record, 'member now receives the outing').toBeDefined()
+    expect(record!.data.members).toEqual([host.userId, member.userId])
+    expect(record!.data.payload.people).toEqual([
+      { userId: host.userId, joinedAt: expect.any(String) },
+      { userId: member.userId, joinedAt: expect.any(String) },
+    ])
+  } finally {
+    await deleteOuting(host.page, id)
+  }
+})
+
+test('INV-03: an unknown token and a deleted outing token return identical INVITE_INVALID responses', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id, inviteToken } = await createOuting(host.page, 'inv03')
+  await command(host.page, 'deleteOuting', { id, input: {} })
+
+  const unknown = await command(member.page, 'joinOuting', { input: { token: crypto.randomUUID() } })
+  const deleted = await command(member.page, 'joinOuting', { input: { token: inviteToken } })
+  expect(unknown.status).toBe(400)
+  expect(unknown.body).toMatchObject({ success: false, error: 'INVITE_INVALID' })
+  expect(deleted).toEqual(unknown)
+})
+
+test('OUT-07: after the host deletes an outing it is gone and its invite link returns INVITE_INVALID', async ({ users }) => {
+  const [host, member] = await users(['Host', 'Member'])
+  const { id, inviteToken } = await createOuting(host.page, 'out07')
+  let deleted = false
+  try {
+    await command(member.page, 'joinOuting', { input: { token: inviteToken } })
+    const refused = await command(member.page, 'deleteOuting', { id, input: {} })
+    expect(refused.body).toMatchObject({ success: false, error: 'NOT_HOST' })
+    expect((await readOutings(member.page)).some((r) => r.recordId === id)).toBe(true)
+
+    const res = await command(host.page, 'deleteOuting', { id, input: {} })
+    expect(res.body).toEqual({ success: true, data: {} })
+    deleted = true
+    expect((await readOutings(host.page)).some((r) => r.recordId === id)).toBe(false)
+    expect((await readOutings(member.page)).some((r) => r.recordId === id)).toBe(false)
+    const join = await command(member.page, 'joinOuting', { input: { token: inviteToken } })
+    expect(join.body).toMatchObject({ success: false, error: 'INVITE_INVALID' })
+  } finally {
+    if (!deleted) await deleteOuting(host.page, id)
   }
 })
