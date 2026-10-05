@@ -1,4 +1,4 @@
-# PlanIt — Spec v1.1.2
+# PlanIt — Spec v1.1.3
 
 Status: approved design (2026-10-05). New build in its own folder (`~/planit`), deployed to the account's existing app `app_01M466GAC7Q1B8FQDTNRGN7Z96` under the name `planit`. The Codex prototype in `~/actually-go` shares that app ID, is a local-only reference, and is never deployed from.
 This spec is the source of truth. Changes go through a version bump and a changelog line (Section 12) before any plan, task, or code change.
@@ -113,11 +113,11 @@ type Weather = { forecastAt: string; tempC: number; description: string }
 
 Public route: `POST /api/outing/:command`, body `{ id?, input }`, max 12 KB. Commands not in the public list return 404. Internal commands (`publishSuggestions`, `failSuggestions`) are callable only by worker code.
 
-Response: `{ success: true, data }` or `{ success: false, error: <CODE>, message }`. HTTP 401 for missing/invalid JWT, 400 for every refusal. The UI shows `message` and branches on `error`.
+Response: `{ success: true, data }` or `{ success: false, error: <CODE>, message }`. HTTP 401 for missing/invalid JWT (checked before anything else, so signed-out callers learn nothing about which commands exist), 404 `NOT_FOUND` for an unknown or internal command name, 400 for every other refusal, including a body over 12 KB. An unexpected failure inside the room returns 500 JSON with `INTERNAL` and never throws out of `blockConcurrencyWhile` (a throw there resets the room for every user). The UI shows `message` and branches on `error`.
 
 **Check order (first failure wins):** authentication (401) → input validation (INVALID_INPUT) → record lookup (NOT_FOUND / INVITE_INVALID) → membership (NOT_MEMBER) → role (NOT_HOST / NOT_CREATOR / NOT_AUTHOR) → outing state (OUTING_FINALIZED / INVALID_STATE) → option lock (OPTION_LOCKED) → limits (LIMIT_REACHED).
 
-**Error codes:** `UNAUTHENTICATED` · `NOT_MEMBER` · `NOT_HOST` · `NOT_CREATOR` · `NOT_AUTHOR` · `OPTION_LOCKED` · `NOT_FOUND` · `OUTING_FINALIZED` · `INVALID_STATE` · `INVALID_INPUT` · `INVITE_INVALID` · `LIMIT_REACHED`
+**Error codes:** `UNAUTHENTICATED` · `NOT_MEMBER` · `NOT_HOST` · `NOT_CREATOR` · `NOT_AUTHOR` · `OPTION_LOCKED` · `NOT_FOUND` · `OUTING_FINALIZED` · `INVALID_STATE` · `INVALID_INPUT` · `INVITE_INVALID` · `LIMIT_REACHED` · `INTERNAL` (500 only)
 
 | Command | Input | Success data | Refusals (besides UNAUTHENTICATED) |
 |---|---|---|---|
@@ -183,8 +183,8 @@ Integrations are called from worker code with `buildCronContext(env, env.OWNER_U
 |---|---|---|
 | Resolve location | `openweathermap/geocoding` (`q` = location, `limit` 5) | 0 results → fail "Location not found. Add the city and state." More than one distinct candidate (name + state + country) → fail "Location is ambiguous. Add the state or country." Exactly one → resolved name and coordinates. |
 | Forecast | `openweathermap/forecast` (`q` = resolved name, `units: metric`) | Use the entry whose `dt` is within 90 minutes of `startAt`. None, or call failed → `'unavailable'`. Never substitute current weather. |
-| Places | `serpapi/places-search` (`q` from the group's most common interest tags + setting + resolved name; `ll` if Block 0 confirms it) | Normalize; dedupe by `providerPlaceId` and by normalized name against existing options (D-15); drop results without a name or source URL; keep the first 3. No other filters (D-14). |
-| Explain | `anthropic/chat-completion` through the `Explainer` adapter | `system` holds instructions; candidates (ID, name, provider facts), weather, and the group's fixed-value preferences go in the user message as JSON. Expected output `{ "explanations": [{ "candidateId": string, "text": string }] }`. |
+| Places | `serpapi/places-search` (`q` from the group's most common interest tags + setting + resolved name; `ll` if Block 0 confirms it) | Normalize; dedupe by `providerPlaceId` and by normalized name, both within the result set and against existing options (D-15); drop results without a name or source URL; keep the first 3. No other filters (D-14). |
+| Explain | `anthropic/chat-completion` through the `Explainer` adapter | `system` holds instructions; candidates (ID, name, provider facts), weather, and the group's fixed-value preferences go in the user message as JSON. Expected output `{ "explanations": [{ "candidateId": string, "text": string }] }`. One surrounding Markdown code fence (```` ```json … ``` ````) is stripped before parsing; anything else that isn't that JSON is rejected. |
 
 3. **Publish (in the room, `publishSuggestions`):** recheck host and `state === 'open'`. If finalized meanwhile, discard results and set `status: 'failed'` with "Plan was confirmed before suggestions finished." Otherwise append up to 3 options (`origin: suggested`, `fetchedAt`, explanation if valid), store `weather` and `resolvedLocation`, set `status: done`.
 
@@ -198,7 +198,7 @@ Any fetch-phase failure calls `failSuggestions` with a readable message; existin
 
 ### BASE — platform verification (Block 0)
 - **BASE-01** [collab] The users fixture signs in three distinct accounts: host, member, outsider.
-- **BASE-02** [unit] The `outings` schema denies client `create`, `update`, and `delete` for every role (the platform enforces schema permissions in the room; the test pins the schema so a change can't slip in).
+- **BASE-02** [unit] The `outings` schema denies client `create`, `update`, and `delete` for every role, grants only `read: 'collaborator'`, and has no `'*'` (anonymous) entry (the platform enforces schema permissions in the room; the test pins the schema so a change can't slip in).
 - **BASE-03** [collab] The outsider's connection receives no outing records, including after new writes to an outing they don't belong to.
 - **BASE-04** [api] (runs in Block 2, once `setResponse` exists) 20 concurrent `setResponse` commands from two members on different options of one outing all land: the final record has exactly 20 responses and no lost updates.
 - **BASE-05** [manual] Fixtures recorded with `npx deepspace integrations invoke` for `openweathermap/geocoding`, `openweathermap/forecast`, `serpapi/places-search`, and `anthropic/chat-completion`, saved under `src/domain/suggestions/fixtures/`; whether `places-search` accepts `ll`, the chosen `EXPLAINER_MODEL`, and its price are recorded in the development log. (D-01)
@@ -270,8 +270,8 @@ Any fetch-phase failure calls `failSuggestions` with a readable message; existin
 ### SUG — suggestions (Block 4)
 - **SUG-01** [unit] `requestSuggestions` while a run is `running` returns `reused: true` and does not increment counters. [api] Two concurrent requests trigger provider calls once.
 - **SUG-02** [unit] A 4th run for one outing, or a run after 30 app-wide runs in the current UTC day, returns LIMIT_REACHED. (D-16)
-- **SUG-03** [unit] Place results normalize to the option shape, dedupe by provider place ID and by normalized name against existing options, drop candidates without a name and source URL, and keep at most 3. No other filtering. (D-14, D-15)
-- **SUG-04** [unit] Explainer output is accepted only if it parses as the schema and every `candidateId` exists; unknown IDs or malformed output are rejected; each explanation ≤ 240 chars.
+- **SUG-03** [unit] Place results normalize to the option shape, dedupe by provider place ID and by normalized name (within the result set and against existing options), drop candidates without a name and source URL, and keep at most 3. No other filtering. (D-14, D-15)
+- **SUG-04** [unit] Explainer output, after stripping one surrounding code fence, is accepted only if it parses as the schema and every `candidateId` exists; unknown IDs or malformed output are rejected; each explanation ≤ 240 chars.
 - **SUG-05** [unit] The explainer request contains no user IDs, emails, names, comments, or free text from members. Venue text containing instructions is passed as data inside the user message and does not change output structure (fixture test).
 - **SUG-06** [api] Places failure: run ends `failed` with a readable message; existing options, responses, and comments unchanged.
 - **SUG-07** [unit] Forecast failure, or no entry within 90 minutes of `startAt`, stores `weather: 'unavailable'` and the run completes. When available, the stored weather is passed to the explainer. [smoke] Header shows the forecast with its time, or "Forecast unavailable". (D-13)
@@ -355,6 +355,7 @@ The prototype (`~/actually-go`, tag it before use) is read-only reference. Anyth
 
 ## 12. Changelog
 
+- **v1.1.3 (2026-10-05):** From Block 0 review: §5 states 401-before-404, 404 for unknown/internal commands, 400 for oversized bodies, and 500 (never a throw) for unexpected room failures. BASE-02 also pins read-only-collaborator and no anonymous entry. §7/SUG-03 dedupe within a result set (fixture had one venue twice); §7/SUG-04 strip one code fence (Haiku fixture reply was fenced).
 - **v1.1.2 (2026-10-05):** From plan review: BASE-05 records fixtures with the CLI in Block 0; the worker integration path is proven by new SUG-16 in Block 4. BASE-04 runs in Block 2. BASE-02 is a schema unit test (client writes go over the realtime socket, which has no test hook; the room enforces schema permissions).
 - **v1.1.1 (2026-10-05):** A-02 updated: account has one active app slot (`app list`), so PlanIt deploys to the prototype's registered app ID with `name = "planit"`; prototype is never deployed.
 - **v1.1 (2026-10-05):** Renamed to PlanIt; new app and folder (A-02). Adopted the prototype's one-record, serialized-command design (A-01): replaced the 8-collection model, server actions, `uniqueOn`, snapshot, and lock row. Commands replace actions; same error codes. Added `deleteOuting`, member/option/comment caps, SUG-15 stale-run recovery, BASE-04 (no lost updates), BASE-06 (internal path not public), OUT-07/08, INV-07. FIN-04 rewritten for serialized commands. Integrations now called with `buildCronContext(...).integrations.call` (confirmed exported by `deepspace/worker` 0.37.0). Authorization matrix mostly tested at `[unit]` on `applyCommand`. Added Section 9 (porting guide). App-wide daily limit is now exact.
