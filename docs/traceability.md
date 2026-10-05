@@ -25,29 +25,29 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | INV-05 | smoke | `INV-05: …` (`tests/smoke.spec.ts`) |  | Copy invite dialog in `OutingPage.tsx` |  |  |
 | INV-06 | unit | `INV-06: …` (`commands.test.ts`) — join half; "can post comments" half added with T3.3 |  | `joinOuting` has no state check |  |  |
 | INV-07 | unit | `INV-07: …` (`commands.test.ts`) |  | `CAPS.members` check in `joinOuting` |  |  |
-| OPT-01 | unit |  |  |  |  |  |
-| OPT-02 | unit |  |  |  |  |  |
+| OPT-01 | unit | `OPT-01: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
+| OPT-02 | unit | `OPT-02: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-03 | smoke |  |  |  |  |  |
 | OPT-04 | collab |  |  |  |  |  |
-| OPT-05 | unit |  |  |  |  |  |
-| OPT-06 | unit |  |  |  |  |  |
-| OPT-07 | unit |  |  |  |  |  |
-| OPT-08 | unit |  |  |  |  |  |
+| OPT-05 | unit | `OPT-05: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
+| OPT-06 | unit | `OPT-06: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) | Matrix fault-injected 2026-10-05: host lock bypass removed → `§6 deleteOption (own, locked): host (open)` red; restored | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
+| OPT-07 | unit | `OPT-07: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
+| OPT-08 | unit | `OPT-08: …` (`src/domain/options.test.ts`) + §6 matrix rows (`matrix.test.ts`) |  | `addOption` / `editOption` / `deleteOption`, `isLocked` in `src/domain/commands.ts`; limits in `validate.ts` |  |  |
 | OPT-09 | smoke |  |  |  |  |  |
-| VOTE-01 | unit |  |  |  |  |  |
+| VOTE-01 | unit | `VOTE-01: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
 | VOTE-02 | api |  |  |  |  |  |
-| VOTE-03 | unit |  |  |  |  |  |
-| VOTE-04 | unit |  |  |  |  |  |
+| VOTE-03 | unit | `VOTE-03: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
+| VOTE-04 | unit | `VOTE-04: …` (`responses.test.ts`) |  | `src/domain/tally.ts` |  |  |
 | VOTE-05 | smoke |  |  |  |  |  |
 | VOTE-06 | collab |  |  |  |  |  |
-| VOTE-07 | unit |  |  |  |  |  |
-| FIN-01 | unit |  |  |  |  |  |
-| FIN-02 | unit |  |  |  |  |  |
-| FIN-03 | unit |  |  |  |  |  |
+| VOTE-07 | unit | `VOTE-07: …` (`src/domain/responses.test.ts`) |  | `setResponse` in `commands.ts` (upsert per user+option; `null` removes) |  |  |
+| FIN-01 | unit | `FIN-01: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
+| FIN-02 | unit | `FIN-02: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
+| FIN-03 | unit | `FIN-03: …` (`responses.test.ts`) + §6 matrix; requestSuggestions half added in Block 4 |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-04 | api |  |  |  |  |  |
 | FIN-05 | smoke |  |  |  |  |  |
-| FIN-06 | unit |  |  |  |  |  |
-| FIN-07 | unit |  |  |  |  |  |
+| FIN-06 | unit | `FIN-06: …` (`responses.test.ts`) |  | `planText` in `src/domain/summary.ts` |  |  |
+| FIN-07 | unit | `FIN-07: …` (`responses.test.ts`) + §6 matrix |  | `finalize` / `reopen` in `commands.ts` |  |  |
 | FIN-08 | collab |  |  |  |  |  |
 | PREF-01 | unit |  |  |  |  |  |
 | PREF-02 | api |  |  |  |  |  |
