@@ -5,7 +5,7 @@ Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, comm
 | AC | Level | Test (name/file) | Seen failing | Implemented | Browser-verified | Deployed-verified |
 |---|---|---|---|---|---|---|
 | BASE-01 | collab |  |  |  |  |  |
-| BASE-02 | unit |  |  |  |  |  |
+| BASE-02 | unit | `BASE-02: registered outings schema denies client create, update, and delete for every role` (`src/schemas/outings-schema.test.ts`) | 2026-10-05: `expected undefined to be defined` — no `outings` schema registered | `src/schemas/outings-schema.ts`, registered in `src/schemas.ts` (ported from prototype `src/schemas/outings-schema.ts`) |  |  |
 | BASE-03 | collab |  |  |  |  |  |
 | BASE-04 | api |  |  |  |  |  |
 | BASE-05 | manual |  |  |  |  |  |
