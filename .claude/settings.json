@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "ask": [
+      "Edit(docs/spec.md)",
+      "Write(docs/spec.md)",
+      "Bash(npx deepspace deploy:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

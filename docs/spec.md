@@ -1,4 +1,4 @@
-# PlanIt — Spec v1.1.1
+# PlanIt — Spec v1.1.2
 
 Status: approved design (2026-10-05). New build in its own folder (`~/planit`), deployed to the account's existing app `app_01M466GAC7Q1B8FQDTNRGN7Z96` under the name `planit`. The Codex prototype in `~/actually-go` shares that app ID, is a local-only reference, and is never deployed from.
 This spec is the source of truth. Changes go through a version bump and a changelog line (Section 12) before any plan, task, or code change.
@@ -198,10 +198,10 @@ Any fetch-phase failure calls `failSuggestions` with a readable message; existin
 
 ### BASE — platform verification (Block 0)
 - **BASE-01** [collab] The users fixture signs in three distinct accounts: host, member, outsider.
-- **BASE-02** [api] Direct client create, update, and delete on `outings` are refused.
+- **BASE-02** [unit] The `outings` schema denies client `create`, `update`, and `delete` for every role (the platform enforces schema permissions in the room; the test pins the schema so a change can't slip in).
 - **BASE-03** [collab] The outsider's connection receives no outing records, including after new writes to an outing they don't belong to.
-- **BASE-04** [api] 20 concurrent `setResponse` commands from two members on different options of one outing all land: the final record has exactly 20 responses and no lost updates.
-- **BASE-05** [manual] One live call each to `openweathermap/geocoding`, `openweathermap/forecast`, `serpapi/places-search`, and `anthropic/chat-completion` succeeds through `integrations.call` from worker code; responses saved as fixtures; whether `places-search` accepts `ll`, and the chosen `EXPLAINER_MODEL` and its price, are recorded. (D-01)
+- **BASE-04** [api] (runs in Block 2, once `setResponse` exists) 20 concurrent `setResponse` commands from two members on different options of one outing all land: the final record has exactly 20 responses and no lost updates.
+- **BASE-05** [manual] Fixtures recorded with `npx deepspace integrations invoke` for `openweathermap/geocoding`, `openweathermap/forecast`, `serpapi/places-search`, and `anthropic/chat-completion`, saved under `src/domain/suggestions/fixtures/`; whether `places-search` accepts `ll`, the chosen `EXPLAINER_MODEL`, and its price are recorded in the development log. (D-01)
 - **BASE-06** [api] The internal `/internal/outing` path is not reachable from any public route, and an `X-User-Id` header sent by a client is ignored.
 
 ### OUT — create, home, delete (Block 1)
@@ -283,6 +283,7 @@ Any fetch-phase failure calls `failSuggestions` with a readable message; existin
 - **SUG-13** [unit] With `PROVIDERS=fixture`, the full pipeline runs with no network calls; the live Explainer adapter passes the same SUG-04 and SUG-05 tests against its recorded fixture.
 - **SUG-14** [smoke] The suggestion button is shown only to the host of an open outing and is disabled while a run is `running`.
 - **SUG-15** [unit] A run stuck in `running` for more than 2 minutes is treated as failed, and a new request is allowed.
+- **SUG-16** [manual] One suggestion run through the live adapters (`integrations.call` from worker code) succeeds on local dev before the first deployed run (REL-04).
 
 ### UX — cross-cutting (part of every block's done check)
 - **UX-01** [smoke] Every command shows a pending state. On refusal the UI shows the message and the view stays on server state; a refused change never appears saved.
@@ -354,6 +355,7 @@ The prototype (`~/actually-go`, tag it before use) is read-only reference. Anyth
 
 ## 12. Changelog
 
+- **v1.1.2 (2026-10-05):** From plan review: BASE-05 records fixtures with the CLI in Block 0; the worker integration path is proven by new SUG-16 in Block 4. BASE-04 runs in Block 2. BASE-02 is a schema unit test (client writes go over the realtime socket, which has no test hook; the room enforces schema permissions).
 - **v1.1.1 (2026-10-05):** A-02 updated: account has one active app slot (`app list`), so PlanIt deploys to the prototype's registered app ID with `name = "planit"`; prototype is never deployed.
 - **v1.1 (2026-10-05):** Renamed to PlanIt; new app and folder (A-02). Adopted the prototype's one-record, serialized-command design (A-01): replaced the 8-collection model, server actions, `uniqueOn`, snapshot, and lock row. Commands replace actions; same error codes. Added `deleteOuting`, member/option/comment caps, SUG-15 stale-run recovery, BASE-04 (no lost updates), BASE-06 (internal path not public), OUT-07/08, INV-07. FIN-04 rewritten for serialized commands. Integrations now called with `buildCronContext(...).integrations.call` (confirmed exported by `deepspace/worker` 0.37.0). Authorization matrix mostly tested at `[unit]` on `applyCommand`. Added Section 9 (porting guide). App-wide daily limit is now exact.
 - **v1.0 (2026-10-05):** All decisions closed.
