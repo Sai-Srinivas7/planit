@@ -1,11 +1,11 @@
 # Traceability
 
-Source: `docs/spec.md` v1.1.2. Tick a column only with evidence (test name, commit, or log entry).
+Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, commit, or log entry).
 
 | AC | Level | Test (name/file) | Seen failing | Implemented | Browser-verified | Deployed-verified |
 |---|---|---|---|---|---|---|
 | BASE-01 | collab | `BASE-01: the users fixture signs in three distinct accounts: host, member, outsider` (`tests/collab.spec.ts`) | Not seen failing (test of the harness; accounts `Host`, `Member`, `Outsider` created in T0.1) | Test accounts `planit-{host,member,outsider}@deepspace.test` |  |  |
-| BASE-02 | unit | `BASE-02: registered outings schema denies client create, update, and delete for every role` (`src/schemas/outings-schema.test.ts`) | 2026-10-05: `expected undefined to be defined` — no `outings` schema registered | `src/schemas/outings-schema.ts`, registered in `src/schemas.ts` (ported from prototype `src/schemas/outings-schema.ts`) |  |  |
+| BASE-02 | unit | `BASE-02: … reads only as collaborator, and has no anonymous entry` (`src/schemas/outings-schema.test.ts`), strengthened for spec v1.1.3 | 2026-10-05: `expected undefined to be defined` — no `outings` schema registered | `src/schemas/outings-schema.ts`, registered in `src/schemas.ts` (ported from prototype `src/schemas/outings-schema.ts`) |  |  |
 | BASE-03 | collab | `BASE-03: the outsider receives no outing records, including after new writes` (`tests/collab.spec.ts`; live `outing-count` + fresh socket read) | Fault-injected 2026-10-05: `outings` read policy `collaborator` → `true` → outsider count `8`, expected `0`. Restored, green. Writes so far are two `createOuting`s; extend with update writes (join/option) when those commands exist. | `outings` read `collaborator` (`src/schemas/outings-schema.ts`); `src/features/outing/OutingList.tsx` (count only), `src/pages/(app)/home.tsx` |  |  |
 | BASE-04 | api |  |  |  |  |  |
 | BASE-05 | manual | Manual: `src/domain/suggestions/fixtures/*.json` (+ `requests/`), log in `docs/DEVELOPMENT_LOG.md` Block 0 / T0.8 | n/a (manual) | Recorded 2026-10-05 via `integrations invoke`: geocoding ×2, forecast, places-search ×2 (`ll` supported), chat-completion (`claude-haiku-4-5`, $0.00089); ≈ $0.072 total |  |  |

@@ -13,6 +13,7 @@ export const ERROR_CODES = [
   'INVALID_INPUT',
   'INVITE_INVALID',
   'LIMIT_REACHED',
+  'INTERNAL', // 500 only: unexpected failure inside the room
 ] as const
 
 export type ErrorCode = (typeof ERROR_CODES)[number]

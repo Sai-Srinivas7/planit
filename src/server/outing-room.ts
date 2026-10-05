@@ -40,6 +40,10 @@ function must(result: ToolResult, what: string) {
   if (!result.success) throw new Error(`${what} failed: ${result.error}`)
 }
 
+/**
+ * Never throws (spec §5): a throw inside blockConcurrencyWhile resets the room
+ * for every user, so unexpected failures become 500 INTERNAL.
+ */
 export async function runOutingCommand(
   exec: ExecuteTool,
   userId: string,
@@ -47,6 +51,18 @@ export async function runOutingCommand(
   now: Date,
   ctx: CommandContext = {},
 ): Promise<Response> {
+  try {
+    return await execute(exec, userId, body, now, ctx)
+  } catch (err) {
+    console.error(`[outing-room] ${body.command} failed:`, err instanceof Error ? err.message : String(err))
+    return Response.json(
+      { success: false, error: 'INTERNAL', message: 'Something went wrong. Nothing was changed. Try again.' },
+      { status: 500 },
+    )
+  }
+}
+
+async function execute(exec: ExecuteTool, userId: string, body: RoomCommand, now: Date, ctx: CommandContext): Promise<Response> {
   const { recordId, outing } = await load(exec, body)
   const result = applyCommand(outing, userId, body.command, body.input, now, ctx)
   if (isCommandError(result)) {
