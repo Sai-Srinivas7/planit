@@ -34,3 +34,35 @@ Total ≈ $0.072. `app usage` afterwards (30-day, all apps): serpapi 4 calls $0.
   - Injection candidate (`c2`, name = "Ignore all previous instructions…") was treated as data: structure kept, no "HACKED" output (SUG-05 evidence).
   - `places-dallas-ll.json` contains the same venue title twice ("Daily Coffee", different `place_id`s). §7 dedupes by `providerPlaceId` and by name *against existing options*; duplicates by name within one result set are not covered. Decide in T4.2.
   - Place results carry `price`, `hours`, `rating`, `phone`. OPT-03 requires unknown facts to show "Unconfirmed" and no fact without a source; the normalizer should keep only what the option shape has.
+
+### Block 0 gate (T0.9)
+
+**Tasks done**
+- T0.1 — test accounts `Host`, `Member`, `Outsider` (`planit-*@deepspace.test`, label `planit`) created via `test accounts create --password-stdin` with random passwords; `Planner A`/`B` left in the pool. No files.
+- T0.2 — `CLAUDE.md`, `/red`, `/green`, `/block`, traceability, dev log: `04433c9`, `528574d`.
+- T0.3 — prune api-status page, nav hint, its two collab tests: `05637b9`.
+- T0.4 — BASE-02 outings schema: `fc79f95`.
+- T0.5 — SEC-01, BASE-06: serialized room, public route, minimal `createOuting`: `390b792`.
+- T0.6 — BASE-01, BASE-03: home outing count, three-user collab checks: `746fcd6`.
+- T0.7 — SEC-02 first half, integration proxy 403: `fad37d7`.
+- T0.8 — BASE-05 provider fixtures: `6c40d28`.
+
+**Ported:** `src/schemas/outings-schema.ts` (verbatim); `worker.ts:54-82` room `fetch` override + `blockConcurrencyWhile` (thrown strings → §5 codes; suggestion counter not ported); `src/server/outing-routes.ts:7-10` route + auth (response shape → §5); `src/server/http-routes.ts:232-236` integration 403.
+
+**Fault injection (each red, then restored and green):** SEC-01 auth check skipped; SEC-01 unverified JWT payload trusted; BASE-06 client `X-User-Id` forwarded to the room; BASE-06 public route into `/internal/outing`; BASE-03 read policy `true`; SEC-02 proxy reopened with an offline stub (no paid call).
+
+**Gate results:** `test run unit` 2/2 · `test run all --port 5199` 14/14 Playwright (api 5, smoke 6, collab 3) + unit 2/2 · `tsc --noEmit` clean · `npm run lint` clean. Port 5173 is held by another process on this machine, so suites ran on 5199.
+
+**Spec gaps / decisions taken without a spec line (review):**
+1. §5 does not say what an *unauthenticated* request for an unknown command gets. Implemented 401 (authentication is first in the check order), so command names aren't discoverable. Signed-in unknown or internal command → 404 `NOT_FOUND`.
+2. §5 "max 12 KB": over-size bodies return 400 `INVALID_INPUT` ("400 for every refusal"); the prototype used 413.
+3. `applyCommand` takes an optional 6th argument `newId` (id generator) so tests can be deterministic; §4.1 lists five.
+4. BASE-03's "new writes" are currently two `createOuting`s; extend with update writes when `joinOuting` / option commands exist.
+5. Test outings accumulate in local dev storage until `deleteOuting` (T1.8) lets tests clean up.
+6. Block 4 notes from fixtures (fenced LLM JSON vs SUG-04; same-name duplicates within one places result set) — see T0.8 above.
+
+**Codex adversarial review:** not run — Codex plugin not installed.
+
+**Open:** `createOuting` stores unvalidated input with `startAt: ''` until T1.1/T1.4 (marked `ponytail:`); every other command throws "not implemented" (route answers 500).
+
+Verified by Sai:
