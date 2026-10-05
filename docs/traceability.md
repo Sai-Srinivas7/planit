@@ -74,7 +74,7 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | SUG-13 | unit | `SUG-13: …` ×2 (`src/domain/suggestions/suggestions.test.ts`: fixture pipeline with fetch tripwire; live Explainer adapter on recorded fixture) |  | `fixture.ts`, `live.ts`, `pipeline.ts` |  |  |
 | SUG-14 | smoke | `SUG-14: …` (`tests/smoke.spec.ts`) |  | `SuggestionStatus.tsx` (host + open only; disabled while `isRunActive`) |  |  |
 | SUG-15 | unit | `SUG-15: …` (`src/domain/suggest-commands.test.ts`) |  | `isRunActive` (2-minute stale) |  |  |
-| SUG-16 | manual |  |  | Code ready: `src/domain/suggestions/live.ts`, `adaptersFor` (`PROVIDERS=live`), billing in `src/integrations.ts`. Live local run pending Sai (paid). |  |  |
+| SUG-16 | manual | Manual — pending Sai: one local run with `PROVIDERS=live` (paid, ≈ $0.07) |  | Code ready: `src/domain/suggestions/live.ts`, `adaptersFor` (`PROVIDERS=live`), billing in `src/integrations.ts`. Live local run pending Sai (paid). |  |  |
 | UX-01 | smoke | `UX-01: …` create/join, option refusal, comment pending (`tests/smoke.spec.ts`) |  | `src/lib/outing-api.ts` `useCommand` (pending + message, no optimistic writes); used by create, join, delete |  |  |
 | UX-02 | smoke | `UX-02: …` (`tests/smoke.spec.ts`, session check held 1.5 s) |  | `AuthBoot` loading panel in `src/pages/(app)/_layout.tsx`; per-view loading states (list, outing) |  |  |
 | UX-03 | smoke | `UX-03: …` (`tests/smoke.spec.ts`, real socket drop via `routeWebSocket`) |  | `src/features/outing/LiveIndicator.tsx` (signed in + `useRecordContext().status === connected`) |  |  |
@@ -82,9 +82,9 @@ Source: `docs/spec.md` v1.1.3. Tick a column only with evidence (test name, comm
 | UX-05 | manual | Automated evidence in `UX-03: … (and UX-05 …)` (`tests/smoke.spec.ts`): change made while offline appears after reconnect; manual check still due |  | SDK resubscribes on reconnect; UI renders only server state |  |  |
 | SEC-01 | api | `SEC-01: every public command without a valid JWT returns 401 UNAUTHENTICATED` (`tests/api.spec.ts`) | 2026-10-05: before route existed, expected 401, received 404. Fault-injected: (1) auth check skipped → `createOuting with no Authorization header` 200; (2) unverified JWT payload trusted → `createOuting with unsigned forged JWT` 200. Restored, green. | `src/server/outing-routes.ts` (JWT via scaffold `resolveAuth`, checked before allowlist), registered in `worker.ts`; ported from prototype `src/server/outing-routes.ts:7-10` |  |  |
 | SEC-02 | api | `SEC-02: browser calls to /api/integrations/* return 403…` + `SEC-02: the built client bundle contains no provider URLs` (`tests/api.spec.ts`, runs `npm run build`, scans `dist/client`) | Fault-injected: (1) proxy reopened with offline stub → 200; (2) `makeFixtureAdapters` imported into `OutingPage.tsx` → `dist/client/assets/home-*.js` flagged. Restored, green. | `/api/integrations/:name/:endpoint` → 403; provider calls only in worker (`adaptersFor` → `buildCronContext(...).integrations.call`); fixtures server-only |  |  |
-| SEC-03 | manual | Manual. Pre-check 2026-10-05: `.dev.vars` git-ignored; no JWT/key-shaped strings in tracked files, fixtures (SerpApi archive URLs redacted), or `dist/client` |  |  |  |  |
+| SEC-03 | manual | Manual. Pre-check 2026-10-05: `.dev.vars` git-ignored; no JWT/key-shaped strings in tracked files, fixtures (SerpApi archive URLs redacted), or `dist/client` |  | `.dev.vars` in `.gitignore`; secrets only via `deepspace secrets`; fixtures redacted; client bundle scanned (SEC-02) |  |  |
 | SEC-04 | api | `SEC-04: no route returns raw users rows (no emails)` (`tests/api.spec.ts`: every outing command + integrations, actions, debug, users routes as a non-owner) | Fault-injected 2026-10-05: `joinOuting` response extended with `user.list` rows → `planit-host@deepspace.test` found. Restored, green. | Command responses carry IDs/status only; no server actions; agent not registered |  |  |
-| REL-01 | manual |  |  |  |  |  |
-| REL-02 | manual |  |  |  |  |  |
-| REL-03 | manual |  |  |  |  |  |
-| REL-04 | manual |  |  |  |  |  |
+| REL-01 | manual | Manual record 2026-10-05 (local): `test run unit` 149/149 (12 files); `test run api` 17/17; `test run e2e` 49/49; `test run all` 49/49 + unit; `tsc --noEmit` clean; `npm run lint` clean; `npm run build` OK |  | All automated suites green on local |  |  |
+| REL-02 | manual | Manual — pending deploy (Sai) |  | Not started: needs first deploy |  |  |
+| REL-03 | manual | Manual — pending deploy (Sai) |  | Not started: needs first deploy |  |  |
+| REL-04 | manual | Manual — pending deploy + live run (Sai, paid) |  | Not started: needs deploy and SUG-16 |  |  |
