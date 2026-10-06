@@ -1,93 +1,101 @@
 # PlanIt
 
-Turn "we should go somewhere" into one confirmed outing for a small private group.
+A small group planner for turning "we should hang out sometime" into one confirmed plan.
 
-Create an outing → share the invite link → friends join → add places and preferences → respond Yes / Maybe / Can't do → talk it through → the host confirms one plan → copy the details. The host can also ask for up to three suggested places, with weather context and short AI explanations.
+**Live:** https://planit.app.space
 
-PlanIt is a planning tool. It never implies a booking, a reservation, or verified availability: unknown facts show as "Unconfirmed" and the confirmed view says nothing is booked.
+Group chats are bad at decisions. Suggestions get buried, nobody knows who already said no, and the plan quietly dies. PlanIt gives each outing one shared page: a shortlist of places, everyone's Yes / Maybe / Can't do on each one, the group's preferences, and a conversation. When it's clear what works, the host confirms a plan and everyone can copy the details.
 
-Built on the [DeepSpace SDK](https://docs.deep.space) (Cloudflare Workers + Durable Objects). Spec, plan, task list and AC traceability live in `docs/`.
+## Features
 
-## Setup
+- **Private outings.** Create an outing with a place, date, time, and timezone, then share an invite link. Only people who join can see it.
+- **Shortlist and responses.** Anyone can add a place. Everyone marks each one Yes, Maybe, or Can't do, and sees who said what. Places sort by Yes, then Maybe.
+- **Preferences.** Each person sets a budget range, interests, and indoor/outdoor preference, visible to the group.
+- **Live conversation.** Comments and every other change show up for the whole group instantly, with no refresh.
+- **Confirm and reopen.** The host locks in one place. Voting freezes, the conversation stays open, and anyone can copy a plain-text summary. The host can reopen if plans change.
+- **Suggestions.** The host can ask for up to three nearby places that fit the group's interests, with the forecast for the outing time and a short explanation of why each one fits.
+- **Honest about what it doesn't know.** Price, hours, and address show as "Unconfirmed" unless there's a source, and a confirmed plan says plainly that nothing is booked.
 
-Requirements: Node 22.15+ / 24 / 26, npm 11.6+.
+## How it works
+
+```
+Browser ──POST /api/outing/:command──▶ Worker route
+                                        verifies the session, allowlists the command
+                                        │
+                                        ▼
+                             Record room (Durable Object)
+                             one command at a time:
+                             read outing → apply rules → save
+                                        │
+                                        ▼
+                             realtime update to members only
+```
+
+Built on [DeepSpace](https://docs.deep.space), which runs the app on Cloudflare Workers and Durable Objects and provides auth, realtime records, permissions, and an integration proxy.
+
+**One record per outing, one command at a time.** Each outing is a single record. Every change (a vote, a new place, a confirm) goes through one route into the record room, which applies it inside `blockConcurrencyWhile`. Changes to the app's data never interleave, so a vote and a confirm can't race: either the vote lands first and counts, or it's refused because the plan is already confirmed. The tradeoff is that all outings share one queue. That's fine for small groups, and the fix at scale is one room per outing.
+
+**Rules as pure functions.** Everything about who can do what lives in `src/domain/` as plain TypeScript with no I/O. `applyCommand(outing, userId, command, input, now)` returns the next state or a typed error such as `NOT_HOST` or `OUTING_FINALIZED`. The full permission matrix (every role × every action × open/confirmed) is one table-driven unit test.
+
+**Identity comes from the session only.** User IDs sent by the browser are ignored, and there are no name fields: names come from each person's account. Clients can't write to the database directly; the collection only allows reads, and only for members.
+
+**Suggestions pipeline.** Four steps, each a DeepSpace integration called from server code:
+
+| Step | Integration | Behavior |
+|---|---|---|
+| Find the location | OpenWeather geocoding | If the location is ambiguous ("Dallas"), the host is asked to be more specific instead of guessing |
+| Weather | OpenWeather forecast | The forecast entry closest to the start time, or "Forecast unavailable" |
+| Places | SerpApi Google Maps search | Near the location, based on the group's interests; deduplicated, at most 3 |
+| Why it fits | Anthropic Claude Haiku | Short explanations tied to each place; output is validated, and venue text is treated as data, not instructions |
+
+Provider keys never touch the app: calls go through DeepSpace's integration proxy from server code only, and the browser can't reach the proxy. If any step fails, the rest of the app keeps working. No forecast means no weather line, and a failed explanation means places without explanations. Runs are capped at 3 per outing and 30 per day.
+
+## Running locally
+
+Requires Node 22.15+ and npm 11.6+.
 
 ```sh
 npm install
-npx deepspace auth login         # once
-npx deepspace dev start          # local dev (fixture providers by default)
+npx deepspace auth login
+npx deepspace dev start
 ```
 
-Tests (three named test accounts are needed for the multi-user specs: `Host`, `Member`, `Outsider`):
+Locally, suggestions replay recorded provider responses from `src/domain/suggestions/fixtures/`, so development and tests are free and repeatable. Set `PROVIDERS=live` in `.dev.vars` to make real calls.
+
+## Tests
 
 ```sh
-npx deepspace test accounts create --email <name>@deepspace.test --name "<Name>" --password-stdin
-npx deepspace test run unit      # domain rules, §6 matrix, suggestion pipeline (Vitest)
-npx deepspace test run all       # unit + api + smoke + collab (Playwright)
+npx deepspace test run unit    # rules, permission matrix, suggestion pipeline (Vitest)
+npx deepspace test run all     # plus API, UI, and multi-user realtime tests (Playwright)
 npx tsc --noEmit && npm run lint
 ```
 
-`npx deepspace test run` without a suite skips the collab specs, so it is never a full run. If port 5173 is busy, add `--port <n>`.
+The multi-user tests need three test accounts named `Host`, `Member`, and `Outsider`:
 
-## Architecture
-
-```
-browser ──POST /api/outing/:command──▶ Hono route (verifies JWT, allowlist, 12 KB cap)
-                                         │  fresh internal request, X-User-Id = verified user only
-                                         ▼
-                              AppRecordRoom /internal/outing
-                              blockConcurrencyWhile: read record → applyCommand() → write record
-                                         │
-                                         ▼  realtime push to members only (read: 'collaborator')
+```sh
+npx deepspace test accounts create --email <name>@deepspace.test --name "<Name>" --password-stdin
 ```
 
-- **One record per outing** in the `outings` collection; all business state is in its `payload` JSON (spec §4.3). The schema denies every client write; only the command path writes.
-- **All rules are pure functions** in `src/domain/` — `applyCommand(outing, userId, command, input, now)` returns the next outing or a `CommandError` with a spec §5 code. The full §6 authorization matrix is a table-driven unit test (`src/domain/matrix.test.ts`).
-- **Serialized commands.** Every command runs inside the room's `blockConcurrencyWhile`, so check-then-write never interleaves (a vote and a finalize cannot overlap). BASE-04 and FIN-04 prove it with concurrent requests; removing the gate makes them fail.
-- **Identity** comes only from the verified JWT. User IDs in input and client `X-User-Id` headers are ignored. There are no name fields; names come from the DeepSpace user directory.
-- **The room never throws** out of `blockConcurrencyWhile`; unexpected failures return 500 `INTERNAL`.
+Security and concurrency tests were checked by breaking the guard they protect and confirming they fail. For example, without the one-at-a-time room, only 6 of 20 simultaneous votes survive.
 
-Key files: `worker.ts` (room override), `src/server/outing-routes.ts` (public route, suggestion orchestration), `src/server/outing-room.ts` (load → apply → save), `src/domain/*` (rules), `src/features/outing/*` (UI), `src/lib/outing-api.ts` (client: pending state, refusal messages, no optimistic writes).
+## Project layout
 
-## Integrations
-
-All provider calls are made from worker code with `buildCronContext(env, env.OWNER_USER_ID).integrations.call(...)`, billed to the app owner. The browser integration proxy (`/api/integrations/*`) returns 403, and a test checks the built client bundle contains no provider hostnames.
-
-| Step | Endpoint | Notes |
-|---|---|---|
-| Resolve location | `openweathermap/geocoding` | 0 or several distinct matches → the host is asked to be more specific |
-| Weather | `openweathermap/forecast` | entry within 90 min of the start, else "Forecast unavailable" |
-| Places | `serpapi/places-search` | with `ll` from the geocode; normalized, deduped, max 3 |
-| Explanations | `anthropic/chat-completion` | `claude-haiku-4-5`; output validated, venue text passed as data |
-
-Providers are behind adapters (`src/domain/suggestions/adapters.ts`) with live and fixture implementations. Selection: `PROVIDERS=live|fixture`; when unset, local dev/test (where the CLI sets `ALLOW_DEBUG_ROUTES`) uses fixtures recorded in `src/domain/suggestions/fixtures/`, and deployed apps use live providers. Limits: 3 runs per outing, 30 billable runs app-wide per UTC day, enforced exactly in the room.
-
-## Known limitations
-
-- All outings share one serialized command queue (one RecordRoom for the app). Fine at this scale; a busy app would shard rooms per outing.
-- The room overrides `RecordRoom.fetch` to add `/internal/outing`; an SDK upgrade could change that method.
-- A leaked invite link works for as long as the outing exists; members cannot leave or be removed.
-- Forecasts only cover about 5 days ahead.
-- A suggestion run executes inside the request; if the worker dies mid-run, the run counts as failed after 2 minutes and can be retried.
-- The prototype folder (`~/actually-go`) shares this app's ID; deploying from it would overwrite PlanIt.
-
-## Code map
-
-**PlanIt (written for this app)**
-
-| Path | What it is |
+| Path | Contents |
 |---|---|
-| `src/domain/` | All business rules as pure functions: `commands.ts` (`applyCommand`, every rule in spec §5–6), `validate.ts`, `time.ts`, `tally.ts`, `summary.ts`, `errors.ts`, `types.ts` |
-| `src/domain/suggestions/` | Suggestion pipeline: geocode → forecast → places → explain. `live.ts` calls DeepSpace integrations; `fixture.ts` + `fixtures/` replay recorded responses for local runs and tests |
-| `src/server/outing-routes.ts` | Public `POST /api/outing/:command`: JWT check, command allowlist, suggestion orchestration |
-| `src/server/outing-room.ts` + `AppRecordRoom.fetch` in `worker.ts` | Serialized command path inside the RecordRoom (`blockConcurrencyWhile`) |
-| `src/schemas/outings-schema.ts` | The one `outings` collection |
-| `src/features/outing/`, `src/pages/(app)/home.tsx`, `src/lib/outing-api.ts` | UI: one component per panel, and the client command helper |
-| `tests/`, `src/**/*.test.ts` | Playwright (api, collab, smoke) and Vitest unit tests; names start with AC IDs |
-| `docs/` | Spec, plan, tasks, traceability, development log, gap report, submission note |
+| `src/domain/` | Business rules, validation, time handling, tally, plan summary |
+| `src/domain/suggestions/` | Suggestion pipeline, live and recorded providers |
+| `src/server/outing-routes.ts`, `src/server/outing-room.ts`, `worker.ts` | Command route and the serialized room |
+| `src/schemas/outings-schema.ts` | The `outings` collection and its permissions |
+| `src/features/outing/` | UI components, one per panel |
+| `tests/`, `src/**/*.test.ts` | Playwright and Vitest tests |
+| `docs/` | Specification, design decisions, and development log |
 
-**DeepSpace scaffold (kept because the platform runtime uses it)**
+Auth, realtime, and proxy routes, the UI primitives, and the prerender setup come from the DeepSpace starter.
 
-Auth, proxy, and realtime routes in `src/server/`; `worker.ts` wiring; `src/components/` (navigation, error screen, the UI primitives PlanIt uses); `prerender.ts`, `src/seo.ts`, `src/stale-chunk-recovery.ts`; the generated `src/router.ts`; the settings page (sign-out). `src/cron.ts`, `src/jobs.ts`, and `src/actions/` are empty registries the Cron/Job rooms and action route expect. The Yjs, canvas, presence, cron, and job Durable Object classes stay declared because removing a DO class needs a migration.
+## Limitations and next steps
 
-**Removed:** the scaffold's in-app AI chat (`src/ai/`, never activated), payments starters (`products.ts`, `subscriptions.ts`), the theme catalog, and unused UI primitives (Checkbox, EmptyState, Label, Popover, SearchInput, Tabs, Switch).
+- Members can't leave an outing, and invite links don't expire.
+- Forecasts only reach about 5 days ahead.
+- One shared command queue for all outings; shard per outing if usage grows.
+- The record room overrides one SDK method (`RecordRoom.fetch`), so SDK upgrades need a check.
+- Ideas: multiple date options, invite revocation, reminders.
