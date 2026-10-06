@@ -1,4 +1,4 @@
-# PlanIt — Spec v1.1.3
+# PlanIt — Spec v1.1.4
 
 Status: approved design (2026-10-05). New build in its own folder (`~/planit`), deployed to the account's existing app `app_01M466GAC7Q1B8FQDTNRGN7Z96` under the name `planit`. The Codex prototype in `~/actually-go` shares that app ID, is a local-only reference, and is never deployed from.
 This spec is the source of truth. Changes go through a version bump and a changelog line (Section 12) before any plan, task, or code change.
@@ -176,7 +176,7 @@ Response: `{ success: true, data }` or `{ success: false, error: <CODE>, message
 Integrations are called from worker code with `buildCronContext(env, env.OWNER_USER_ID).integrations.call(endpoint, body)`, billed to the app owner. `src/integrations.ts` lists `serpapi`, `openweathermap`, `anthropic` as `'developer'`. The public `/api/integrations/*` route stays blocked (403) so browsers can never trigger paid calls directly.
 
 **Phases**
-1. **Reserve (in the room):** host, open, `suggestions.status !== 'running'` (or running for more than 2 minutes, which counts as failed), `runs < 3` per outing, app-wide runs today `< 30` (counter in room storage, keyed by UTC date). Sets `status: running`, increments both counters. A second request while running returns `{ status: 'running', reused: true }` with no provider call. Because this runs in the serialized room, both limits are exact (D-16).
+1. **Reserve (in the room):** host, open, `suggestions.status !== 'running'` (or running for more than 2 minutes, which counts as failed), `runs < 3` per outing, app-wide runs today `< 30` (counter in room storage, keyed by UTC date). Sets `status: running`, increments both counters. A second request while running returns `{ status: 'running', reused: true }` with no provider call. Because this runs in the serialized room, both limits are exact (D-16). Only live-provider runs count toward the limits; fixture runs (local dev and tests, `PROVIDERS=fixture`) do not. Deployed apps always run live.
 2. **Fetch (outside the room, in the worker route):**
 
 | Step | Endpoint | Rule |
@@ -283,7 +283,7 @@ Any fetch-phase failure calls `failSuggestions` with a readable message; existin
 - **SUG-13** [unit] With `PROVIDERS=fixture`, the full pipeline runs with no network calls; the live Explainer adapter passes the same SUG-04 and SUG-05 tests against its recorded fixture.
 - **SUG-14** [smoke] The suggestion button is shown only to the host of an open outing and is disabled while a run is `running`.
 - **SUG-15** [unit] A run stuck in `running` for more than 2 minutes is treated as failed, and a new request is allowed.
-- **SUG-16** [manual] One suggestion run through the live adapters (`integrations.call` from worker code) succeeds on local dev before the first deployed run (REL-04).
+- **SUG-16** [manual] One suggestion run through the live adapters (`integrations.call` from worker code) succeeds. Satisfied by the REL-04 deployed run; no separate local live run (setting `PROVIDERS=live` as an app secret would also affect the deployed app and risk paid calls from test runs).
 
 ### UX — cross-cutting (part of every block's done check)
 - **UX-01** [smoke] Every command shows a pending state. On refusal the UI shows the message and the view stays on server state; a refused change never appears saved.
@@ -355,6 +355,7 @@ The prototype (`~/actually-go`, tag it before use) is read-only reference. Anyth
 
 ## 12. Changelog
 
+- **v1.1.4 (2026-10-05):** D-16 counts live-provider runs only (fixture runs in local tests were exhausting the daily limit). SUG-16 satisfied by the deployed REL-04 run.
 - **v1.1.3 (2026-10-05):** From Block 0 review: §5 states 401-before-404, 404 for unknown/internal commands, 400 for oversized bodies, and 500 (never a throw) for unexpected room failures. BASE-02 also pins read-only-collaborator and no anonymous entry. §7/SUG-03 dedupe within a result set (fixture had one venue twice); §7/SUG-04 strip one code fence (Haiku fixture reply was fenced).
 - **v1.1.2 (2026-10-05):** From plan review: BASE-05 records fixtures with the CLI in Block 0; the worker integration path is proven by new SUG-16 in Block 4. BASE-04 runs in Block 2. BASE-02 is a schema unit test (client writes go over the realtime socket, which has no test hook; the room enforces schema permissions).
 - **v1.1.1 (2026-10-05):** A-02 updated: account has one active app slot (`app list`), so PlanIt deploys to the prototype's registered app ID with `name = "planit"`; prototype is never deployed.

@@ -12,11 +12,21 @@ The browser integration proxy returns 403, and a test checks the client bundle c
 
 **Main tradeoff.** Each outing is one record, and every write is a command run inside the record room's `blockConcurrencyWhile`. This makes every check-then-write atomic: a vote and a finalize cannot interleave, and BASE-04 and FIN-04 fail without the gate. The cost is one app-wide command queue and an override of one SDK method (`RecordRoom.fetch`).
 
-**What the agent did.** Claude Code (Opus 5.5) wrote the spec-driven plan, tasks and tests, and built Blocks 0–6 test-first per acceptance criterion:
-- 149 unit tests, including the full §6 authorization matrix.
-- 49 Playwright api, smoke and collab tests.
-- Fault injection for every security and concurrency AC: each guard was broken on purpose to see its test go red, then restored.
+**Left out on purpose.** Scheduling polls, bookings, payments, calendars, maps, notifications, and AI chat. None is needed to get from "we should go" to one confirmed plan. Price and opening hours stay "Unconfirmed": a map listing isn't verification, and the app never implies a booking. I considered DeepSeek for explanations but it isn't a catalog integration, so it would have meant managing a key outside the proxy.
 
-Details, decisions and spec gaps are in `docs/DEVELOPMENT_LOG.md`; AC status is in `docs/traceability.md`.
+**How the agents were used.**
+- **Codex (one shot)** built a first prototype from a DeepSpace-generated prompt. Claude audited it against my spec (`docs/gap-report.md`): its serialized write design was sound, but it used zero DeepSpace integrations (plain `fetch` to OpenStreetMap, Open-Meteo, DeepSeek), took typed display names instead of account names, and lacked reopen, vote clearing, option edit/delete, and comment delete.
+- **I decided:** keep the prototype's serialized design and rebuild cleanly as PlanIt in a new folder; route all providers through DeepSpace integrations; use account names; and 17 product decisions (option lock rule, reopen behavior, limits, and others) recorded in `docs/spec.md` §11.
+- **Claude (chat)** drafted the spec, plan, and task list from my decisions, and reviewed the build at gates. In Block 0 that review found that a failed write inside `blockConcurrencyWhile` would reset the room for every user; it was fixed before Block 1.
+- **Claude Code** built Blocks 0–6 against the spec, task by task, with a test named for every acceptance criterion: 149 unit tests (including the full §6 authorization matrix as a table) and 49 Playwright api, smoke, and collab tests. For every security and concurrency criterion it broke the guard on purpose, confirmed the test failed, and restored it (without serialization, only 6 of 20 concurrent votes survived). It stopped for spec conflicts; I approved five spec revisions after v1.0 (v1.1 → v1.1.4), each with a changelog line.
+- Removed unused scaffold code (in-app AI chat, payments starters, unused UI primitives); the README code map separates PlanIt's code from DeepSpace's.
 
-**What Sai verified.** _(to fill in: hand checks, live two-account loop, deploy, live suggestion run and its cost)_
+Details: `docs/DEVELOPMENT_LOG.md`; AC status: `docs/traceability.md`.
+
+**What I verified myself.**
+- Chose the architecture and every product decision; reviewed the gap report against the prototype's code.
+- Ran PlanIt locally with two accounts in separate browsers: create, invite, join, places, votes, comments, preferences, confirm, reopen, copy plan; changes appeared live in the other window.
+- _(fill in)_ Deployed app: same loop with two accounts; Outsider sees nothing; Member has no Confirm/Suggest.
+- _(fill in)_ One live suggestion run on the deployed app: places, weather, explanations; cost from `npx deepspace app usage`.
+
+**Unfinished / next.** Members can't leave and invite links never expire; forecasts only cover 5 days; all outings share one command queue (shard per outing if it grew).

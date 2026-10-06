@@ -71,6 +71,23 @@ Providers are behind adapters (`src/domain/suggestions/adapters.ts`) with live a
 - A suggestion run executes inside the request; if the worker dies mid-run, the run counts as failed after 2 minutes and can be retried.
 - The prototype folder (`~/actually-go`) shares this app's ID; deploying from it would overwrite PlanIt.
 
-## Scaffold code PlanIt does not use
+## Code map
 
-Left in place, unregistered or unused: `src/ai/*` (assistant chat; the agent only mounts with the AI chat schema, which PlanIt doesn't declare), `src/cron.ts`, `src/jobs.ts`, `src/products.ts`, `src/subscriptions.ts`, `src/actions/` (no server actions), `src/pages/(app)/(protected)/settings.tsx`. The Yjs, canvas, presence, cron and job Durable Object classes stay declared because removing a DO class needs a migration.
+**PlanIt (written for this app)**
+
+| Path | What it is |
+|---|---|
+| `src/domain/` | All business rules as pure functions: `commands.ts` (`applyCommand`, every rule in spec §5–6), `validate.ts`, `time.ts`, `tally.ts`, `summary.ts`, `errors.ts`, `types.ts` |
+| `src/domain/suggestions/` | Suggestion pipeline: geocode → forecast → places → explain. `live.ts` calls DeepSpace integrations; `fixture.ts` + `fixtures/` replay recorded responses for local runs and tests |
+| `src/server/outing-routes.ts` | Public `POST /api/outing/:command`: JWT check, command allowlist, suggestion orchestration |
+| `src/server/outing-room.ts` + `AppRecordRoom.fetch` in `worker.ts` | Serialized command path inside the RecordRoom (`blockConcurrencyWhile`) |
+| `src/schemas/outings-schema.ts` | The one `outings` collection |
+| `src/features/outing/`, `src/pages/(app)/home.tsx`, `src/lib/outing-api.ts` | UI: one component per panel, and the client command helper |
+| `tests/`, `src/**/*.test.ts` | Playwright (api, collab, smoke) and Vitest unit tests; names start with AC IDs |
+| `docs/` | Spec, plan, tasks, traceability, development log, gap report, submission note |
+
+**DeepSpace scaffold (kept because the platform runtime uses it)**
+
+Auth, proxy, and realtime routes in `src/server/`; `worker.ts` wiring; `src/components/` (navigation, error screen, the UI primitives PlanIt uses); `prerender.ts`, `src/seo.ts`, `src/stale-chunk-recovery.ts`; the generated `src/router.ts`; the settings page (sign-out). `src/cron.ts`, `src/jobs.ts`, and `src/actions/` are empty registries the Cron/Job rooms and action route expect. The Yjs, canvas, presence, cron, and job Durable Object classes stay declared because removing a DO class needs a migration.
+
+**Removed:** the scaffold's in-app AI chat (`src/ai/`, never activated), payments starters (`products.ts`, `subscriptions.ts`), the theme catalog, and unused UI primitives (Checkbox, EmptyState, Label, Popover, SearchInput, Tabs, Switch).
